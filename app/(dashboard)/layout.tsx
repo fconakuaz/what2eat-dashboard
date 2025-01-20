@@ -45,6 +45,7 @@ export default function DashboardLayout({
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <MobileNav />
             <DashboardBreadcrumb />
+
             <SearchInput />
             <User />
           </header>
@@ -64,10 +65,11 @@ function DesktopNav() {
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
         <Link
           href="https://vercel.com/templates/next.js/admin-dashboard-tailwind-postgres-react-nextjs"
-          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-white text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
-          <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" />
-          <span className="sr-only">Acme Inc</span>
+          {/* <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" /> */}
+          <img src="apple-touch-icon.png" alt="logo" />
+          <span className="sr-only">What2Eat</span>
         </Link>
 
         <NavItem href="#" label="Dashboard">
