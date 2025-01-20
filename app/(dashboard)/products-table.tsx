@@ -44,10 +44,8 @@ export function ProductsTable({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Products</CardTitle>
-        <CardDescription>
-          Manage your products and view their sales performance.
-        </CardDescription>
+        <CardTitle>Historial</CardTitle>
+        <CardDescription>Visualiza los cambios que has tenido</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
@@ -80,7 +78,11 @@ export function ProductsTable({
           <div className="text-xs text-muted-foreground">
             Showing{' '}
             <strong>
-              {Math.max(0, Math.min(offset - productsPerPage, totalProducts) + 1)}-{offset}
+              {Math.max(
+                0,
+                Math.min(offset - productsPerPage, totalProducts) + 1
+              )}
+              -{offset}
             </strong>{' '}
             of <strong>{totalProducts}</strong> products
           </div>
