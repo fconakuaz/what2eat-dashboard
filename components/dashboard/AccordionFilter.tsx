@@ -4,13 +4,16 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
+import { TableAddIngredients } from './TableAddIngredients';
 
 export function AccordionFilter() {
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-3">
         <AccordionTrigger>Mis preferencias</AccordionTrigger>
-        <AccordionContent>Tipo de alimentación</AccordionContent>
+        <AccordionContent>
+          <TableAddIngredients />{' '}
+        </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-1">
         <AccordionTrigger>Quiero incluir</AccordionTrigger>

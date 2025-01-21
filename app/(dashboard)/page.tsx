@@ -38,7 +38,7 @@ export default function HomePage() {
             </div>
 
             {/* Columna derecha (70% en pantallas grandes, 100% en móviles) */}
-            <div className="bg-muted/30 p-2 h-64 ml-3 mr-4">
+            <div className="bg-muted/30 p-2 h-64 ml-3 mr-4 min-h-[72vh] ">
               Texto del menú del día
             </div>
           </div>
