@@ -6,14 +6,12 @@ import {
   CardTitle
 } from '@/components/ui/card';
 
-export default function HomePage() {
+export default function StatsPage() {
   return (
     <Card className="rounded-none">
       <CardHeader>
-        <CardTitle>Menú del día</CardTitle>
-        <CardDescription>
-          Seleccione sus preferencias y genere un nuevo menú para comer hoy.
-        </CardDescription>
+        <CardTitle>Estadísticas</CardTitle>
+        <CardDescription>Aquí puede ver sus avances</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-4">

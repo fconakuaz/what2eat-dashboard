@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {
-  Home,
+  NotebookPen,
   LineChart,
   Package,
   Package2,
@@ -50,7 +50,7 @@ export default function DashboardLayout({
             <ToggleTheme />
             <User />
           </header>
-          <main className="grid flex-1 items-start gap-2 p-4 sm:px-6 sm:py-0 md:gap-4 bg-muted/40">
+          <main className="min-h-auto grid flex-1 items-start gap-2 p-4 sm:px-0 sm:py-0 md:gap-4 bg-muted/40 ">
             {children}
           </main>
         </div>
@@ -73,23 +73,15 @@ function DesktopNav() {
           <span className="sr-only">What2Eat</span>
         </Link>
 
-        <NavItem href="#" label="Dashboard">
-          <Home className="h-5 w-5" />
+        <NavItem href="/" label="Dashboard">
+          <NotebookPen className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="#" label="Orders">
-          <ShoppingCart className="h-5 w-5" />
-        </NavItem>
-
-        <NavItem href="/" label="Products">
-          <Package className="h-5 w-5" />
-        </NavItem>
-
-        <NavItem href="/customers" label="Customers">
+        <NavItem href="/history" label="Historial">
           <Users2 className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="#" label="Analytics">
+        <NavItem href="/stats" label="Estadísticas">
           <LineChart className="h-5 w-5" />
         </NavItem>
       </nav>
@@ -133,7 +125,7 @@ function MobileNav() {
             href="#"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
-            <Home className="h-5 w-5" />
+            <NotebookPen className="h-5 w-5" />
             Dashboard
           </Link>
           <Link
