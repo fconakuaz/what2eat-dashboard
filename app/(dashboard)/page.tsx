@@ -1,3 +1,5 @@
+import { AccordionFilter } from '@/components/dashboard/AccordionFilter';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -5,6 +7,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
+import { PlusCircle, Sparkles } from 'lucide-react';
 
 export default function HomePage() {
   return (
@@ -18,15 +21,26 @@ export default function HomePage() {
       <CardContent>
         <div className="flex flex-col gap-4">
           {/* Barra superior (100% del ancho) */}
-          <div className="w-full  *:h-16">Barra de botones</div>
+          <div className="w-full grid place-items-end *:h-11">
+            <Button size="sm" className="h-8 gap-1">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                Crear menú del día
+              </span>
+            </Button>
+          </div>
 
           {/* Contenedor principal */}
           <div className="grid w-full gap-4 md:grid-cols-[30%_70%]">
             {/* Columna izquierda (30% en pantallas grandes, 100% en móviles) */}
-            <div className=" h-64">Filtros</div>
+            <div className=" h-64">
+              <AccordionFilter />{' '}
+            </div>
 
             {/* Columna derecha (70% en pantallas grandes, 100% en móviles) */}
-            <div className="bg-muted/30 p-2 h-64">Texto del menú del día</div>
+            <div className="bg-muted/30 p-2 h-64 ml-3 mr-4">
+              Texto del menú del día
+            </div>
           </div>
         </div>
       </CardContent>
