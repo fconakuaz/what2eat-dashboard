@@ -1,5 +1,7 @@
+'use client';
 import { AccordionFilter } from '@/components/dashboard/AccordionFilter';
 import { Button } from '@/components/ui/button';
+import { runGemini } from '../AI/getRecipe';
 import {
   Card,
   CardContent,
@@ -9,7 +11,17 @@ import {
 } from '@/components/ui/card';
 import { PlusCircle, Sparkles } from 'lucide-react';
 
-export default function HomePage() {
+const HomePage = () => {
+  async function run() {
+    try {
+      console.log('Generando menú del día...');
+      // Simula la generación del menú
+      const response = await runGemini();
+      console.log('Menú generado:', response);
+    } catch (error) {
+      console.error('Error al generar el menú:', error);
+    }
+  }
   return (
     <Card className="rounded-none">
       <CardHeader>
@@ -22,7 +34,7 @@ export default function HomePage() {
         <div className="flex flex-col gap-4">
           {/* Barra superior (100% del ancho) */}
           <div className="w-full grid place-items-end *:h-11">
-            <Button size="sm" className="h-8 gap-1">
+            <Button size="sm" className="h-8 gap-1" onClick={run}>
               <Sparkles className="h-3.5 w-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                 Crear menú del día
@@ -46,4 +58,5 @@ export default function HomePage() {
       </CardContent>
     </Card>
   );
-}
+};
+export default HomePage;
