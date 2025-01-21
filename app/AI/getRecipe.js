@@ -63,7 +63,7 @@ export function GenerateHTMLFromJson({ json }) {
       {Object.entries(json).map(([meal, recipe]) => (
         <div key={meal} className="meal-container">
           {/* Título de la receta */}
-          <CardTitle className="py-1">
+          <CardTitle className="py-1 font-bold">
             {meal.charAt(0).toUpperCase() + meal.slice(1)}
           </CardTitle>
 
@@ -73,21 +73,27 @@ export function GenerateHTMLFromJson({ json }) {
           </CardDescription>
 
           {/* Ingredientes */}
+          <br></br>
           <h3 className="mb-6 font-medium">Ingredientes:</h3>
-          <ul>
+          <ul className="list-disc ml-5">
             {recipe.recipe_ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
+              <li key={index}>🔹 {ingredient}</li>
             ))}
           </ul>
 
           {/* Instrucciones */}
-          <h3>Instrucciones:</h3>
-          <ol>
+          <br></br>
+          <h3 className="mb-6 font-medium"> Instrucciones:</h3>
+          <ol className="list-decimal ml-5">
             {recipe.recipe_instructions.map((instruction, index) => (
-              <li key={index}>{instruction}</li>
+              <li key={index}>
+                {index + 1}. {instruction}
+              </li>
             ))}
           </ol>
           <br></br>
+          <br></br>
+          <div className="my-4 h-px bg-gray-300"></div>
         </div>
       ))}
     </div>
