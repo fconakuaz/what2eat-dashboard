@@ -55,7 +55,7 @@ const HomePage = () => {
             </div>
 
             {/* Columna derecha (70% en pantallas grandes, 100% en móviles) */}
-            <div className="bg-muted/30 px-10 py-8 h-64 ml-3 mr-4 min-h-[1900px] ">
+            <div className="bg-muted/30 px-10 py-8 h-64 ml-3 mr-4 min-h-[2000px] ">
               <GenerateHTMLFromJson json={menu} />
             </div>
           </div>
