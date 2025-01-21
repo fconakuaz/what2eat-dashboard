@@ -38,7 +38,7 @@ const HomePage = () => {
       <CardContent>
         <div className="flex flex-col gap-4">
           {/* Barra superior (100% del ancho) */}
-          <div className="w-full grid place-items-end *:h-11">
+          <div className="w-full grid place-items-end">
             <Button size="sm" className="h-8 gap-1" onClick={run}>
               <Sparkles className="h-3.5 w-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -50,13 +50,18 @@ const HomePage = () => {
           {/* Contenedor principal */}
           <div className="grid w-full gap-4 md:grid-cols-[30%_70%]">
             {/* Columna izquierda (30% en pantallas grandes, 100% en móviles) */}
-            <div className=" h-64">
-              <AccordionFilter />{' '}
+            <div className="h-auto">
+              <AccordionFilter />
             </div>
 
             {/* Columna derecha (70% en pantallas grandes, 100% en móviles) */}
-            <div className="bg-muted/30 px-10 py-8 h-64 ml-3 mr-4 min-h-[2000px] ">
-              <GenerateHTMLFromJson json={menu} />
+            <div className="bg-muted/30 px-10 py-8 ml-3 mr-4">
+              {/* Renderizar el contenido dinámico */}
+              {menu && Object.keys(menu).length > 0 ? (
+                <GenerateHTMLFromJson json={menu} />
+              ) : (
+                <p className="text-muted-foreground">Texto del menú del día</p>
+              )}
             </div>
           </div>
         </div>
