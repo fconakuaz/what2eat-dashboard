@@ -1,7 +1,9 @@
 'use client';
+
+import { useState } from 'react';
 import { AccordionFilter } from '@/components/dashboard/AccordionFilter';
 import { Button } from '@/components/ui/button';
-import { runGemini } from '../AI/getRecipe';
+import { runGemini, GenerateHTMLFromJson } from '../AI/getRecipe';
 import {
   Card,
   CardContent,
@@ -12,12 +14,15 @@ import {
 import { PlusCircle, Sparkles } from 'lucide-react';
 
 const HomePage = () => {
+  const [menu, setMenu] = useState<any>([]);
+
   async function run() {
     try {
       console.log('Generando menú del día...');
       // Simula la generación del menú
       const response = await runGemini();
       console.log('Menú generado:', response);
+      setMenu(response);
     } catch (error) {
       console.error('Error al generar el menú:', error);
     }
@@ -50,8 +55,8 @@ const HomePage = () => {
             </div>
 
             {/* Columna derecha (70% en pantallas grandes, 100% en móviles) */}
-            <div className="bg-muted/30 p-2 h-64 ml-3 mr-4 min-h-[72vh] ">
-              Texto del menú del día
+            <div className="bg-muted/30 px-10 py-8 h-64 ml-3 mr-4 min-h-[1900px] ">
+              <GenerateHTMLFromJson json={menu} />
             </div>
           </div>
         </div>

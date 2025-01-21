@@ -5,6 +5,14 @@ const {
 } = require('@google/generative-ai');
 import { responseSchema } from './modelRecipe';
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
+
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
@@ -48,4 +56,40 @@ export async function runGemini() {
     console.error('Error message:', error.message);
     return null;
   }
+}
+export function GenerateHTMLFromJson({ json }) {
+  return (
+    <div>
+      {Object.entries(json).map(([meal, recipe]) => (
+        <div key={meal} className="meal-container">
+          {/* Título de la receta */}
+          <CardTitle className="py-1">
+            {meal.charAt(0).toUpperCase() + meal.slice(1)}
+          </CardTitle>
+
+          {/* Descripción de la receta */}
+          <CardDescription className="mb-6 font-medium">
+            {recipe.recipe_name}
+          </CardDescription>
+
+          {/* Ingredientes */}
+          <h3 className="mb-6 font-medium">Ingredientes:</h3>
+          <ul>
+            {recipe.recipe_ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+
+          {/* Instrucciones */}
+          <h3>Instrucciones:</h3>
+          <ol>
+            {recipe.recipe_instructions.map((instruction, index) => (
+              <li key={index}>{instruction}</li>
+            ))}
+          </ol>
+          <br></br>
+        </div>
+      ))}
+    </div>
+  );
 }
