@@ -1,0 +1,21 @@
+{
+  "HomePage": {
+    "title": "Menú del día",
+    "subtitle": "Selecciona tus preferencias y genera un nuevo menú para el almuerzo de hoy.",
+    "my_preferences": "Mis preferencias",
+    "include_foods": "Incluir alimentos",
+    "exclude_foods": "Excluir alimentos",
+    "create_daily_menu": "Crear menú diario",
+    "Breackfast": "Desayuno",
+    "Dinner": "Cena",
+    "Lunch": "Almuerzo",
+    "Snack1": "1er Colación",
+    "Snack2": "2da Colación",
+    "ingredients": "Ingredientes",
+    "instructions": "Instrucciones",
+    "info": "Da clic en crear menú del día para mostrar el menú de hoy..."
+  },
+  "Common": {
+    "search": "Buscar"
+  }
+}

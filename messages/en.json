@@ -1,0 +1,21 @@
+{
+    "HomePage": {
+      "title": "Menu of the day",
+      "subtitle": "Select your preferences and generate a new menu for lunch today.",
+      "my_preferences": "My preferences",
+      "include_foods": "Include foods",
+      "exclude_foods": "Exclude foods",
+      "create_daily_menu": "Create daily menu",
+      "Breackfast": "Breackfast",
+      "Dinner": "Dinner",
+      "Lunch": "Lunch",
+      "Snack1": "1st Snack",
+      "Snack2": "2nd Snack",
+      "ingredients": "Ingredients",
+      "instructions": "Instructions",
+      "info": "Click on create daily menu to display today's menu..."
+    },
+    "Common": {
+      "search": "Search"
+    }
+  }

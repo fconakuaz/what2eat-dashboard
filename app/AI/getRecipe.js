@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
+import { useTranslations } from 'next-intl';
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -57,33 +58,34 @@ export async function runGemini() {
     return null;
   }
 }
+
 export function GenerateHTMLFromJson({ json }) {
+  const t = useTranslations('HomePage');
+
   return (
     <div>
       {Object.entries(json).map(([meal, recipe]) => (
         <div key={meal} className="meal-container">
-          {/* Título de la receta */}
           <CardTitle className="py-1 font-bold">
-            {meal.charAt(0).toUpperCase() + meal.slice(1)}
+            {t(meal.charAt(0).toUpperCase() + meal.slice(1))}
           </CardTitle>
 
-          {/* Descripción de la receta */}
           <CardDescription className="mb-6 font-medium">
             {recipe.recipe_name}
           </CardDescription>
 
-          {/* Ingredientes */}
+          {/* Ingredients */}
           <br></br>
-          <h3 className="mb-6 font-medium">Ingredientes:</h3>
+          <h3 className="mb-6 font-medium">{t('ingredients')}</h3>
           <ul className="list-disc ml-5">
             {recipe.recipe_ingredients.map((ingredient, index) => (
               <li key={index}>🔹 {ingredient}</li>
             ))}
           </ul>
 
-          {/* Instrucciones */}
+          {/* Instructions */}
           <br></br>
-          <h3 className="mb-6 font-medium"> Instrucciones:</h3>
+          <h3 className="mb-6 font-medium">{t('instructions')}</h3>
           <ol className="list-decimal ml-5">
             {recipe.recipe_instructions.map((instruction, index) => (
               <li key={index}>
