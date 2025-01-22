@@ -7,7 +7,7 @@ type LanguageState = {
 };
 
 export const useLanguageStore = create<LanguageState>((set) => ({
-  locale: Cookies.get('locale'), // Leer el idioma de la cookie o usar un valor predeterminado
+  locale: Cookies.get('locale') || 'es', // Leer el idioma de la cookie o usar un valor predeterminado
   setLocale: (locale: string) => {
     Cookies.set('locale', locale);
     set({ locale });
