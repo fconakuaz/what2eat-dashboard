@@ -95,7 +95,7 @@ export function GenerateHTMLFromJson({ json }) {
           </ol>
           <br></br>
           <br></br>
-          <div className="my-4 h-px bg-gray-300"></div>
+          <br></br>
         </div>
       ))}
     </div>

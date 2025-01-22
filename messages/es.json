@@ -6,6 +6,7 @@
     "include_foods": "Incluir alimentos",
     "exclude_foods": "Excluir alimentos",
     "create_daily_menu": "Crear menú diario",
+    "creating_daily_menu": "Generando menú diario",
     "Breackfast": "Desayuno",
     "Dinner": "Cena",
     "Lunch": "Almuerzo",
