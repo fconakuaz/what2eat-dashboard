@@ -33,6 +33,7 @@ import Providers from './providers';
 import { NavItem } from './nav-item';
 import { SearchInput } from './search';
 import { ToggleTheme } from './toggle-theme';
+import { ToggleLanguage } from 'app/components/header/ToggleLanguage';
 
 export default function DashboardLayout({
   children
@@ -49,6 +50,7 @@ export default function DashboardLayout({
             <DashboardBreadcrumb />
             <SearchInput />
             <ToggleTheme />
+            <ToggleLanguage />
             <User />
           </header>
           <main className="min-h-auto grid flex-1 items-start gap-2 p-4 sm:px-0 sm:py-0 md:gap-4 bg-muted/40 ">
