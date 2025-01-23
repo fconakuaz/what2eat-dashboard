@@ -1,31 +1,23 @@
-import { BellRing, Check, Edit2Icon } from 'lucide-react';
+import {
+  ContactRound,
+  Cross,
+  Dumbbell,
+  Edit2Icon,
+  PersonStanding,
+  Ruler,
+  Salad,
+  Weight
+} from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Asegúrate de tener este componente disponible.
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle
+  CardHeader
 } from '@/components/ui/card';
-import { Switch } from '../ui/switch';
-
-const notifications = [
-  {
-    title: 'Your call has been confirmed.',
-    description: '1 hour ago'
-  },
-  {
-    title: 'You have a new message!',
-    description: '1 hour ago'
-  },
-  {
-    title: 'Your subscription is expiring soon!',
-    description: '2 hours ago'
-  }
-];
+import { MyProperty } from './MyProperty';
 
 type CardProps = React.ComponentProps<typeof Card>;
 
@@ -53,24 +45,43 @@ export function MyPreferences({ className, ...props }: CardProps) {
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="grid gap-4">
-        <div>
-          {notifications.map((notification, index) => (
-            <div
-              key={index}
-              className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-            >
-              <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-              <div className="space-y-1">
-                <p className="text-sm font-medium leading-none">
-                  {notification.title}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <CardContent className="gap-1">
+        <MyProperty
+          icon={<Ruler className="h-4 w-4 text-sky-500 mr-2" />}
+          name="Altura"
+          value="1.78 m"
+        />
+        <MyProperty
+          icon={<Weight className="h-4 w-4 text-sky-500 mr-2" />}
+          name="Peso"
+          value="107 kg"
+        />
+        <MyProperty
+          icon={<ContactRound className="h-4 w-4 text-sky-500 mr-2" />}
+          name="Edad"
+          value="41 años"
+        />
+        <MyProperty
+          icon={<PersonStanding className="h-4 w-4 text-sky-500 mr-2" />}
+          name="Género"
+          value="Masculino"
+        />
+        <MyProperty
+          icon={<Salad className="h-4 w-4 text-sky-500 mr-2" />}
+          name="Alimentación"
+          value="Omnívora"
+        />
+        <MyProperty
+          icon={<Dumbbell className="h-4 w-4 text-sky-500 mr-2" />}
+          name="Programa"
+          value="Bajar de peso"
+        />
+        <MyProperty
+          icon={<Cross className="h-4 w-4 text-sky-500 mr-2" />}
+          name="Padecimientos"
+          value="Diabetes y Colesterol."
+        />
       </CardContent>
-      <CardFooter className="flex justify-end"></CardFooter>
     </Card>
   );
 }
