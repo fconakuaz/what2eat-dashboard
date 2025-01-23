@@ -1,16 +1,12 @@
-const {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold
-} = require('@google/generative-ai');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 import { responseSchema } from './modelRecipe';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Asegúrate de tener este componente disponible.
 
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
+  CardFooter,
+  CardHeader
 } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
 
@@ -40,7 +36,7 @@ export async function runGemini() {
     ' Genera una lista de recetas para un menú del día\n' +
       ' pero evitando los ingredientes: cacahuate, harina.\n' +
       ' incluir ingredientes: tomate, lechuga, rábanos.\n' +
-      ' debe ser un tipo de comida: vegetariana\n' +
+      ' debe ser un tipo de comida: omnivora\n' +
       ' debe considerarse para personas de edad de: 41 años\n' +
       ' de una altura de: 170 cm\n' +
       ' de un peso de: 110 kg\n' +
@@ -63,40 +59,70 @@ export function GenerateHTMLFromJson({ json }) {
   const t = useTranslations('HomePage');
 
   return (
-    <div>
+    <div className="">
       {Object.entries(json).map(([meal, recipe]) => (
-        <div key={meal} className="meal-container">
-          <CardTitle className="py-1 font-bold">
-            {t(meal.charAt(0).toUpperCase() + meal.slice(1))}
-          </CardTitle>
+        <Card key={recipe.recipe_name} className="w-1/1 p-6  mb-8 block">
+          <CardHeader className="flex flex-row items-start justify-between">
+            <div className="flex items-center space-x-2">
+              <Avatar className="w-14 h-14 mr-2">
+                <AvatarImage src="food.webp" alt="User Avatar" />
+                <AvatarFallback>FD</AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="text-xl md:text-2xl font-medium   ">
+                  {t(meal.charAt(0).toUpperCase() + meal.slice(1))}
+                </p>
+                <p className="text-sm md:text-xl font-medium leading-none text-muted-foreground">
+                  {recipe.recipe_name}
+                </p>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            {/* Ingredients */}
+            <h3 className="mb-1  font-medium">{t('ingredients')}</h3>
+            <ul className="list-disc ml-5">
+              {recipe.recipe_ingredients.map((ingredient, index) => (
+                <li key={index}>
+                  <div
+                    key={index}
+                    className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                  >
+                    <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                    <div className="space-y-1">
+                      <p className="text-sm font-normal leading-3 text-muted-foreground">
+                        {ingredient}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
 
-          <CardDescription className="mb-6 font-medium">
-            {recipe.recipe_name}
-          </CardDescription>
-
-          {/* Ingredients */}
-          <br></br>
-          <h3 className="mb-6 font-medium">{t('ingredients')}</h3>
-          <ul className="list-disc ml-5">
-            {recipe.recipe_ingredients.map((ingredient, index) => (
-              <li key={index}>🔹 {ingredient}</li>
-            ))}
-          </ul>
-
-          {/* Instructions */}
-          <br></br>
-          <h3 className="mb-6 font-medium">{t('instructions')}</h3>
-          <ol className="list-decimal ml-5">
-            {recipe.recipe_instructions.map((instruction, index) => (
-              <li key={index}>
-                {index + 1}. {instruction}
-              </li>
-            ))}
-          </ol>
-          <br></br>
-          <br></br>
-          <br></br>
-        </div>
+            {/* Instructions */}
+            <h3 className="mb-1 mt-2 font-medium">{t('instructions')}</h3>
+            <ol className="list-decimal ml-5">
+              {recipe.recipe_instructions.map((instruction, index) => (
+                <li key={index}>
+                  <div
+                    key={index}
+                    className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                  >
+                    <span className="text-sm font-normal leading-3   text-sky-500">
+                      {index + 1}.{' '}
+                    </span>
+                    <div className="space-y-1">
+                      <p className="text-sm font-normal leading-3 text-muted-foreground">
+                        {instruction}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </CardContent>
+          <CardFooter className="flex justify-end"></CardFooter>
+        </Card>
       ))}
     </div>
   );
