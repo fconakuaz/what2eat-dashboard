@@ -34,8 +34,8 @@ export async function runGemini() {
 
   const result = await chatSession.sendMessage(
     ' Genera una lista de recetas para un menú del día\n' +
-      ' pero evitando los ingredientes: cacahuate, harina.\n' +
-      ' incluir ingredientes: tomate, lechuga, rábanos.\n' +
+      ' pero evitando los ingredientes: chayote, chícharo, pescado y mariscos.\n' +
+      // ' incluir ingredientes: tomate, lechuga, rábanos.\n' +
       ' debe ser un tipo de comida: omnivora\n' +
       ' debe considerarse para personas de edad de: 41 años\n' +
       ' de una altura de: 170 cm\n' +
