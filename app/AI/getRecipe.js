@@ -42,6 +42,7 @@ export async function runGemini() {
       ' de un peso de: 110 kg\n' +
       ' debe ser un menú adaptado para personas que tienen: diabetes, colesterol alto, hipertensión.\n' +
       ' genero: masculino\n' +
+      ' debe tener la proteína necesaria según la estatura y peso dicho, ademas de la edad y que sea para una persona con actividad: moderada\n' +
       ' idioma: español'
   );
 
