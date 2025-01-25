@@ -17,6 +17,10 @@
     "info": "Da clic en crear menú del día para mostrar el menú de hoy..."
   },
   "Common": {
-    "search": "Buscar"
+    "search": "Buscar",
+    "Edit": "Editar"
+  },
+  "Profile": {
+    "age": "años"
   }
 }

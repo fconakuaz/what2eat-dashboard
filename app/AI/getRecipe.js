@@ -8,6 +8,7 @@ import {
   CardFooter,
   CardHeader
 } from '@/components/ui/card';
+import { Circle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
@@ -62,7 +63,7 @@ export function GenerateHTMLFromJson({ json }) {
   return (
     <div className="">
       {Object.entries(json).map(([meal, recipe]) => (
-        <Card key={recipe.recipe_name} className="w-1/1 p-6  mb-8 block">
+        <Card key={recipe.recipe_name} className="w-1/1 p-2 lg:p-3  mb-8 block">
           <CardHeader className="flex flex-row items-start justify-between">
             <div className="flex items-center space-x-2">
               <Avatar className="w-14 h-14 mr-2">
@@ -87,11 +88,11 @@ export function GenerateHTMLFromJson({ json }) {
                 <li key={index}>
                   <div
                     key={index}
-                    className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                    className="mb-4 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0"
                   >
-                    <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                    🔹
                     <div className="space-y-1">
-                      <p className="text-sm font-normal leading-3 text-muted-foreground">
+                      <p className="text-sm font-normal text-muted-foreground">
                         {ingredient}
                       </p>
                     </div>
@@ -107,12 +108,12 @@ export function GenerateHTMLFromJson({ json }) {
                 <li key={index}>
                   <div
                     key={index}
-                    className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                    className="mb-4 flex flex-row pr-3 items-start pb-4 last:mb-0 last:pb-0"
                   >
-                    <span className="text-sm font-normal leading-3   text-sky-500">
+                    <span className="text-sm font-normal leading-3 text-sky-500">
                       {index + 1}.{' '}
                     </span>
-                    <div className="space-y-1">
+                    <div className="ml-2 space-y-1">
                       <p className="text-sm font-normal leading-3 text-muted-foreground">
                         {instruction}
                       </p>

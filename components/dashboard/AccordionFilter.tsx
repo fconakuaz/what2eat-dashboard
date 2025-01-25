@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
-import { TableAddIngredients } from './TableAddIngredients';
 import { useTranslations } from 'next-intl';
 import { MyPreferences } from './MyPreferences';
 export function AccordionFilter() {

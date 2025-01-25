@@ -17,6 +17,9 @@
       "info": "Click on create daily menu to display today's menu..."
     },
     "Common": {
-      "search": "Search"
+      "search": "Search",
+      "Edit": "Edit"
+      },"Profile": {
+      "age": "years"
     }
   }
