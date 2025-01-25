@@ -63,7 +63,10 @@ export function GenerateHTMLFromJson({ json }) {
   return (
     <div className="">
       {Object.entries(json).map(([meal, recipe]) => (
-        <Card key={recipe.recipe_name} className="w-1/1 p-2 lg:p-3  mb-8 block">
+        <Card
+          key={recipe.recipe_name}
+          className="w-1/1 p-2 lg:p-3  mb-8 md:mb-8 block"
+        >
           <CardHeader className="flex flex-row items-start justify-between">
             <div className="flex items-center space-x-2">
               <Avatar className="w-14 h-14 mr-2">
