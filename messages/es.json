@@ -14,6 +14,8 @@
     "Snack2": "2da Colación",
     "ingredients": "Ingredientes",
     "instructions": "Instrucciones",
+    "legendActivateBadge": "De clic para activar",
+    "legendDesactivateBadge": "De clic para desactivar",
     "info": "Da clic en crear menú del día para mostrar el menú de hoy..."
   },
   "Common": {
