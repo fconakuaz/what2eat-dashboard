@@ -14,16 +14,23 @@ import {
 import { Info, Sparkles } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
+import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
+import { useIncludeFoodStore } from 'app/store/includeFoodStore';
 
 const HomePage = () => {
   const [menu, setMenu] = useState<any>([]);
+  const { ingredientsToInclude } = useIncludeFoodStore();
+  const { ingredientsToExclude } = useExcludeFoodStore();
   const t = useTranslations('HomePage');
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
 
   async function run() {
     try {
       setLoadingTrue();
-      const response = await runGemini();
+      const response = await runGemini(
+        ingredientsToInclude,
+        ingredientsToExclude
+      );
       console.log('Response:', response);
       setMenu(response);
       setLoadingFalse();

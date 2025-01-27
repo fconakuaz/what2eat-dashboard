@@ -8,8 +8,6 @@ import {
   CardFooter,
   CardHeader
 } from '@/components/ui/card';
-import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
-import { useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useTranslations } from 'next-intl';
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
@@ -28,9 +26,7 @@ const generationConfig = {
   responseSchema
 };
 
-export async function runGemini() {
-  const { ingredientsToInclude } = useIncludeFoodStore();
-  const { ingredientsToExclude } = useExcludeFoodStore();
+export async function runGemini(ingredientsToInclude, ingredientsToExclude) {
   const chatSession = model.startChat({
     generationConfig,
     history: []
