@@ -48,7 +48,6 @@ export async function runGemini(ingredientsToInclude, ingredientsToExclude) {
 
   const messageToSend =
     ' Genera una lista de recetas para un menú del día\n' +
-    ' pero evitando los ingredientes: chayote, chícharo, pescado y mariscos.\n' +
     arrIngredientsToInclude +
     arrIngredientsToExclude +
     ' debe ser un tipo de comida: omnivora\n' +
