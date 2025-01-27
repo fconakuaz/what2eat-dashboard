@@ -8,7 +8,8 @@ import {
   CardFooter,
   CardHeader
 } from '@/components/ui/card';
-import { Circle } from 'lucide-react';
+import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
+import { useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useTranslations } from 'next-intl';
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
@@ -28,24 +29,47 @@ const generationConfig = {
 };
 
 export async function runGemini() {
+  const { ingredientsToInclude } = useIncludeFoodStore();
+  const { ingredientsToExclude } = useExcludeFoodStore();
   const chatSession = model.startChat({
     generationConfig,
     history: []
   });
 
-  const result = await chatSession.sendMessage(
+  const arrIngredientsToInclude =
+    ingredientsToInclude.length > 0
+      ? ' incluir ingredientes: ' +
+        ingredientsToInclude.map(({ name }) => name).join(', ') +
+        ' \n'
+      : ' incluir cualquier ingrediente';
+
+  const arrIngredientsToExclude =
+    ingredientsToExclude.length > 0
+      ? ' excluir ingredientes: ' +
+        ingredientsToExclude.map(({ name }) => name).join(', ') +
+        ' \n'
+      : ' no excluir ningún ingrediente';
+
+  const messageToSend =
     ' Genera una lista de recetas para un menú del día\n' +
-      ' pero evitando los ingredientes: chayote, chícharo, pescado y mariscos.\n' +
-      // ' incluir ingredientes: tomate, lechuga, rábanos.\n' +
-      ' debe ser un tipo de comida: omnivora\n' +
-      ' debe considerarse para personas de edad de: 41 años\n' +
-      ' de una altura de: 170 cm\n' +
-      ' de un peso de: 110 kg\n' +
-      ' debe ser un menú adaptado para personas que tienen: diabetes, colesterol alto, hipertensión.\n' +
-      ' genero: masculino\n' +
-      ' debe tener la proteína necesaria según la estatura y peso dicho, ademas de la edad y que sea para una persona con actividad: moderada\n' +
-      ' idioma: español'
-  );
+    ' pero evitando los ingredientes: chayote, chícharo, pescado y mariscos.\n' +
+    arrIngredientsToInclude +
+    arrIngredientsToExclude +
+    ' debe ser un tipo de comida: omnivora\n' +
+    ' debe considerarse para personas de edad de: 41 años\n' +
+    ' de una altura de: 170 cm\n' +
+    ' de un peso de: 110 kg\n' +
+    ' debe ser un menú adaptado para personas que tienen: diabetes, colesterol alto, hipertensión.\n' +
+    ' genero: masculino\n' +
+    ' debe tener la proteína necesaria según la estatura y peso dicho, ademas de la edad y que sea para una persona con actividad: moderada\n' +
+    ' idioma: español\n' +
+    ' Con ingredientes fáciles de conseguir en el país de: México' +
+    ' y en el estado de : Veracruz\n';
+
+  console.log('🟢🟢🟢 messageToSend 🟢🟢🟢');
+  console.log(messageToSend);
+
+  const result = await chatSession.sendMessage(messageToSend);
 
   try {
     const responseText = result.response.text();
