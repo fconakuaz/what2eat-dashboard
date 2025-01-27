@@ -33,7 +33,7 @@ export const BadgeIngredient: FC<Props> = ({ name, state, type }): any => {
           <Badge
             onClick={handleClick}
             variant={state ? 'default' : 'outline'}
-            className="mr-1 mb-1 cursor-pointer"
+            className="mr-2 mb-3 px-3 py-1 cursor-pointer"
           >
             {name}
           </Badge>
