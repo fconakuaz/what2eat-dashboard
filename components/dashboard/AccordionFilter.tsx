@@ -9,6 +9,7 @@ import { MyPreferences } from './MyPreferences';
 import { useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
 import { BadgeIngredient } from './BadgeIngredient';
+import { Card } from '../ui/card';
 export function AccordionFilter() {
   const t = useTranslations('HomePage');
   const { ingredientsToInclude } = useIncludeFoodStore();
@@ -27,14 +28,16 @@ export function AccordionFilter() {
       <AccordionItem value="item-1">
         <AccordionTrigger>{t('include_foods')}</AccordionTrigger>
         <AccordionContent>
-          {ingredientsToInclude.map(({ name, state }, index) => (
-            <BadgeIngredient
-              key={index}
-              name={name}
-              state={state}
-              type="include"
-            />
-          ))}
+          <Card className="w-full p-4 pt-7">
+            {ingredientsToInclude.map(({ name, state }, index) => (
+              <BadgeIngredient
+                key={index}
+                name={name}
+                state={state}
+                type="include"
+              />
+            ))}
+          </Card>
         </AccordionContent>
       </AccordionItem>
 
@@ -42,14 +45,16 @@ export function AccordionFilter() {
       <AccordionItem value="item-2">
         <AccordionTrigger>{t('exclude_foods')}</AccordionTrigger>
         <AccordionContent>
-          {ingredientsToExclude.map(({ name, state }, index) => (
-            <BadgeIngredient
-              key={index}
-              name={name}
-              state={state}
-              type="exclude"
-            />
-          ))}
+          <Card className="w-full p-4 pt-7">
+            {ingredientsToExclude.map(({ name, state }, index) => (
+              <BadgeIngredient
+                key={index}
+                name={name}
+                state={state}
+                type="exclude"
+              />
+            ))}
+          </Card>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
