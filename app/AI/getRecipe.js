@@ -34,16 +34,26 @@ export async function runGemini(ingredientsToInclude, ingredientsToExclude) {
 
   const arrIngredientsToInclude =
     ingredientsToInclude.length > 0
-      ? ' incluir ingredientes: ' +
-        ingredientsToInclude.map(({ name }) => name).join(', ') +
-        ' \n'
+      ? ' Se puede incluir sólo los siguientes ingredientes pero ninguno más que ' +
+        ingredientsToInclude
+          .filter(({ state }) => state)
+          .map(({ name }) => name)
+          .join(', ') +
+        '.\n'
       : ' incluir cualquier ingrediente';
 
   const arrIngredientsToExclude =
     ingredientsToExclude.length > 0
-      ? ' excluir ingredientes: ' +
-        ingredientsToExclude.map(({ name }) => name).join(', ') +
-        ' \n'
+      ? ' excluir ingredientes como ' +
+        ingredientsToExclude
+          .filter(({ state }) => state)
+          .map(({ name }) => name)
+          .join(', ') +
+        ingredientsToInclude
+          .filter(({ state }) => state == false)
+          .map(({ name }) => name)
+          .join(', ') +
+        '.\n'
       : ' no excluir ningún ingrediente';
 
   const messageToSend =
@@ -59,7 +69,7 @@ export async function runGemini(ingredientsToInclude, ingredientsToExclude) {
     ' debe tener la proteína necesaria según la estatura y peso dicho, ademas de la edad y que sea para una persona con actividad: moderada\n' +
     ' idioma: español\n' +
     ' Con ingredientes fáciles de conseguir en el país de: México' +
-    ' y en el estado de : Veracruz\n';
+    ' y en el estado de Veracruz\n';
 
   console.log('🟢🟢🟢 messageToSend 🟢🟢🟢');
   console.log(messageToSend);

@@ -44,7 +44,7 @@ export const useIncludeFoodStore = create<IncludeFoodStore>((set) => ({
       state: true
     },
     {
-      name: 'Huevo',
+      name: 'Huevos',
       state: true
     },
     {
