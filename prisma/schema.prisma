@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id              String   @id @default(uuid())
+  nombre          String
+  apellido        String
+  email           String   @unique
+  passwordHash    String
+  fechaNacimiento DateTime
+  genero          String
+  pais            String
+  estado          String
+  actividadFisica Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  Padecimientos    PadecimientosUsuarios[]
+  AlimentosIncluir AlimentosIncluirUsuario[]
+  AlimentosExcluir AlimentosExcluirUsuario[]
+  Menus            MenuGuardado[]
+  Indicadores      RegistroIndicadoresUsuario[]
+}
+
+model Padecimiento {
+  id       String                  @id @default(uuid())
+  nombre   String                  @unique
+  Usuarios PadecimientosUsuarios[]
+}
+
+model PadecimientosUsuarios {
+  id             String       @id @default(uuid())
+  usuarioId      String
+  padecimientoId String
+  usuario        Usuario      @relation(fields: [usuarioId], references: [id])
+  padecimiento   Padecimiento @relation(fields: [padecimientoId], references: [id])
+}
+
+model Alimento {
+  id               String                    @id @default(uuid())
+  nombre           String                    @unique
+  AlimentosIncluir AlimentosIncluirUsuario[]
+  AlimentosExcluir AlimentosExcluirUsuario[]
+}
+
+model AlimentosIncluirUsuario {
+  id         String   @id @default(uuid())
+  usuarioId  String
+  alimentoId String
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  alimento   Alimento @relation(fields: [alimentoId], references: [id])
+}
+
+model AlimentosExcluirUsuario {
+  id         String   @id @default(uuid())
+  usuarioId  String
+  alimentoId String
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  alimento   Alimento @relation(fields: [alimentoId], references: [id])
+}
+
+model MenuGuardado {
+  id        String  @id @default(uuid())
+  usuarioId String
+  nombre    String
+  items     Json
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+}
+
+model RegistroIndicadoresUsuario {
+  id        String  @id @default(uuid())
+  usuarioId String
+  peso      Float
+  altura    Float
+  imc       Float
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+}
