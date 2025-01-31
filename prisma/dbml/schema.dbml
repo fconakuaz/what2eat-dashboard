@@ -1,0 +1,93 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Usuario {
+  id String [pk]
+  nombre String [not null]
+  apellido String [not null]
+  email String [unique, not null]
+  passwordHash String [not null]
+  fechaNacimiento DateTime [not null]
+  genero String [not null]
+  pais String [not null]
+  estado String [not null]
+  actividadFisica Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  Padecimientos PadecimientosUsuarios [not null]
+  AlimentosIncluir AlimentosIncluirUsuario [not null]
+  AlimentosExcluir AlimentosExcluirUsuario [not null]
+  Menus MenuGuardado [not null]
+  Indicadores RegistroIndicadoresUsuario [not null]
+}
+
+Table Padecimiento {
+  id String [pk]
+  nombre String [unique, not null]
+  Usuarios PadecimientosUsuarios [not null]
+}
+
+Table PadecimientosUsuarios {
+  id String [pk]
+  usuarioId String [not null]
+  padecimientoId String [not null]
+  usuario Usuario [not null]
+  padecimiento Padecimiento [not null]
+}
+
+Table Alimento {
+  id String [pk]
+  nombre String [unique, not null]
+  AlimentosIncluir AlimentosIncluirUsuario [not null]
+  AlimentosExcluir AlimentosExcluirUsuario [not null]
+}
+
+Table AlimentosIncluirUsuario {
+  id String [pk]
+  usuarioId String [not null]
+  alimentoId String [not null]
+  usuario Usuario [not null]
+  alimento Alimento [not null]
+}
+
+Table AlimentosExcluirUsuario {
+  id String [pk]
+  usuarioId String [not null]
+  alimentoId String [not null]
+  usuario Usuario [not null]
+  alimento Alimento [not null]
+}
+
+Table MenuGuardado {
+  id String [pk]
+  usuarioId String [not null]
+  nombre String [not null]
+  items Json [not null]
+  usuario Usuario [not null]
+}
+
+Table RegistroIndicadoresUsuario {
+  id String [pk]
+  usuarioId String [not null]
+  peso Float [not null]
+  altura Float [not null]
+  imc Float [not null]
+  usuario Usuario [not null]
+}
+
+Ref: PadecimientosUsuarios.usuarioId > Usuario.id
+
+Ref: PadecimientosUsuarios.padecimientoId > Padecimiento.id
+
+Ref: AlimentosIncluirUsuario.usuarioId > Usuario.id
+
+Ref: AlimentosIncluirUsuario.alimentoId > Alimento.id
+
+Ref: AlimentosExcluirUsuario.usuarioId > Usuario.id
+
+Ref: AlimentosExcluirUsuario.alimentoId > Alimento.id
+
+Ref: MenuGuardado.usuarioId > Usuario.id
+
+Ref: RegistroIndicadoresUsuario.usuarioId > Usuario.id
