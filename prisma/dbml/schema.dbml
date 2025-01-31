@@ -2,92 +2,287 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Table Usuario {
+Table User {
   id String [pk]
-  nombre String [not null]
-  apellido String [not null]
+  name String [not null]
+  lastName String [not null]
   email String [unique, not null]
-  passwordHash String [not null]
-  fechaNacimiento DateTime [not null]
-  genero String [not null]
-  pais String [not null]
-  estado String [not null]
-  actividadFisica Int [not null]
+  birthDate DateTime [not null]
+  gender UserGender [not null]
+  dietaryPreference DietaryPreference [not null, default: 'NONE']
+  country String [not null]
+  physicalActivity PhysicalActivityLevel [not null, default: 'SEDENTARY']
+  status UserStatus [not null, default: 'ACTIVE']
+  role UserRole [not null, default: 'USER']
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  Padecimientos PadecimientosUsuarios [not null]
-  AlimentosIncluir AlimentosIncluirUsuario [not null]
-  AlimentosExcluir AlimentosExcluirUsuario [not null]
-  Menus MenuGuardado [not null]
-  Indicadores RegistroIndicadoresUsuario [not null]
+  Auth Auth
+  Afflictions AfflictionUser [not null]
+  IncludedFoods IncludedFoodUser [not null]
+  ExcludedFoods ExcludedFoodUser [not null]
+  SavedMenus SavedMenu [not null]
+  HealthIndicators HealthIndicatorUser [not null]
+  Activities Activity [not null]
+  SleepSessions SleepSession [not null]
+  HeartRates HeartRate [not null]
+  Nutrition Nutrition [not null]
 }
 
-Table Padecimiento {
+Table Auth {
   id String [pk]
-  nombre String [unique, not null]
-  Usuarios PadecimientosUsuarios [not null]
+  userId String [unique, not null]
+  authType AuthType [not null]
+  passwordHash String
+  googleId String
+  isVerified Boolean [not null, default: false]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  user User [not null]
+  Sessions Session [not null]
 }
 
-Table PadecimientosUsuarios {
+Table Session {
   id String [pk]
-  usuarioId String [not null]
-  padecimientoId String [not null]
-  usuario Usuario [not null]
-  padecimiento Padecimiento [not null]
+  authId String [not null]
+  refreshToken String [unique, not null]
+  expiresAt DateTime [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  auth Auth [not null]
 }
 
-Table Alimento {
+Table Affliction {
   id String [pk]
-  nombre String [unique, not null]
-  AlimentosIncluir AlimentosIncluirUsuario [not null]
-  AlimentosExcluir AlimentosExcluirUsuario [not null]
+  name String [unique, not null]
+  Users AfflictionUser [not null]
 }
 
-Table AlimentosIncluirUsuario {
+Table AfflictionUser {
   id String [pk]
-  usuarioId String [not null]
-  alimentoId String [not null]
-  usuario Usuario [not null]
-  alimento Alimento [not null]
+  userId String [not null]
+  afflictionId String [not null]
+  user User [not null]
+  affliction Affliction [not null]
 }
 
-Table AlimentosExcluirUsuario {
+Table Food {
   id String [pk]
-  usuarioId String [not null]
-  alimentoId String [not null]
-  usuario Usuario [not null]
-  alimento Alimento [not null]
+  name String [unique, not null]
+  category FoodCategory
+  IncludedUsers IncludedFoodUser [not null]
+  ExcludedUsers ExcludedFoodUser [not null]
 }
 
-Table MenuGuardado {
+Table IncludedFoodUser {
   id String [pk]
-  usuarioId String [not null]
-  nombre String [not null]
+  userId String [not null]
+  foodId String [not null]
+  user User [not null]
+  food Food [not null]
+}
+
+Table ExcludedFoodUser {
+  id String [pk]
+  userId String [not null]
+  foodId String [not null]
+  user User [not null]
+  food Food [not null]
+}
+
+Table SavedMenu {
+  id String [pk]
+  userId String [not null]
+  name String [not null]
   items Json [not null]
-  usuario Usuario [not null]
+  user User [not null]
 }
 
-Table RegistroIndicadoresUsuario {
+Table HealthIndicatorUser {
   id String [pk]
-  usuarioId String [not null]
-  peso Float [not null]
-  altura Float [not null]
-  imc Float [not null]
-  usuario Usuario [not null]
+  userId String [not null]
+  weight Float
+  height Float
+  bmi Float
+  bodyType BodyType
+  bodyFat Float
+  bodyWater Float
+  bodyProtein Float
+  basalMetabolism Float
+  visceralFat Float
+  boneMass Float
+  user User [not null]
 }
 
-Ref: PadecimientosUsuarios.usuarioId > Usuario.id
+Table Activity {
+  id String [pk]
+  userId String [not null]
+  steps Int [not null]
+  caloriesBurned Float [not null]
+  distanceMeters Float [not null]
+  activeMinutes Int [not null]
+  heartPoints Int [not null]
+  moveMinutes Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  user User [not null]
+  WorkoutSessions WorkoutSession [not null]
+}
 
-Ref: PadecimientosUsuarios.padecimientoId > Padecimiento.id
+Table WorkoutSession {
+  id String [pk]
+  activityId String [not null]
+  activityType String [not null]
+  startTime DateTime [not null]
+  endTime DateTime [not null]
+  caloriesBurned Float [not null]
+  distanceMeters Float [not null]
+  averageHeartRateBpm Int [not null]
+  activity Activity [not null]
+}
 
-Ref: AlimentosIncluirUsuario.usuarioId > Usuario.id
+Table SleepSession {
+  id String [pk]
+  userId String [not null]
+  startTime DateTime [not null]
+  endTime DateTime [not null]
+  totalSleepHrs Float [not null]
+  user User [not null]
+  SleepStages SleepStage [not null]
+}
 
-Ref: AlimentosIncluirUsuario.alimentoId > Alimento.id
+Table SleepStage {
+  id String [pk]
+  sleepSessionId String [not null]
+  lightSleepMinutes Int [not null]
+  deepSleepMinutes Int [not null]
+  remSleepMinutes Int [not null]
+  sleepSession SleepSession [not null]
+}
 
-Ref: AlimentosExcluirUsuario.usuarioId > Usuario.id
+Table HeartRate {
+  id String [pk]
+  userId String [not null]
+  restingHeartRate Int [not null]
+  averageHeartRate Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  user User [not null]
+  HeartRateZones HeartRateZone [not null]
+}
 
-Ref: AlimentosExcluirUsuario.alimentoId > Alimento.id
+Table HeartRateZone {
+  id String [pk]
+  heartRateId String [not null]
+  fatBurn Int [not null]
+  cardio Int [not null]
+  peak Int [not null]
+  heartRate HeartRate [not null]
+}
 
-Ref: MenuGuardado.usuarioId > Usuario.id
+Table Nutrition {
+  id String [pk]
+  userId String [not null]
+  waterIntakeMl Int [not null]
+  caloriesConsumed Float [not null]
+  carbohydratesG Float [not null]
+  proteinsG Float [not null]
+  fatsG Float [not null]
+  createdAt DateTime [default: `now()`, not null]
+  user User [not null]
+}
 
-Ref: RegistroIndicadoresUsuario.usuarioId > Usuario.id
+Enum PhysicalActivityLevel {
+  SEDENTARY
+  LIGHT
+  MODERATE
+  ACTIVE
+  VERY_ACTIVE
+}
+
+Enum AuthType {
+  EMAIL
+  GOOGLE
+}
+
+Enum UserStatus {
+  ACTIVE
+  BANNED
+}
+
+Enum UserRole {
+  USER
+  ADMIN
+}
+
+Enum UserGender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+Enum FoodCategory {
+  FRUITS
+  VEGETABLES
+  GRAINS
+  PROTEINS
+  DAIRY
+  LEGUMES
+  NUTS_SEEDS
+  FATS_OILS
+  SWEETS_DESSERTS
+  BEVERAGES
+  HERBS_SPICES
+}
+
+Enum DietaryPreference {
+  VEGAN
+  VEGETARIAN
+  GLUTEN_FREE
+  KETO
+  PALEO
+  HALAL
+  KOSHER
+  NONE
+}
+
+Enum BodyType {
+  ECTOMORPH
+  SLENDER
+  ATHLETIC
+  THICK_SET
+  STOCKY
+  HEAVYSET
+  OBESE
+}
+
+Ref: Auth.userId - User.id
+
+Ref: Session.authId > Auth.id
+
+Ref: AfflictionUser.userId > User.id
+
+Ref: AfflictionUser.afflictionId > Affliction.id
+
+Ref: IncludedFoodUser.userId > User.id
+
+Ref: IncludedFoodUser.foodId > Food.id
+
+Ref: ExcludedFoodUser.userId > User.id
+
+Ref: ExcludedFoodUser.foodId > Food.id
+
+Ref: SavedMenu.userId > User.id
+
+Ref: HealthIndicatorUser.userId > User.id
+
+Ref: Activity.userId > User.id
+
+Ref: WorkoutSession.activityId > Activity.id
+
+Ref: SleepSession.userId > User.id
+
+Ref: SleepStage.sleepSessionId > SleepSession.id
+
+Ref: HeartRate.userId > User.id
+
+Ref: HeartRateZone.heartRateId > HeartRate.id
+
+Ref: Nutrition.userId > User.id

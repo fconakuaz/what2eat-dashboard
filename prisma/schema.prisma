@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Prisma schema file for What2Eat
 
 generator client {
   provider = "prisma-client-js"
@@ -17,77 +13,253 @@ generator dbml {
   provider = "prisma-dbml-generator"
 }
 
-model Usuario {
-  id              String   @id @default(uuid())
-  nombre          String
-  apellido        String
-  email           String   @unique
-  passwordHash    String
-  fechaNacimiento DateTime
-  genero          String
-  pais            String
-  estado          String
-  actividadFisica Int
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  Padecimientos    PadecimientosUsuarios[]
-  AlimentosIncluir AlimentosIncluirUsuario[]
-  AlimentosExcluir AlimentosExcluirUsuario[]
-  Menus            MenuGuardado[]
-  Indicadores      RegistroIndicadoresUsuario[]
+enum PhysicalActivityLevel {
+  SEDENTARY // Little to no exercise
+  LIGHT // Light exercise (1-3 days per week)
+  MODERATE // Moderate exercise (3-5 days per week)
+  ACTIVE // Intense exercise (6-7 days per week)
+  VERY_ACTIVE // Athletes or physically demanding jobs
 }
 
-model Padecimiento {
-  id       String                  @id @default(uuid())
-  nombre   String                  @unique
-  Usuarios PadecimientosUsuarios[]
+enum AuthType {
+  EMAIL
+  GOOGLE
 }
 
-model PadecimientosUsuarios {
-  id             String       @id @default(uuid())
-  usuarioId      String
-  padecimientoId String
-  usuario        Usuario      @relation(fields: [usuarioId], references: [id])
-  padecimiento   Padecimiento @relation(fields: [padecimientoId], references: [id])
+enum UserStatus {
+  ACTIVE
+  BANNED
 }
 
-model Alimento {
-  id               String                    @id @default(uuid())
-  nombre           String                    @unique
-  AlimentosIncluir AlimentosIncluirUsuario[]
-  AlimentosExcluir AlimentosExcluirUsuario[]
+enum UserRole {
+  USER
+  ADMIN
 }
 
-model AlimentosIncluirUsuario {
-  id         String   @id @default(uuid())
-  usuarioId  String
-  alimentoId String
-  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
-  alimento   Alimento @relation(fields: [alimentoId], references: [id])
+enum UserGender {
+  MALE
+  FEMALE
+  OTHER
 }
 
-model AlimentosExcluirUsuario {
-  id         String   @id @default(uuid())
-  usuarioId  String
-  alimentoId String
-  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
-  alimento   Alimento @relation(fields: [alimentoId], references: [id])
+enum FoodCategory {
+  FRUITS
+  VEGETABLES
+  GRAINS
+  PROTEINS
+  DAIRY
+  LEGUMES
+  NUTS_SEEDS
+  FATS_OILS
+  SWEETS_DESSERTS
+  BEVERAGES
+  HERBS_SPICES
 }
 
-model MenuGuardado {
-  id        String  @id @default(uuid())
-  usuarioId String
-  nombre    String
-  items     Json
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+enum DietaryPreference {
+  VEGAN
+  VEGETARIAN
+  GLUTEN_FREE
+  KETO
+  PALEO
+  HALAL
+  KOSHER
+  NONE // Default for users without dietary restrictions
 }
 
-model RegistroIndicadoresUsuario {
-  id        String  @id @default(uuid())
-  usuarioId String
-  peso      Float
-  altura    Float
-  imc       Float
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+enum BodyType {
+  ECTOMORPH // BMI < 18.5
+  SLENDER // BMI 18.5 - 22.9
+  ATHLETIC // BMI 23 - 26.9
+  THICK_SET // BMI 27 - 29.9
+  STOCKY // BMI 30 - 34.9
+  HEAVYSET // BMI 35 - 39.9
+  OBESE // BMI >= 40
+}
+
+model User {
+  id                String                @id @default(uuid())
+  name              String
+  lastName          String
+  email             String                @unique
+  birthDate         DateTime
+  gender            UserGender
+  dietaryPreference DietaryPreference     @default(NONE)
+  country           String
+  physicalActivity  PhysicalActivityLevel @default(SEDENTARY)
+  status            UserStatus            @default(ACTIVE)
+  role              UserRole              @default(USER)
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  Auth              Auth?
+  Afflictions       AfflictionUser[]
+  IncludedFoods     IncludedFoodUser[]
+  ExcludedFoods     ExcludedFoodUser[]
+  SavedMenus        SavedMenu[]
+  HealthIndicators  HealthIndicatorUser[]
+  Activities        Activity[]
+  SleepSessions     SleepSession[]
+  HeartRates        HeartRate[]
+  Nutrition         Nutrition[]
+}
+
+model Auth {
+  id           String    @id @default(uuid())
+  userId       String    @unique
+  authType     AuthType
+  passwordHash String? // Only for email authentication
+  googleId     String? // Only for Google authentication
+  isVerified   Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  user         User      @relation(fields: [userId], references: [id])
+  Sessions     Session[]
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  authId       String
+  refreshToken String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  auth         Auth     @relation(fields: [authId], references: [id])
+}
+
+model Affliction {
+  id    String           @id @default(uuid())
+  name  String           @unique
+  Users AfflictionUser[]
+}
+
+model AfflictionUser {
+  id           String     @id @default(uuid())
+  userId       String
+  afflictionId String
+  user         User       @relation(fields: [userId], references: [id])
+  affliction   Affliction @relation(fields: [afflictionId], references: [id])
+}
+
+model Food {
+  id            String             @id @default(uuid())
+  name          String             @unique
+  category      FoodCategory?
+  IncludedUsers IncludedFoodUser[]
+  ExcludedUsers ExcludedFoodUser[]
+}
+
+model IncludedFoodUser {
+  id     String @id @default(uuid())
+  userId String
+  foodId String
+  user   User   @relation(fields: [userId], references: [id])
+  food   Food   @relation(fields: [foodId], references: [id])
+}
+
+model ExcludedFoodUser {
+  id     String @id @default(uuid())
+  userId String
+  foodId String
+  user   User   @relation(fields: [userId], references: [id])
+  food   Food   @relation(fields: [foodId], references: [id])
+}
+
+model SavedMenu {
+  id     String @id @default(uuid())
+  userId String
+  name   String
+  items  Json
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model HealthIndicatorUser {
+  id              String    @id @default(uuid())
+  userId          String
+  weight          Float?
+  height          Float?
+  bmi             Float?
+  bodyType        BodyType?
+  bodyFat         Float?
+  bodyWater       Float?
+  bodyProtein     Float?
+  basalMetabolism Float?
+  visceralFat     Float?
+  boneMass        Float?
+  user            User      @relation(fields: [userId], references: [id])
+}
+
+model Activity {
+  id              String           @id @default(uuid())
+  userId          String
+  steps           Int
+  caloriesBurned  Float
+  distanceMeters  Float
+  activeMinutes   Int
+  heartPoints     Int
+  moveMinutes     Int
+  createdAt       DateTime         @default(now())
+  user            User             @relation(fields: [userId], references: [id])
+  WorkoutSessions WorkoutSession[]
+}
+
+model WorkoutSession {
+  id                  String   @id @default(uuid())
+  activityId          String
+  activityType        String
+  startTime           DateTime
+  endTime             DateTime
+  caloriesBurned      Float
+  distanceMeters      Float
+  averageHeartRateBpm Int
+  activity            Activity @relation(fields: [activityId], references: [id])
+}
+
+model SleepSession {
+  id            String       @id @default(uuid())
+  userId        String
+  startTime     DateTime
+  endTime       DateTime
+  totalSleepHrs Float
+  user          User         @relation(fields: [userId], references: [id])
+  SleepStages   SleepStage[]
+}
+
+model SleepStage {
+  id                String       @id @default(uuid())
+  sleepSessionId    String
+  lightSleepMinutes Int
+  deepSleepMinutes  Int
+  remSleepMinutes   Int
+  sleepSession      SleepSession @relation(fields: [sleepSessionId], references: [id])
+}
+
+model HeartRate {
+  id               String          @id @default(uuid())
+  userId           String
+  restingHeartRate Int
+  averageHeartRate Int
+  createdAt        DateTime        @default(now())
+  user             User            @relation(fields: [userId], references: [id])
+  HeartRateZones   HeartRateZone[]
+}
+
+model HeartRateZone {
+  id          String    @id @default(uuid())
+  heartRateId String
+  fatBurn     Int
+  cardio      Int
+  peak        Int
+  heartRate   HeartRate @relation(fields: [heartRateId], references: [id])
+}
+
+model Nutrition {
+  id               String   @id @default(uuid())
+  userId           String
+  waterIntakeMl    Int
+  caloriesConsumed Float
+  carbohydratesG   Float
+  proteinsG        Float
+  fatsG            Float
+  createdAt        DateTime @default(now())
+  user             User     @relation(fields: [userId], references: [id])
 }

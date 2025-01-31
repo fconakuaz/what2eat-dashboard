@@ -26,6 +26,25 @@ This template uses the new Next.js App Router. This includes support for enhance
 
 ## Getting Started
 
+### Config BD with Prisma
+
+```bash
+# Crea tablas en BD
+pnpm prisma migrate dev --name init
+
+# Actualiza tablas en BD
+pnpm prisma migrate dev --name update
+
+# Generate tables cada que se hacen cambios al esquema
+pnpm prisma generate
+
+# Reset prismayarn prisma generate
+pnpm prisma db push --force-reset
+
+# Run seed
+pnpm run seed
+```
+
 During the deployment, Vercel will prompt you to create a new Postgres database. This will add the necessary environment variables to your project.
 
 Inside the Vercel Postgres dashboard, create a table based on the schema defined in this repository.
