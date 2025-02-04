@@ -1,12 +1,14 @@
-<h1 align="center"><strong>What2Eat</strong></h1>
+<h1 align="center"><strong>🍎What2Eat</strong></h1>
 <h3 align="center"><strong>Dashboard administrativo</strong></h3>
 
 <br />
 <div align="center">
-<a href="https://what2eat-dashboard.vercel.app/">Demo</a>
+<a style="font-size: 18px" href="https://what2eat-dashboard.vercel.app/">Demo</a>
 <span> · </span>
-<a href="https://github.com/fconakuaz/what2eat-dashboard">Repositorio</a>
-<span>
+<a style="font-size: 18px" href="https://github.com/fconakuaz/what2eat-dashboard">Repositorio en Git</a>
+ <span> · </span>
+<a style="font-size: 18px" href="https://dbdiagram.io/d/What2Eat-679c125f263d6cf9a0952c89">Diagrama de la Base de datos</a>
+ 
 </div>
 
 <br>
@@ -15,25 +17,96 @@
  
 <br>
 
-## Overview.
+## Características principales
 
-This is a starter template using the following stack:
+- ✅ **Generación de menús inteligentes** con IA generativa del modelo de Gemini 2 Flash.
+- ✅ **Compatibilidad con Google Fit** para ajustar tus menús según tu actividad física.
+- ✅ **Personalización** para dietas especiales: vegetariana, sin gluten, alta en proteínas, etc.
+- ✅ **Gestión eficiente de inventarios**: usa lo que tienes en tu despensa antes de que caduque.
+- ✅ **Interfaz fácil de usar**, rápida y optimizada.
+- ✅ **Multilingüe**, con soporte para varios idiomas (Español/Inglés).
+
+<br>
+
+## Estructura de Base de datos
+
+<a style="font-size: 18px" href="https://dbdiagram.io/d/What2Eat-679c125f263d6cf9a0952c89">Diagrama de la Base de datos</a>
+
+```plaintext
+/
+├── prisma/
+│   ├── schema.prisma  (Modelos de BD)
+
+```
+
+<img src="public/uml.webp" alt="What2Eat Screenshot">
+
+<br>
+
+## Estructura de archivos
+
+```plaintext
+/
+├── app/
+│   ├── (dashboard)/
+│   ├── [locale]/
+│   ├── AI/
+│   ├── api/
+│   ├── components/
+│   ├── login/
+│   ├── store/
+│   ├── layout.tsx
+│   ├── globals.css
+│   ├── request.ts
+│   ├── favicon.ico
+├── components/
+│   ├── dashboard/
+│   ├── ui/
+│   ├── icons.tsx
+│   ├── theme-provider.tsx
+├── i18n/
+│   ├── request.ts
+├── lib/
+│   ├── auth.ts
+│   ├── db.ts
+│   ├── prisma.ts
+│   ├── utils.ts
+├── messages/
+│   ├── en.json
+│   ├── es.json
+├── prisma/
+│   ├── dbml/
+│   ├── migrations/
+│   ├── schema.prisma
+│   ├── seed.ts
+├── public/
+│   ├── apple-touch-icon.png
+│   ├── ...
+├── .env
+├── package.json
+├── README.md
+└── ...
+
+```
+
+## Tecnologías usadas
 
 - Framework - [Next.js (App Router)](https://nextjs.org)
-- Language - [TypeScript](https://www.typescriptlang.org)
+- Lenguaje - [TypeScript](https://www.typescriptlang.org)
 - Auth - [Auth.js](https://authjs.dev)
-- Database - [Postgres](https://vercel.com/postgres)
+- Base de datos - [Postgres](https://vercel.com/postgres)
 - Deployment - [Vercel](https://vercel.com/docs/concepts/next.js/overview)
 - Styling - [Tailwind CSS](https://tailwindcss.com)
-- Components - [Shadcn UI](https://ui.shadcn.com/)
+- Componentes - [Shadcn UI](https://ui.shadcn.com/)
 - Analytics - [Vercel Analytics](https://vercel.com/analytics)
 - Formatting - [Prettier](https://prettier.io)
-
-This template uses the new Next.js App Router. This includes support for enhanced layouts, colocation of components, tests, and styles, component-level data fetching, and more.
+- ORM - [Prisma](https://www.prisma.io/)
 
 ## Getting Started
 
 ### Config BD with Prisma
+
+Una vez configurada la url de la base de datos para conectar Prisma se realizan los siguientes pasos
 
 ```bash
 # Crea tablas en BD
@@ -45,46 +118,22 @@ pnpm prisma migrate dev --name update
 # Generate tables cada que se hacen cambios al esquema
 pnpm prisma generate
 
-# Reset prismayarn prisma generate
+# Reset prisma si requieres borrar toda la BD de cero
 pnpm prisma db push --force-reset
 
 # Run seed
 pnpm run seed
 ```
 
-During the deployment, Vercel will prompt you to create a new Postgres database. This will add the necessary environment variables to your project.
+El archivo `.env.example` convertirlo a `.env` y actualizar los valores de las variables de ambiente.
 
-Inside the Vercel Postgres dashboard, create a table based on the schema defined in this repository.
-
-```
-CREATE TYPE status AS ENUM ('active', 'inactive', 'archived');
-
-CREATE TABLE products (
-  id SERIAL PRIMARY KEY,
-  image_url TEXT NOT NULL,
-  name TEXT NOT NULL,
-  status status NOT NULL,
-  price NUMERIC(10, 2) NOT NULL,
-  stock INTEGER NOT NULL,
-  available_at TIMESTAMP NOT NULL
-);
-```
-
-Then, uncomment `app/api/seed.ts` and hit `http://localhost:3000/api/seed` to seed the database with products.
-
-Next, copy the `.env.example` file to `.env` and update the values. Follow the instructions in the `.env.example` file to set up your GitHub OAuth application.
-
-```bash
-npm i -g vercel
-vercel link
-vercel env pull
-```
-
-Finally, run the following commands to start the development server:
+Finalmente se corren los comandos del servidor de desarrollo:
 
 ```
 pnpm install
 pnpm run dev
 ```
 
-You should now be able to access the application at http://localhost:3000.
+Ahora podrás ver la aplicación lanzada en http://localhost:3000.
+
+**Creado por [Francisco Nakú Acosta Zárate](#)**
