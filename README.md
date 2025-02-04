@@ -1,12 +1,19 @@
-<div align="center"><strong>Next.js 15 Admin Dashboard Template</strong></div>
-<div align="center">Built with the Next.js App Router</div>
+<h1 align="center"><strong>What2Eat</strong></h1>
+<h3 align="center"><strong>Dashboard administrativo</strong></h3>
+
 <br />
 <div align="center">
-<a href="https://next-admin-dash.vercel.app/">Demo</a>
+<a href="https://what2eat-dashboard.vercel.app/">Demo</a>
 <span> · </span>
-<a href="https://vercel.com/templates/next.js/admin-dashboard-tailwind-postgres-react-nextjs">Clone & Deploy.</a>
+<a href="https://github.com/fconakuaz/what2eat-dashboard">Repositorio</a>
 <span>
 </div>
+
+<br>
+
+<img src="public/dashboard.webp" alt="What2Eat Screenshot">
+ 
+<br>
 
 ## Overview.
 
