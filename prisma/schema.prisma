@@ -79,13 +79,15 @@ enum BodyType {
 
 model User {
   id                String                @id @default(uuid())
-  name              String
+  firstName         String
   lastName          String
+  image             String
   email             String                @unique
   birthDate         DateTime
   gender            UserGender
   dietaryPreference DietaryPreference     @default(NONE)
   country           String
+  state             String
   physicalActivity  PhysicalActivityLevel @default(SEDENTARY)
   status            UserStatus            @default(ACTIVE)
   role              UserRole              @default(USER)
@@ -185,6 +187,8 @@ model HealthIndicatorUser {
   basalMetabolism Float?
   visceralFat     Float?
   boneMass        Float?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
   user            User      @relation(fields: [userId], references: [id])
 }
 

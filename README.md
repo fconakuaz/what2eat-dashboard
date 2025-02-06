@@ -101,6 +101,7 @@
 - Analytics - [Vercel Analytics](https://vercel.com/analytics)
 - Formatting - [Prettier](https://prettier.io)
 - ORM - [Prisma](https://www.prisma.io/)
+- Manejador de estado - [Zustand](https://zustand-demo.pmnd.rs/)
 
 ## Getting Started
 
