@@ -12,7 +12,8 @@
 
 */
 -- CreateEnum
-CREATE TYPE "AuthType" AS ENUM ('EMAIL', 'GOOGLE');
+CREATE TYPE "AuthType" AS ENUM
+('EMAIL', 'GOOGLE');
 
 -- DropForeignKey
 ALTER TABLE "AlimentosExcluirUsuario" DROP CONSTRAINT "AlimentosExcluirUsuario_alimentoId_fkey";
@@ -63,9 +64,10 @@ DROP TABLE "RegistroIndicadoresUsuario";
 DROP TABLE "Usuario";
 
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "User"
+(
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "weight" DOUBLE PRECISION,
@@ -83,7 +85,8 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Auth" (
+CREATE TABLE "Auth"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "authType" "AuthType" NOT NULL,
@@ -98,7 +101,8 @@ CREATE TABLE "Auth" (
 );
 
 -- CreateTable
-CREATE TABLE "Session" (
+CREATE TABLE "Session"
+(
     "id" TEXT NOT NULL,
     "authId" TEXT NOT NULL,
     "refreshToken" TEXT NOT NULL,
@@ -110,7 +114,8 @@ CREATE TABLE "Session" (
 );
 
 -- CreateTable
-CREATE TABLE "Affliction" (
+CREATE TABLE "Affliction"
+(
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
 
@@ -118,7 +123,8 @@ CREATE TABLE "Affliction" (
 );
 
 -- CreateTable
-CREATE TABLE "AfflictionsUsers" (
+CREATE TABLE "AfflictionsUsers"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "afflictionId" TEXT NOT NULL,
@@ -127,7 +133,8 @@ CREATE TABLE "AfflictionsUsers" (
 );
 
 -- CreateTable
-CREATE TABLE "Food" (
+CREATE TABLE "Food"
+(
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
 
@@ -135,7 +142,8 @@ CREATE TABLE "Food" (
 );
 
 -- CreateTable
-CREATE TABLE "FoodIncludeUser" (
+CREATE TABLE "FoodIncludeUser"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "foodId" TEXT NOT NULL,
@@ -144,7 +152,8 @@ CREATE TABLE "FoodIncludeUser" (
 );
 
 -- CreateTable
-CREATE TABLE "FoodToExcludeUser" (
+CREATE TABLE "FoodToExcludeUser"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "foodId" TEXT NOT NULL,
@@ -153,7 +162,8 @@ CREATE TABLE "FoodToExcludeUser" (
 );
 
 -- CreateTable
-CREATE TABLE "MenuSaved" (
+CREATE TABLE "MenuSaved"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -163,7 +173,8 @@ CREATE TABLE "MenuSaved" (
 );
 
 -- CreateTable
-CREATE TABLE "IndicatorsRegisterUser" (
+CREATE TABLE "IndicatorsRegisterUser"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "imc" DOUBLE PRECISION NOT NULL,
@@ -172,7 +183,8 @@ CREATE TABLE "IndicatorsRegisterUser" (
 );
 
 -- CreateTable
-CREATE TABLE "Activity" (
+CREATE TABLE "Activity"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "steps" INTEGER NOT NULL,
@@ -187,7 +199,8 @@ CREATE TABLE "Activity" (
 );
 
 -- CreateTable
-CREATE TABLE "WorkoutSession" (
+CREATE TABLE "WorkoutSession"
+(
     "id" TEXT NOT NULL,
     "activityId" TEXT NOT NULL,
     "activityType" TEXT NOT NULL,
@@ -201,7 +214,8 @@ CREATE TABLE "WorkoutSession" (
 );
 
 -- CreateTable
-CREATE TABLE "SleepSession" (
+CREATE TABLE "SleepSession"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "startTime" TIMESTAMP(3) NOT NULL,
@@ -212,7 +226,8 @@ CREATE TABLE "SleepSession" (
 );
 
 -- CreateTable
-CREATE TABLE "SleepStage" (
+CREATE TABLE "SleepStage"
+(
     "id" TEXT NOT NULL,
     "sleepSessionId" TEXT NOT NULL,
     "lightSleepMinutes" INTEGER NOT NULL,
@@ -223,7 +238,8 @@ CREATE TABLE "SleepStage" (
 );
 
 -- CreateTable
-CREATE TABLE "HeartRate" (
+CREATE TABLE "HeartRate"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "restingHeartRate" INTEGER NOT NULL,
@@ -234,7 +250,8 @@ CREATE TABLE "HeartRate" (
 );
 
 -- CreateTable
-CREATE TABLE "HeartRateZone" (
+CREATE TABLE "HeartRateZone"
+(
     "id" TEXT NOT NULL,
     "heartRateId" TEXT NOT NULL,
     "fatBurn" INTEGER NOT NULL,
@@ -245,7 +262,8 @@ CREATE TABLE "HeartRateZone" (
 );
 
 -- CreateTable
-CREATE TABLE "Nutrition" (
+CREATE TABLE "Nutrition"
+(
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "waterIntakeMl" INTEGER NOT NULL,
@@ -277,52 +295,86 @@ CREATE UNIQUE INDEX "Affliction_name_key" ON "Affliction"("name");
 CREATE UNIQUE INDEX "Food_name_key" ON "Food"("name");
 
 -- AddForeignKey
-ALTER TABLE "Auth" ADD CONSTRAINT "Auth_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Auth" ADD CONSTRAINT "Auth_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Session" ADD CONSTRAINT "Session_authId_fkey" FOREIGN KEY ("authId") REFERENCES "Auth"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Session" ADD CONSTRAINT "Session_authId_fkey" FOREIGN KEY ("authId") REFERENCES "Auth"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "AfflictionsUsers" ADD CONSTRAINT "AfflictionsUsers_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "AfflictionsUsers" ADD CONSTRAINT "AfflictionsUsers_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "AfflictionsUsers" ADD CONSTRAINT "AfflictionsUsers_afflictionId_fkey" FOREIGN KEY ("afflictionId") REFERENCES "Affliction"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "AfflictionsUsers" ADD CONSTRAINT "AfflictionsUsers_afflictionId_fkey" FOREIGN KEY ("afflictionId") REFERENCES "Affliction"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FoodIncludeUser" ADD CONSTRAINT "FoodIncludeUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "FoodIncludeUser" ADD CONSTRAINT "FoodIncludeUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FoodIncludeUser" ADD CONSTRAINT "FoodIncludeUser_foodId_fkey" FOREIGN KEY ("foodId") REFERENCES "Food"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "FoodIncludeUser" ADD CONSTRAINT "FoodIncludeUser_foodId_fkey" FOREIGN KEY ("foodId") REFERENCES "Food"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FoodToExcludeUser" ADD CONSTRAINT "FoodToExcludeUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "FoodToExcludeUser" ADD CONSTRAINT "FoodToExcludeUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FoodToExcludeUser" ADD CONSTRAINT "FoodToExcludeUser_foodId_fkey" FOREIGN KEY ("foodId") REFERENCES "Food"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "FoodToExcludeUser" ADD CONSTRAINT "FoodToExcludeUser_foodId_fkey" FOREIGN KEY ("foodId") REFERENCES "Food"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MenuSaved" ADD CONSTRAINT "MenuSaved_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "MenuSaved" ADD CONSTRAINT "MenuSaved_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "IndicatorsRegisterUser" ADD CONSTRAINT "IndicatorsRegisterUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "IndicatorsRegisterUser" ADD CONSTRAINT "IndicatorsRegisterUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Activity" ADD CONSTRAINT "Activity_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Activity" ADD CONSTRAINT "Activity_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WorkoutSession" ADD CONSTRAINT "WorkoutSession_activityId_fkey" FOREIGN KEY ("activityId") REFERENCES "Activity"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "WorkoutSession" ADD CONSTRAINT "WorkoutSession_activityId_fkey" FOREIGN KEY ("activityId") REFERENCES "Activity"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SleepSession" ADD CONSTRAINT "SleepSession_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "SleepSession" ADD CONSTRAINT "SleepSession_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SleepStage" ADD CONSTRAINT "SleepStage_sleepSessionId_fkey" FOREIGN KEY ("sleepSessionId") REFERENCES "SleepSession"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "SleepStage" ADD CONSTRAINT "SleepStage_sleepSessionId_fkey" FOREIGN KEY ("sleepSessionId") REFERENCES "SleepSession"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "HeartRate" ADD CONSTRAINT "HeartRate_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "HeartRate" ADD CONSTRAINT "HeartRate_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "HeartRateZone" ADD CONSTRAINT "HeartRateZone_heartRateId_fkey" FOREIGN KEY ("heartRateId") REFERENCES "HeartRate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "HeartRateZone" ADD CONSTRAINT "HeartRateZone_heartRateId_fkey" FOREIGN KEY ("heartRateId") REFERENCES "HeartRate"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Nutrition" ADD CONSTRAINT "Nutrition_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Nutrition" ADD CONSTRAINT "Nutrition_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;

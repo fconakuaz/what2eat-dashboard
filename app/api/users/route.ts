@@ -21,7 +21,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const {
-      name,
+      firstName,
       lastName,
       email,
       password,
@@ -73,12 +73,14 @@ export async function POST(req: Request) {
     // Create user
     const newUser = await prisma.user.create({
       data: {
-        name,
+        firstName,
         lastName,
+        image: 'placeholder-user.jpg',
         email,
         birthDate: new Date(),
         gender, // Must match enum values
         country,
+        state: 'Veracruz',
         physicalActivity,
         dietaryPreference: dietaryPreference || 'NONE',
         status: 'ACTIVE', // Default user status

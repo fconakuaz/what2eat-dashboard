@@ -31,10 +31,10 @@ export function MyPreferences({ className, ...props }: CardProps) {
     age,
     country,
     gender,
-    height,
     physicalActivity,
-    state,
-    weight
+    state
+    // height,
+    // weight
   } = profile;
   return (
     <Card className={cn('w-full', className)} {...props}>
@@ -63,12 +63,12 @@ export function MyPreferences({ className, ...props }: CardProps) {
         <MyProperty
           icon={<Ruler className={classNameIcon} />}
           name="Altura"
-          value={convertCmToMeters(height)} //"1.78 m"
+          value={convertCmToMeters(178)} //"1.78 m"
         />
         <MyProperty
           icon={<Weight className={classNameIcon} />}
           name="Peso"
-          value={convertKgToString(weight)}
+          value={convertKgToString(107)}
         />
         <MyProperty
           icon={<ContactRound className={classNameIcon} />}
