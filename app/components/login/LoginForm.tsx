@@ -74,7 +74,7 @@ export function LoginForm({
         className={cn('flex flex-col gap-6', className)}
         {...props}
       >
-        <div className="grid gap-6 mb-10">
+        <div className="grid gap-6 mb-8">
           <Button
             variant="outline"
             className="w-full flex items-center justify-center gap-2"
@@ -92,14 +92,14 @@ export function LoginForm({
             <span className="text-sm">Iniciar sesión con Google</span>
           </Button>
         </div>
-        <div className="flex flex-col items-center text-center gap-2 mt-10">
+        <div className="flex flex-col items-center text-center gap-2 ">
           <h2 className="text-lg font-semibold text-primary">
-            “Come mejor, sin complicaciones”
+            Come mejor, sin complicaciones
           </h2>
-          <p className="text-sm text-muted-foreground">
+          {/* <p className="text-sm text-muted-foreground">
             What2Eat facilita tu alimentación diaria con inteligencia artificial
             generativa.
-          </p>
+          </p> */}
         </div>
         {/* <div className="text-center text-sm">
       Don&apos;t have an account?{" "}
