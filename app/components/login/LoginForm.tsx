@@ -29,11 +29,11 @@ export function LoginForm({
 
           <h1 className="text-2xl font-bold">Inicie sesión </h1>
           <p className="text-balance text-sm text-muted-foreground">
-            Inicie sesión con su cuenta de email
+            Inicie sesión con su cuenta de Gmail
           </p>
         </div>
         <div className="grid gap-6 mb-10">
-          <div className="grid gap-2">
+          {/* <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
@@ -61,7 +61,7 @@ export function LoginForm({
             <span className="relative z-10 bg-background px-2 text-muted-foreground">
               O si lo prefiere
             </span>
-          </div>
+          </div> */}
         </div>
       </form>
       <form
