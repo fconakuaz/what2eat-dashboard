@@ -44,7 +44,7 @@ export default function DashboardLayout({
             <MobileNav />
             {/* <DashboardBreadcrumb /> */}
             <h1 className="text-xl sm:text-2xl  ">
-              What<span className="font-semibold">2</span>
+              What<span className="font-normal">2</span>
               Eat
             </h1>
             <SearchInput />
