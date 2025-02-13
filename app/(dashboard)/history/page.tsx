@@ -3,6 +3,7 @@ import { File, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getProducts } from '@/lib/db';
 import { ProductsTable } from '../products-table';
+import Wizard from 'app/components/wizard/Wizard';
 
 export default async function HistoryPage(props: {
   searchParams: Promise<{ q: string; offset: string }>;
@@ -10,14 +11,15 @@ export default async function HistoryPage(props: {
   const searchParams = await props.searchParams;
   const search = searchParams.q ?? '';
   const offset = searchParams.offset ?? 0;
-  const { products, newOffset, totalProducts } = await getProducts(
-    search,
-    Number(offset)
-  );
+  // const { products, newOffset, totalProducts } = await getProducts(
+  //   search,
+  //   Number(offset)
+  // );
 
   return (
     <Tabs defaultValue="all">
-      <div className="flex items-center">
+      <Wizard />
+      {/* <div className="flex items-center">
         <TabsList>
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="active">Active</TabsTrigger>
@@ -47,7 +49,7 @@ export default async function HistoryPage(props: {
           offset={newOffset ?? 0}
           totalProducts={totalProducts}
         />
-      </TabsContent>
+      </TabsContent> */}
     </Tabs>
   );
 }
