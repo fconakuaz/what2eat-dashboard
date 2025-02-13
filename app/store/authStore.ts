@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, devtools } from 'zustand/middleware';
 
 type User = {
   name: string;
@@ -15,17 +15,20 @@ type AuthState = {
   logout: () => void;
 };
 
-export const useAuthStore = create(
-  persist<AuthState>(
-    (set) => ({
-      user: null,
-      session: null,
-      setUser: (user) => set({ user }),
-      setSession: (session) => set({ session, user: session?.user || null }),
-      logout: () => set({ user: null, session: null })
-    }),
-    {
-      name: 'auth-storage'
-    }
+export const useAuthStore = create<AuthState>()(
+  devtools(
+    persist(
+      (set) => ({
+        user: null,
+        session: null,
+        setUser: (user) => set({ user }),
+        setSession: (session) => set({ session, user: session?.user || null }),
+        logout: () => set({ user: null, session: null })
+      }),
+      {
+        name: 'auth-storage'
+      }
+    ),
+    { name: 'AuthStore' }
   )
 );
