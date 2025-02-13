@@ -61,7 +61,9 @@ export default function Wizard() {
 
   const steps = [
     {
-      icon: <PartyPopper className="w-14 h-14 mt-5 mb-2 text-primary/70" />,
+      icon: (
+        <PartyPopper className="w-20 h-20 mt-5 mb-4 text-primary/70 animate-pulse " />
+      ),
       title: '¡Te damos la bienvenida a What2Eat!',
       description:
         'Antes de empezar, cuéntanos un poco sobre ti para personalizar tu experiencia.',
@@ -136,7 +138,7 @@ export default function Wizard() {
   ];
 
   return (
-    <div className="flex flex-col items-center pt-[calc(50vh-240px)] min-h-[calc(100vh-170px)]">
+    <div className="flex flex-col items-center pt-[calc(50vh-250px)] min-h-[calc(100vh-170px)]">
       <Carousel className="w-full max-w-[calc(100vw-30px)] h-full sm:max-w-sm md:max-w-md lg:max-w-lg">
         <CarouselContent>
           {steps.map((step, index) => (
@@ -149,12 +151,12 @@ export default function Wizard() {
                   <CardContent className="p-6 flex flex-col items-center">
                     {step.icon && <div className="mb-2 ">{step.icon}</div>}
                     {step.title && (
-                      <h2 className="text-xl sm:text-2xl font-bold">
+                      <h2 className="text-xl sm:text-2xl mb-1 font-bold">
                         {step.title}
                       </h2>
                     )}
                     {step.description && (
-                      <p className="mt-0 mb-4 text-gray-600 text-sm sm:text-base">
+                      <p className="mt-0 mb-4 text-sm sm:text-base/tight">
                         {step.description}
                       </p>
                     )}
