@@ -1,8 +1,9 @@
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
-
 import { Analytics } from '@vercel/analytics/react';
+import { SessionProvider } from 'next-auth/react';
+import SessionSync from './components/auth/SessionSync';
 
 export const metadata = {
   title: 'What2Eat',
@@ -15,16 +16,20 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const locale = await getLocale();
-
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="flex min-h-screen w-full flex-col">
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <SessionProvider>
+          {' '}
+          {/* ✅ Envolvemos con SessionProvider de NextAuth */}
+          <SessionSync />{' '}
+          {/* 🔹 Componente que sincroniza la sesión con Zustand */}
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </SessionProvider>
       </body>
       <Analytics />
     </html>
