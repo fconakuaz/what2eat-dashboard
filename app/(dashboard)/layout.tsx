@@ -48,7 +48,7 @@ export default function DashboardLayout({
             <ToggleLanguage />
             <User />
           </header>
-          <main className="min-h-auto grid flex-1 items-start gap-2 p-4 sm:px-2 sm:py-0 md:gap-4 ">
+          <main className="min-h-auto grid flex-1 items-start gap-2 p-1 sm:px-2 sm:py-0 md:gap-4 ">
             {children}
           </main>
         </div>
