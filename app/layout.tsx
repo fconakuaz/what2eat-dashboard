@@ -6,8 +6,30 @@ import { SessionProvider } from 'next-auth/react';
 import SessionSync from './components/auth/SessionSync';
 
 export const metadata = {
-  title: 'What2Eat',
-  description: 'Eat Smart'
+  title: '🍎 What2Eat',
+  description: 'Eat Smart',
+  openGraph: {
+    title: '🍎 What2Eat',
+    description: 'Eat Smart',
+    url: 'https://what2eat-dashboard.vercel.app',
+    siteName: 'What2Eat',
+    images: [
+      {
+        url: 'https://tuwebapp.com/dashboard.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Imagen promocional de What2Eat'
+      }
+    ],
+    type: 'website'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@fco_naku',
+    title: '🍎 What2Eat',
+    description: 'Eat Smart',
+    images: ['https://tuwebapp.com/dashboard.webp']
+  }
 };
 
 export default async function RootLayout({
@@ -22,10 +44,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="flex min-h-screen w-full flex-col">
         <SessionProvider>
-          {' '}
-          {/* ✅ Envolvemos con SessionProvider de NextAuth */}
-          <SessionSync />{' '}
-          {/* 🔹 Componente que sincroniza la sesión con Zustand */}
+          <SessionSync />
           <NextIntlClientProvider messages={messages}>
             {children}
           </NextIntlClientProvider>

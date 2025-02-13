@@ -12,7 +12,8 @@ export async function middleware(req: NextRequest) {
     '/_next',
     '/favicon.ico',
     '/manifest.json',
-    '/banner.webp' // ✅ Permitir imágenes en public/
+    '/banner.webp',
+    '/dashboard.webp'
   ];
 
   // Permitir archivos en `public/`
