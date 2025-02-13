@@ -29,7 +29,8 @@ import {
   Heart,
   Target,
   PartyPopper,
-  ArrowRight
+  ArrowRight,
+  BadgeCheck
 } from 'lucide-react';
 
 export default function Wizard() {
@@ -128,10 +129,12 @@ export default function Wizard() {
     },
     {
       title: '¡Listo!',
-      description: 'Ahora podemos personalizar mejor tus menús.',
+      description:
+        'Ahora podemos personalizar mejor tus menús de acuerdo a tus necesidades.',
+      icon: <BadgeCheck className="w-14 h-14 mt-5 mb-2 text-primary/70" />,
       content: (
         <Button className="mt-4 w-full sm:w-auto" onClick={handleFinish}>
-          Finalizar
+          Crear tu primer menú del día
         </Button>
       )
     }
@@ -203,7 +206,7 @@ export default function Wizard() {
                     )}
                     {step.content}
                     <div className="flex justify-between w-full mt-11">
-                      {index > 0 && (
+                      {index > 0 && index < steps.length - 1 && (
                         <Button
                           variant="outline"
                           className="w-2/5 sm:w-auto flex items-center gap-2"
