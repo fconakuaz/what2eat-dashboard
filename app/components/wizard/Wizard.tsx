@@ -44,7 +44,7 @@ export default function Wizard() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+    <div className="flex flex-col items-center pt-[calc(50vh-170px)] min-h-screen ">
       <Carousel className="w-full max-w-[calc(100vw-130px)] h-full sm:max-w-sm md:max-w-md lg:max-w-lg">
         <CarouselContent>
           {/* Pantalla de Bienvenida */}
@@ -53,7 +53,7 @@ export default function Wizard() {
               <Card className="w-full text-center">
                 <CardContent className="p-6 flex flex-col items-center">
                   <h2 className="text-xl sm:text-2xl font-bold">
-                    ¡Bienvenido a What2Eat!
+                    ¡Te damos la bienvenida a What2Eat!
                   </h2>
                   <p className="mt-2 text-gray-600 text-sm sm:text-base">
                     Antes de empezar, cuéntanos un poco sobre ti para
