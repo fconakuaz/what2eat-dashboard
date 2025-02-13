@@ -1,0 +1,529 @@
+commit 5eefdf23ecb5eeb98b4f1e572dcd18933b292fc1
+Author: fconakuaz <2430049+fconakuaz@users.noreply.github.com>
+Date:   Mon Jan 20 21:01:57 2025 +0000
+
+    Initial commit
+    
+    Created from https://vercel.com/new
+
+A	.env.example
+A	.gitignore
+A	.vscode/settings.json
+A	LICENSE.md
+A	README.md
+A	app/(dashboard)/actions.ts
+A	app/(dashboard)/customers/page.tsx
+A	app/(dashboard)/error.tsx
+A	app/(dashboard)/layout.tsx
+A	app/(dashboard)/nav-item.tsx
+A	app/(dashboard)/page.tsx
+A	app/(dashboard)/product.tsx
+A	app/(dashboard)/products-table.tsx
+A	app/(dashboard)/providers.tsx
+A	app/(dashboard)/search.tsx
+A	app/(dashboard)/user.tsx
+A	app/api/auth/[...nextauth]/route.ts
+A	app/api/seed/route.ts
+A	app/favicon.ico
+A	app/globals.css
+A	app/layout.tsx
+A	app/login/page.tsx
+A	components.json
+A	components/icons.tsx
+A	components/ui/badge.tsx
+A	components/ui/breadcrumb.tsx
+A	components/ui/button.tsx
+A	components/ui/card.tsx
+A	components/ui/dropdown-menu.tsx
+A	components/ui/input.tsx
+A	components/ui/sheet.tsx
+A	components/ui/table.tsx
+A	components/ui/tabs.tsx
+A	components/ui/tooltip.tsx
+A	lib/auth.ts
+A	lib/db.ts
+A	lib/utils.ts
+A	middleware.ts
+A	next.config.ts
+A	package.json
+A	pnpm-lock.yaml
+A	postcss.config.js
+A	public/placeholder-user.jpg
+A	public/placeholder.svg
+A	tailwind.config.ts
+A	tsconfig.json
+
+commit bd32e6ba090381196384af3345e2fdc4f4c5e13f
+Author: Francisco Nakú Acosta Zárate <francisco.acosta@softtek.com>
+Date:   Mon Jan 20 15:19:42 2025 -0600
+
+    env
+
+M	.env.example
+
+commit a81badbf5bf16b5783ba31f151e76e64f07c7642
+Author: Francisco Nakú Acosta Zárate <francisco.acosta@softtek.com>
+Date:   Mon Jan 20 16:04:32 2025 -0600
+
+    prueba update
+
+M	app/(dashboard)/products-table.tsx
+M	app/api/seed/route.ts
+A	package-lock.json
+
+commit 0816b84d293302df8fd9f92fa8e842de278fcd3a
+Author: Francisco Nakú Acosta Zárate <francisco.acosta@softtek.com>
+Date:   Mon Jan 20 16:07:52 2025 -0600
+
+    Iniciación de dashboard
+
+M	.gitignore
+M	README.md
+
+commit 0563b3c9148d9e6301f5e07ddbd2600f34eb9e8d
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 20 16:16:57 2025 -0600
+
+    update readme
+
+M	README.md
+
+commit 5fedab1cceb365dfbf68d5405ed9f0a1f3610f20
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 20 17:38:13 2025 -0600
+
+    Prueba iconos y lib de tema
+
+M	app/(dashboard)/layout.tsx
+A	app/apple-touch-icon.png
+A	app/favicon-96x96.png
+M	app/favicon.ico
+A	app/favicon.svg
+M	app/layout.tsx
+A	app/site.webmanifest
+A	app/web-app-manifest-192x192.png
+A	app/web-app-manifest-512x512.png
+M	package.json
+M	pnpm-lock.yaml
+A	public/apple-touch-icon.png
+A	public/favicon-96x96.png
+A	public/web-app-manifest-512x512.png
+
+commit 58ba199feafb7fa841e92455c0c61ffa9ef27534
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 20 18:32:59 2025 -0600
+
+    Corrige cambio de tema
+
+M	app/(dashboard)/layout.tsx
+M	app/(dashboard)/providers.tsx
+M	app/(dashboard)/search.tsx
+A	app/(dashboard)/toggle-theme.tsx
+M	app/layout.tsx
+A	components/theme-provider.tsx
+
+commit db22445c5a4854ff49f98ea7c07d34ee26d0d28c
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 20 19:20:25 2025 -0600
+
+    Se aplica cambio de color a temas
+
+M	app/globals.css
+
+commit 9f6b7087e4db5374d2f86541a5d384adbea0436a
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 20 20:05:40 2025 -0600
+
+    se agregan layouts
+
+D	app/(dashboard)/customers/page.tsx
+A	app/(dashboard)/history/page.tsx
+M	app/(dashboard)/layout.tsx
+M	app/(dashboard)/page.tsx
+A	app/(dashboard)/stats/page.tsx
+M	tsconfig.json
+
+commit 4953b80cb422c8b0aa26a383c657b139341a5042
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 20 20:18:30 2025 -0600
+
+    Inicio de interfaz de la creación del menú
+
+M	app/(dashboard)/page.tsx
+A	components/dashboard/AccordionFilter.tsx
+A	components/ui/accordion.tsx
+M	package.json
+M	pnpm-lock.yaml
+A	tailwind.config.js
+
+commit dc7018c360b8d4670fb7276eec79e8c9a5c6f38c
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 20 20:34:01 2025 -0600
+
+    Agrego acordeón
+
+M	app/(dashboard)/page.tsx
+M	components/dashboard/AccordionFilter.tsx
+A	components/dashboard/TableAddIngredients.tsx
+A	components/ui/checkbox.tsx
+M	package.json
+M	pnpm-lock.yaml
+
+commit 5f04f7e1d62bad8a82ac7ba3ad474c57f141eca5
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Jan 21 14:09:23 2025 -0600
+
+    Se agrega función de consulta de menú diario a la API de Gemini
+
+M	app/(dashboard)/page.tsx
+A	app/AI/getRecipe.js
+A	app/AI/modelRecipe.js
+M	package.json
+M	pnpm-lock.yaml
+
+commit 3e4b3654fa46f7155d311997160e6ffce7977776
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Jan 21 14:37:06 2025 -0600
+
+    se muestra lista de menú diaria obtenida de IA generativa
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+
+commit 9bb927fc3f8a1225f5e769778b32eda3a997523b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Jan 21 14:41:11 2025 -0600
+
+    Ajsute de estilos
+
+M	app/(dashboard)/page.tsx
+
+commit f9c6ba30c0ba4e62970837a7b177d3853c2401da
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Jan 21 15:30:47 2025 -0600
+
+    Mejoras de responsividad
+
+M	app/(dashboard)/page.tsx
+
+commit 48c06d3fd97a83ba4cec1c56a42aab2953e28c50
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Jan 21 15:51:11 2025 -0600
+
+    Mejoras de responsividad y diseño
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+
+commit 04b92e0b7ad225ad361a2d4668d4ea779f2b4125
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Jan 21 16:51:49 2025 -0600
+
+    Cambio de menú móvil
+
+M	app/(dashboard)/layout.tsx
+
+commit e13b9901471fd4671572755e39da726152f79c1e
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Jan 22 11:20:01 2025 -0600
+
+    Se agrega configuración i18n en config y home
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+M	app/layout.tsx
+M	components/dashboard/AccordionFilter.tsx
+A	i18n/request.ts
+A	messages/en.json
+A	messages/es.json
+M	next.config.ts
+M	package.json
+M	pnpm-lock.yaml
+
+commit e3e3d2fcf1cfac00fbfc306af0a7fc3b326d34ec
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Jan 22 12:53:19 2025 -0600
+
+    Se agrega switcher para cambiar de idioma
+
+M	app/(dashboard)/layout.tsx
+A	app/components/header/ToggleLanguage.tsx
+A	app/store/languajeStore.ts
+M	i18n/request.ts
+M	package.json
+M	pnpm-lock.yaml
+
+commit 409e300c93d5ee9fee911cb49a2a79142ac2adc9
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Jan 22 12:58:00 2025 -0600
+
+    Se agrega switcher para cambiar de idioma
+
+M	app/store/languajeStore.ts
+
+commit 69017e556a11e6f5274329e5288af5dcbc0bdff9
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Jan 22 17:25:45 2025 -0600
+
+    se agrega skeleton y loading
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+A	app/store/commonStore.ts
+A	components/ui/skeletonMenu.tsx
+M	messages/en.json
+M	messages/es.json
+
+commit b4620a20c7ad411af1aeba35f01daa0f099d959d
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 23 17:02:40 2025 -0600
+
+    Se mejoran estilos de recetas y se inicia sección de mis preferencias
+
+M	app/AI/getRecipe.js
+M	app/AI/modelRecipe.js
+M	components/dashboard/AccordionFilter.tsx
+A	components/dashboard/MyPreferences.tsx
+A	components/ui/avatar.tsx
+A	components/ui/separator.tsx
+A	components/ui/switch.tsx
+M	package.json
+M	pnpm-lock.yaml
+A	public/food.png
+A	public/food.webp
+
+commit a3f74ce39f7fe2f3089ee7efde3a8c87585b765e
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 23 17:28:12 2025 -0600
+
+    Diseño Mis preferencias
+
+M	components/dashboard/MyPreferences.tsx
+A	components/dashboard/MyProperty.tsx
+
+commit 87e960c322c88675290acbd45f3a0f472e66a1cb
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 23 17:46:34 2025 -0600
+
+    Se cambia request de prueba
+
+M	app/AI/getRecipe.js
+
+commit b051b3875e7b03809ca8ea5da018c990c560ff2b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 23 17:51:07 2025 -0600
+
+    configuración prote
+
+M	app/AI/getRecipe.js
+
+commit ff701b45f619f224ab4876719f7f7eb44fc9267b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Jan 24 20:43:09 2025 -0600
+
+    se arregla responsive
+
+M	app/AI/getRecipe.js
+A	app/store/preferencesStore.ts
+A	app/store/profileStore.ts
+M	components/dashboard/AccordionFilter.tsx
+M	components/dashboard/MyPreferences.tsx
+D	components/dashboard/TableAddIngredients.tsx
+M	lib/utils.ts
+M	messages/en.json
+M	messages/es.json
+
+commit 4373205f80f1197167aa96987086d3dcb8c48e48
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Jan 24 20:53:00 2025 -0600
+
+    se arregla responsive
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+
+commit aab6e83884018bbabfb1ef9d1d8386b4a16bc584
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 17:12:29 2025 -0600
+
+    Se agregan badges de ingredientes a incluir y excluir
+
+M	components/dashboard/AccordionFilter.tsx
+A	components/dashboard/BadgeIngredient.tsx
+
+commit 7e505e421f05329510928eea4f238f5be9a827d7
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 17:12:51 2025 -0600
+
+    Se agregan stores en zustand para el manejo de ingredientes a excluir e incluir
+
+A	app/store/excludeFoodStore.ts
+A	app/store/includeFoodStore.ts
+
+commit f15d66af8b271c1b12f995c7ee038a745419cdd2
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 17:36:13 2025 -0600
+
+    Se agregan traducciones a badges y tooltips
+
+M	components/dashboard/BadgeIngredient.tsx
+M	messages/en.json
+M	messages/es.json
+
+commit b31a7017cd56cfe59be4c4defcfc61c49e483de1
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 17:36:29 2025 -0600
+
+    Se agregan ingredientes a incluir y excuir en prompt
+
+M	app/AI/getRecipe.js
+
+commit 49de2c3a3d8f932ea16b678126d96ed2f2d9c4eb
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 17:41:20 2025 -0600
+
+    mejora espcios de Bagdes
+
+M	components/dashboard/BadgeIngredient.tsx
+
+commit 48cae4a8819cbb51d3f163f0d33c869b9693652b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 17:51:44 2025 -0600
+
+    Corrección de bug en prompt
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+
+commit bd9c1e69d2fe69b081896e2ade7f539d6412c052
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 17:53:01 2025 -0600
+
+    Quita duplicado de prompt
+
+M	app/AI/getRecipe.js
+
+commit fa994ed8d082231b5c610841e8aae3d1d7d810f2
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 18:04:29 2025 -0600
+
+    Mejora de prompt
+
+M	app/AI/getRecipe.js
+M	app/store/includeFoodStore.ts
+
+commit 10c6b4fe099d5aa685fa2f7e25b00188642d87aa
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Jan 27 18:06:39 2025 -0600
+
+    Mejora de badges
+
+M	components/dashboard/AccordionFilter.tsx
+
+commit b625a16144ecde20176887496c47a3af367fe21d
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 30 17:46:02 2025 -0600
+
+    Se agrega configuración de API
+
+M	app/api/seed/route.ts
+A	app/api/usuarios/route.ts
+
+commit 426870453a59c90cb2c6af4a3b797fbccc96ecde
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 30 17:46:49 2025 -0600
+
+    Se agrega Prisma
+
+A	lib/prisma.ts
+M	package.json
+M	pnpm-lock.yaml
+A	prisma/migrations/20250130224907_init/migration.sql
+A	prisma/migrations/migration_lock.toml
+A	prisma/schema.prisma
+
+commit 20defc04c665d002e48cf52711c3b1b318324b26
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 30 17:46:55 2025 -0600
+
+    Se agrega seed
+
+A	prisma/seed.ts
+
+commit d4d38832096fd16c52391d3bc84f23b2adb8f339
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 30 18:02:18 2025 -0600
+
+    Se agrega generador de archivos dbml
+
+M	package.json
+M	pnpm-lock.yaml
+A	prisma/dbml/schema.dbml
+M	prisma/schema.prisma
+
+commit 7def4876fb37d8510eb451c8a983f875bf59c43d
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 30 18:05:38 2025 -0600
+
+    corrección de build
+
+M	package.json
+
+commit aeb44a6d83d261ecaac3f2daa928d5c290bba408
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 30 18:09:12 2025 -0600
+
+    corrección de build
+
+M	README.md
+
+commit aed2124269500ae2c2d416820388a722ff77a4e1
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Jan 30 18:15:39 2025 -0600
+
+    corrección de build
+
+M	README.md
+
+commit b8cce4de095b5375be9466758aa9fc4689df11a7
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Jan 31 15:53:54 2025 -0600
+
+    Se crea seeder con catálogos de Food y Affliction
+
+M	README.md
+A	app/api/users/route.ts
+D	app/api/usuarios/route.ts
+M	prisma/dbml/schema.dbml
+A	prisma/migrations/20250131172249_add_auth_sessions/migration.sql
+A	prisma/migrations/20250131192347_add_health_indicators/migration.sql
+M	prisma/schema.prisma
+M	prisma/seed.ts
+
+commit 29d94fa886375ac1ffb4c3aaaf6031b5c250b514
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Jan 31 15:55:29 2025 -0600
+
+    Se quita seed duplicado
+
+D	app/api/seed/route.ts
+
+commit 36d2b36b0ebd6b8a9318a2eb343f2e416b17099f
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 3 21:28:58 2025 -0600
+
+    env de ejemplo y readme
+
+M	.env.example
+M	README.md
+A	public/dashboard.webp
+A	public/uml.webp
+
+commit 4a04867adde190be3e56f14309753381db8d44f3
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 3 22:08:13 2025 -0600
+
+    Edición de README
+
+D	LICENSE.md
+M	README.md
