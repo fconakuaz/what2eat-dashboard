@@ -6,16 +6,21 @@ import { SessionProvider } from 'next-auth/react';
 import SessionSync from './components/auth/SessionSync';
 
 export const metadata = {
-  title: '🍎 What2Eat',
-  description: 'Eat Smart',
+  title: 'What2Eat - Eat Smart',
+  description:
+    'Crea menús personalizados con IA generativa con los alimentos que más te gusten y necesitas.',
+  facebook: {
+    appId: '1260364538842027'
+  },
   openGraph: {
-    title: '🍎 What2Eat',
-    description: 'Eat Smart',
+    title: 'What2Eat - Eat Smart',
+    description:
+      'Crea menús personalizados con IA generativa con los alimentos que más te gusten y necesitas',
     url: 'https://what2eat-dashboard.vercel.app',
     siteName: 'What2Eat',
     images: [
       {
-        url: 'https://tuwebapp.com/dashboard.webp',
+        url: 'https://what2eat-dashboard.vercel.app/dashboard.webp',
         width: 1200,
         height: 630,
         alt: 'Imagen promocional de What2Eat'
@@ -25,10 +30,11 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@fco_naku',
-    title: '🍎 What2Eat',
-    description: 'Eat Smart',
-    images: ['https://tuwebapp.com/dashboard.webp']
+    site: '@tuusuario',
+    title: 'What2Eat - Eat Smart',
+    description:
+      'Crea menús personalizados con IA generativa con los alimentos que más te gusten y necesitas',
+    images: ['https://what2eat-dashboard.vercel.app/dashboard.webp']
   }
 };
 
