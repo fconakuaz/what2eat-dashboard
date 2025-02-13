@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { MyProperty } from './MyProperty';
 import { useProfileStore } from 'app/store/profileStore';
 import { useTranslations } from 'next-intl';
+import { useAuthStore } from 'app/store/authStore';
 
 type CardProps = React.ComponentProps<typeof Card>;
 
@@ -23,6 +24,8 @@ export function MyPreferences({ className, ...props }: CardProps) {
   const tc = useTranslations('Common');
 
   const { profile } = useProfileStore();
+  const { user } = useAuthStore();
+
   const classNameIcon = 'h-4 w-4 text-sky-500 mr-2';
   const {
     image,
@@ -41,15 +44,12 @@ export function MyPreferences({ className, ...props }: CardProps) {
       <CardHeader className="flex flex-row items-start justify-between">
         <div className="flex items-center space-x-2">
           <Avatar className="w-11 h-11">
-            <AvatarImage src={image} alt="User Avatar" />
+            <AvatarImage src={user?.image} alt="User Avatar" />
             <AvatarFallback>AB</AvatarFallback>
           </Avatar>
           <div>
             <p className="text-sm font-medium leading-none text-muted-foreground">
-              {firstName}
-            </p>
-            <p className="text-sm font-medium leading-none text-muted-foreground">
-              {lastName}
+              {user?.name}
             </p>
           </div>
         </div>
