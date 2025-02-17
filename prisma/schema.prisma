@@ -78,22 +78,20 @@ enum BodyType {
 }
 
 model User {
-  id                String                @id @default(uuid())
-  firstName         String
-  lastName          String
+  id                String                 @id @default(uuid())
+  name              String
   image             String
-  email             String                @unique
-  birthDate         DateTime
-  gender            UserGender
-  dietaryPreference DietaryPreference     @default(NONE)
-  country           String
-  state             String
-  physicalActivity  PhysicalActivityLevel @default(SEDENTARY)
-  status            UserStatus            @default(ACTIVE)
-  role              UserRole              @default(USER)
-  createdAt         DateTime              @default(now())
-  updatedAt         DateTime              @updatedAt
-  Auth              Auth?
+  email             String                 @unique
+  birthDate         DateTime?
+  gender            UserGender?
+  dietaryPreference DietaryPreference      @default(NONE)
+  country           String?
+  state             String?
+  physicalActivity  PhysicalActivityLevel? @default(SEDENTARY)
+  status            UserStatus             @default(ACTIVE)
+  role              UserRole               @default(USER)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
   Afflictions       AfflictionUser[]
   IncludedFoods     IncludedFoodUser[]
   ExcludedFoods     ExcludedFoodUser[]
@@ -103,6 +101,7 @@ model User {
   SleepSessions     SleepSession[]
   HeartRates        HeartRate[]
   Nutrition         Nutrition[]
+  Auth              Auth?
 }
 
 model Auth {

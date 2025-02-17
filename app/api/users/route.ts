@@ -21,8 +21,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const {
-      firstName,
-      lastName,
+      name,
       email,
       password,
       gender,
@@ -73,8 +72,7 @@ export async function POST(req: Request) {
     // Create user
     const newUser = await prisma.user.create({
       data: {
-        firstName,
-        lastName,
+        name,
         image: 'placeholder-user.jpg',
         email,
         birthDate: new Date(),

@@ -4,21 +4,19 @@
 
 Table User {
   id String [pk]
-  firstName String [not null]
-  lastName String [not null]
+  name String [not null]
   image String [not null]
   email String [unique, not null]
-  birthDate DateTime [not null]
-  gender UserGender [not null]
+  birthDate DateTime
+  gender UserGender
   dietaryPreference DietaryPreference [not null, default: 'NONE']
-  country String [not null]
-  state String [not null]
-  physicalActivity PhysicalActivityLevel [not null, default: 'SEDENTARY']
+  country String
+  state String
+  physicalActivity PhysicalActivityLevel [default: 'SEDENTARY']
   status UserStatus [not null, default: 'ACTIVE']
   role UserRole [not null, default: 'USER']
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  Auth Auth
   Afflictions AfflictionUser [not null]
   IncludedFoods IncludedFoodUser [not null]
   ExcludedFoods ExcludedFoodUser [not null]
@@ -28,6 +26,7 @@ Table User {
   SleepSessions SleepSession [not null]
   HeartRates HeartRate [not null]
   Nutrition Nutrition [not null]
+  Auth Auth
 }
 
 Table Auth {

@@ -98,11 +98,11 @@ export function MyPreferences({ className, ...props }: CardProps) {
             <LoadingLabels tk="Profile" value={profile?.physicalActivity} />
           }
         />
-        <MyProperty
+        {/* <MyProperty
           icon={<Cross className={classNameIcon} />}
           name={tp('afflictions')}
           value="Diabetes y Colesterol."
-        />
+        /> */}
       </CardContent>
     </Card>
   );

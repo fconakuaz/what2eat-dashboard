@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
-    "seed": "pnpm prisma migrate dev --name init && pnpm tsx prisma/seed.ts",
+    "seed": "bun prisma migrate dev --name init && bun tsx prisma/seed.ts",
     "start": "next start"
   },
   "dependencies": {

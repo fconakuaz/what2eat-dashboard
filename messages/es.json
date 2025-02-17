@@ -25,8 +25,7 @@
   "Profile": { 
     "id": "Id",
     "name": "Nombre",
-    "firstName": "Nombre",
-    "lastName": "Apellido",
+    "name": "Nombre completo", 
     "email": "Email",
     "image": "Imagen",
     "birthDate": "Fecha de nacimiento",

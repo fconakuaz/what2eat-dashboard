@@ -335,8 +335,7 @@ async function main() {
     where: { email: 'paco@example.com' },
     update: {},
     create: {
-      firstName: 'Paco',
-      lastName: 'López',
+      name: 'Paco López',
       image: 'placeholder-user.jpg',
       email: 'paco@example.com',
       birthDate: new Date('1982-03-15'),
