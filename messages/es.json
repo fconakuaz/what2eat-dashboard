@@ -22,7 +22,65 @@
     "search": "Buscar",
     "Edit": "Editar"
   },
-  "Profile": {
-    "age": "años"
+  "Profile": { 
+    "id": "Id",
+    "name": "Nombre",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Email",
+    "image": "Imagen",
+    "birthDate": "Fecha de nacimiento",
+    "age": "Edad",
+    "gender": "Género",
+    "dietaryPreference": "Preferencia alimenticia",
+    "goal": "Objetivo nutricional",
+    "metricUnit": "Sistema de unidades",
+    "weight": "Peso",
+    "height": "Altura",
+    "country": "País",
+    "state": "Estado o región",
+    "physicalActivity": "Nivel de actividad física",
+    "status": "Estado del usuario",
+    "role": "Rol del usuario",
+    "createdAt": "Fecha de creación",
+    "updatedAt": "Última actualización",
+    "afflictions": "Padecimientos",
+    "healthIndicators": "Indicadores de salud",
+    
+    "MALE": "Masculino",
+    "FEMALE": "Femenino",
+    "OTHER": "Sin definir",
+
+    "NONE": "Sin restricciones",
+    "VEGETARIAN": "Vegetariano",
+    "VEGAN": "Vegano",
+    "KETO": "Dieta Keto",
+    "PALEO": "Dieta Paleo",
+    "PESCETARIAN": "Pescetariano",
+
+    "SEDENTARY": "Sedentario",
+    "LIGHT": "Ligero",
+    "MODERATE": "Moderado",
+    "HIGH": "Alto",
+    "ATHLETE": "Atleta",
+
+    "ACTIVE": "Activo",
+    "INACTIVE": "Inactivo",
+    "BANNED": "Baneado",
+
+    "USER": "Usuario",
+    "ADMIN": "Administrador",
+
+    "lose_weight": "Bajar de peso",
+    "gain_muscle": "Ganar masa muscular",
+    "maintain_health": "Mantener salud",
+    "increase_energy": "Aumentar energía",
+    "improve_digestion": "Mejorar digestión",
+    "balanced_diet": "Dieta equilibrada",
+
+    "metric": "Métrico (kg/m)",
+    "imperial": "Imperial (lbs/ft)",
+    
+    "years": "años"
   }
 }

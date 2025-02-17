@@ -1,18 +1,19 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface Props {
   name: string;
-  value: string;
-  icon: any;
+  value: string | ReactNode;
+  icon: ReactNode;
 }
 
-export const MyProperty: FC<Props> = ({ name, value, icon }): any => {
+export const MyProperty: FC<Props> = ({ name, value, icon }) => {
   return (
-    <div className="mb-1 flex flex-row items-start ">
+    <div className="mb-1 flex flex-row items-center space-x-2">
       {icon}
-      <p className="text-sm font-medium  ">
-        {name} <span className="text-muted-foreground ">{value}</span>
-      </p>
+      <div className="flex flex-row items-center space-x-1">
+        <p className="text-sm font-medium">{name}</p>
+        <span className="text-muted-foreground flex items-center">{value}</span>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,10 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export const convertCmToMeters = (cm: number): string => {
+export const convertCmToMeters = (cm: number | undefined): string => {
+  if (cm === undefined) {
+    return 'cargando...';
+  }
   if (cm <= 0) {
     return '';
   }
@@ -13,6 +16,9 @@ export const convertCmToMeters = (cm: number): string => {
   return `${meters} m`;
 };
 
-export const convertKgToString = (kg: number): string => {
+export const convertKgToString = (kg: number | undefined): string => {
+  if (kg === undefined) {
+    return 'cargando...';
+  }
   return `${kg} kg`;
 };

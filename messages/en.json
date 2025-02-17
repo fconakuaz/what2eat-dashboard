@@ -1,27 +1,86 @@
 {
-    "HomePage": {
-      "title": "🍲 Menu of the day",
-      "subtitle": "Select your preferences and generate a new menu for lunch today.",
-      "my_preferences": "My preferences",
-      "include_foods": "Include foods",
-      "exclude_foods": "Exclude foods",
-      "create_daily_menu": "Create daily menu",
-      "creating_daily_menu": "Generating daily menu",
-      "Breackfast": "Breackfast",
-      "Dinner": "Dinner",
-      "Lunch": "Lunch",
-      "Snack1": "1st Snack",
-      "Snack2": "2nd Snack",
-      "ingredients": "Ingredients",
-      "instructions": "Instructions",
-      "legendActivateBadge": "Click to activate",
-      "legendDesactivateBadge": "Click to deactivate",
-      "info": "Click on create daily menu to display today's menu..."
-    },
-    "Common": {
-      "search": "Search",
-      "Edit": "Edit"
-      },"Profile": {
-      "age": "years"
-    }
+  "HomePage": {
+    "title": "🍲  Daily Menu",
+    "subtitle": "Select your preferences and generate a new menu for today's lunch.",
+    "my_preferences": "My Preferences",
+    "include_foods": "Include Foods",
+    "exclude_foods": "Exclude Foods",
+    "create_daily_menu": "Create Daily Menu",
+    "creating_daily_menu": "Generating Daily Menu",
+    "Breackfast": "Breakfast",
+    "Dinner": "Dinner",
+    "Lunch": "Lunch",
+    "Snack1": "1st Snack",
+    "Snack2": "2nd Snack",
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "legendActivateBadge": "Click to activate",
+    "legendDesactivateBadge": "Click to deactivate",
+    "info": "Click on 'Create Daily Menu' to display today's menu..."
+  },
+  "Common": {
+    "search": "Search",
+    "Edit": "Edit"
+  },
+  "Profile": { 
+    "id": "ID",
+    "name": "Name",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "image": "Image",
+    "birthDate": "Date of Birth",
+    "age": "Age",
+    "gender": "Gender",
+    "dietaryPreference": "Dietary Preference",
+    "goal": "Nutritional Goal",
+    "metricUnit": "Measurement System",
+    "weight": "Weight",
+    "height": "Height",
+    "country": "Country",
+    "state": "State or Region",
+    "physicalActivity": "Physical Activity Level",
+    "status": "User Status",
+    "role": "User Role",
+    "createdAt": "Creation Date",
+    "updatedAt": "Last Update",
+    "afflictions": "Medical Conditions",
+    "healthIndicators": "Health Indicators",
+    
+    "MALE": "Male",
+    "FEMALE": "Female",
+    "OTHER": "Undefined",
+
+    "NONE": "No Restrictions",
+    "VEGETARIAN": "Vegetarian",
+    "VEGAN": "Vegan",
+    "KETO": "Keto Diet",
+    "PALEO": "Paleo Diet",
+    "PESCETARIAN": "Pescatarian",
+
+    "SEDENTARY": "Sedentary",
+    "LIGHT": "Light",
+    "MODERATE": "Moderate",
+    "HIGH": "High",
+    "ATHLETE": "Athlete",
+
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "BANNED": "Banned",
+
+    "USER": "User",
+    "ADMIN": "Administrator",
+
+    "lose_weight": "Lose Weight",
+    "gain_muscle": "Gain Muscle",
+    "maintain_health": "Maintain Health",
+    "increase_energy": "Increase Energy",
+    "improve_digestion": "Improve Digestion",
+    "balanced_diet": "Balanced Diet",
+
+    "metric": "Metric (kg/m)",
+    "imperial": "Imperial (lbs/ft)",
+    
+    "years": "years"
   }
+}
