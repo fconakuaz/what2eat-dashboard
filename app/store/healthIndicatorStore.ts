@@ -4,8 +4,6 @@ import { persist } from 'zustand/middleware';
 export type HealthIndicatorUser = {
   id: string;
   userId: string;
-  weight?: number;
-  height?: number;
   bmi?: number;
   bodyType?: string;
   bodyFat?: number;
