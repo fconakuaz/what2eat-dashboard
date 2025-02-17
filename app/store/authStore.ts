@@ -5,13 +5,6 @@ type User = {
   name?: string;
   email?: string;
   image?: string;
-  height: any;
-  weight: any;
-  age: any;
-  gender: any;
-  diet: any;
-  goal: any;
-  conditions: any;
 } | null;
 
 type AuthState = {

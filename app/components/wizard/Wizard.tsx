@@ -151,6 +151,35 @@ export default function Wizard() {
     },
     {
       label: 'Clic aquí para seleccionar',
+      field: 'physicalActivity',
+      type: 'select',
+      icon: <User className="w-14 h-14 mt-5 mb-2 text-primary/70" />,
+      description: 'Selecciona tu nivel de actividad física.',
+      options: [
+        {
+          value: 'SEDENTARY',
+          text: 'Sedentario (Ningún ejercicio)'
+        },
+        {
+          value: 'LIGHT',
+          text: 'Ligero (1-2 días a la semana)'
+        },
+        {
+          value: 'MODERATE',
+          text: 'Moderado (3-4 días a la semana)'
+        },
+        {
+          value: 'HIGH',
+          text: 'Alto (5-6 días a la semana)'
+        },
+        {
+          value: 'ATHLETE',
+          text: 'Atleta (Alto rendimiento)'
+        }
+      ]
+    },
+    {
+      label: 'Clic aquí para seleccionar',
       field: 'dietaryPreference',
       type: 'select',
       icon: <Utensils className="w-14 h-14 mt-5 mb-2 text-primary/70" />,

@@ -36,7 +36,7 @@ type Profile = {
   image?: string;
   birthDate?: Date;
   age?: number; // TODO: <-- Agregar función para calcular
-  gender?: UserGender;
+  gender?: UserGender | null;
   dietaryPreference?: DietaryPreference;
   goal?: UserGoal;
   metricUnit?: Unit; // 'metric' (m/kg) | 'imperial' (ft/lbs)
@@ -44,7 +44,7 @@ type Profile = {
   height?: number; // Altura en metros o pies
   country?: string;
   state?: string;
-  physicalActivity?: PhysicalActivityLevel;
+  physicalActivity?: PhysicalActivityLevel | null;
   status?: UserStatus;
   role?: UserRole;
   createdAt?: Date;
@@ -66,12 +66,37 @@ export const useProfileStore = create(
           id: null,
           firstName: null,
           lastName: null,
-          email: null
+          email: null,
+          physicalActivity: null,
+          gender: null
         },
         setProfile: (updatedProfile) =>
-          set((state) => ({
-            profile: { ...state.profile, ...updatedProfile }
-          }))
+          set((state) => {
+            let newProfile = { ...state.profile, ...updatedProfile };
+
+            // 📅 Si `birthDate` es válida, calcula la edad
+            if (updatedProfile.birthDate) {
+              const birthDate = new Date(updatedProfile.birthDate);
+              if (!isNaN(birthDate.getTime())) {
+                // Verifica si la fecha es válida
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+
+                // Ajuste si aún no ha cumplido años en este año
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                if (
+                  monthDiff < 0 ||
+                  (monthDiff === 0 && today.getDate() < birthDate.getDate())
+                ) {
+                  age--;
+                }
+
+                newProfile.age = age; // 📌 Agrega `age` al perfil
+              }
+            }
+
+            return { profile: newProfile };
+          })
       }),
       {
         name: 'profile-store', // Name of the key in storage
