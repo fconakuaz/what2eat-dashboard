@@ -5,7 +5,7 @@ import { auth } from '@/lib/auth';
 export async function middleware(req: NextRequest) {
   const session = await auth(); // Obtiene la sesión del usuario
 
-  // Rutas que NO necesitan autenticación
+  // 🔹 Rutas públicas que no necesitan autenticación
   const publicRoutes = [
     '/login',
     '/api',
@@ -19,22 +19,18 @@ export async function middleware(req: NextRequest) {
   // Permitir archivos en `public/`
   if (
     req.nextUrl.pathname.startsWith('/_next') ||
-    req.nextUrl.pathname.startsWith('/favicon.ico')
+    req.nextUrl.pathname.startsWith('/favicon.ico') ||
+    req.nextUrl.pathname.startsWith('/banner.webp')
   ) {
     return NextResponse.next();
   }
 
-  // Permitir imágenes en `public/`
-  if (req.nextUrl.pathname.startsWith('/banner.webp')) {
-    return NextResponse.next();
-  }
-
-  // Si la URL está en `publicRoutes`, permitir acceso
+  // 🔹 Si la URL está en `publicRoutes`, permitir acceso sin autenticación
   if (publicRoutes.some((path) => req.nextUrl.pathname.startsWith(path))) {
     return NextResponse.next();
   }
 
-  // Si no hay sesión, redirigir a /login
+  // 🔹 Si no hay sesión, redirigir a /login
   if (!session) {
     return NextResponse.redirect(new URL('/login', req.url));
   }

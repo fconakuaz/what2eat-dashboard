@@ -39,7 +39,7 @@ import DatePickerDropdown from '@/components/datePickerWithYearsSelector';
 
 export default function Wizard() {
   const router = useRouter();
-  const { profile, setProfile } = useProfileStore(); // Obtener perfil desde Zustand
+  const { profile, setProfile, saveProfileToDB } = useProfileStore();
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleChange = (
@@ -53,6 +53,8 @@ export default function Wizard() {
   const handlePrevious = () => setCurrentStep((prev) => prev - 1);
 
   const handleFinish = () => {
+    setProfile({ ['userActive']: true });
+    saveProfileToDB();
     router.push('/');
   };
 

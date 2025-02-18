@@ -60,7 +60,7 @@ export default function DatePickerDropdown({
         value={day === 0 ? undefined : String(day)}
         onValueChange={(value) => setDay(Number(value))}
       >
-        <SelectTrigger className="w-[80px] text-sm">
+        <SelectTrigger className="w-[70px] text-sm">
           <SelectValue placeholder="Día" />
         </SelectTrigger>
         <SelectContent>
@@ -77,7 +77,7 @@ export default function DatePickerDropdown({
         value={month === 0 ? undefined : String(month)}
         onValueChange={(value) => setMonth(Number(value))}
       >
-        <SelectTrigger className="w-[120px] text-sm">
+        <SelectTrigger className="w-[118px] text-sm">
           <SelectValue placeholder="Mes" />
         </SelectTrigger>
         <SelectContent>
@@ -94,7 +94,7 @@ export default function DatePickerDropdown({
         value={year === 0 ? undefined : String(year)}
         onValueChange={(value) => setYear(Number(value))}
       >
-        <SelectTrigger className="w-[100px] text-sm">
+        <SelectTrigger className="w-[85px] text-sm">
           <SelectValue placeholder="Año" />
         </SelectTrigger>
         <SelectContent>

@@ -67,6 +67,15 @@ enum DietaryPreference {
   NONE // Default for users without dietary restrictions
 }
 
+enum Goals {
+  lose_weight
+  gain_muscle
+  maintain_health
+  increase_energy
+  improve_digestion
+  balanced_diet
+}
+
 enum BodyType {
   ECTOMORPH // BMI < 18.5
   SLENDER // BMI 18.5 - 22.9
@@ -84,11 +93,15 @@ model User {
   email             String                 @unique
   birthDate         DateTime?
   gender            UserGender?
-  dietaryPreference DietaryPreference      @default(NONE)
+  dietaryPreference DietaryPreference?
   country           String?
   state             String?
-  physicalActivity  PhysicalActivityLevel? @default(SEDENTARY)
-  status            UserStatus             @default(ACTIVE)
+  metricUnit        String?
+  height            String?
+  weight            String?
+  goal              Goals?
+  physicalActivity  PhysicalActivityLevel?
+  status            UserStatus?            @default(ACTIVE)
   role              UserRole               @default(USER)
   createdAt         DateTime               @default(now())
   updatedAt         DateTime               @updatedAt

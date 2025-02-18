@@ -26,7 +26,11 @@ const generationConfig = {
   responseSchema
 };
 
-export async function runGemini(ingredientsToInclude, ingredientsToExclude) {
+export async function runGemini(
+  ingredientsToInclude,
+  ingredientsToExclude,
+  profile
+) {
   const chatSession = model.startChat({
     generationConfig,
     history: []
@@ -56,20 +60,20 @@ export async function runGemini(ingredientsToInclude, ingredientsToExclude) {
         '.\n'
       : ' no excluir ningún ingrediente';
 
-  const messageToSend =
-    ' Genera una lista de recetas para un menú del día\n' +
-    arrIngredientsToInclude +
-    arrIngredientsToExclude +
-    ' debe ser un tipo de comida: omnivora\n' +
-    ' debe considerarse para personas de edad de: 41 años\n' +
-    ' de una altura de: 170 cm\n' +
-    ' de un peso de: 110 kg\n' +
-    ' debe ser un menú adaptado para personas que tienen: diabetes, colesterol alto, hipertensión.\n' +
-    ' genero: masculino\n' +
-    ' debe tener la proteína necesaria según la estatura y peso dicho, ademas de la edad y que sea para una persona con actividad: moderada\n' +
-    ' idioma: español\n' +
-    ' Con ingredientes fáciles de conseguir en el país de: México' +
-    ' y en el estado de Veracruz\n';
+  const messageToSend = `Genera una lista de recetas para un menú del día. 
+      ${arrIngredientsToInclude} 
+      ${arrIngredientsToExclude}
+      Debe ser un tipo de comida: ${profile?.dietaryPreference}.
+      Debe considerarse para personas de edad de: ${profile?.age} años.
+      Debe considerarse para cumplir la meta de: ${profile?.goal}.
+      De una altura de: ${profile?.height} cm.
+      De un peso de: ${profile?.weight} kg.
+      Debe ser un menú adaptado para personas que tienen: diabetes, colesterol alto, hipertensión.
+      Género: ${profile?.gender}.
+      Debe tener la proteína necesaria según la estatura y peso dicho, además de la edad  
+      Y que sea para una persona con actividad: ${profile?.physicalActivity}.
+      Idioma: español.
+      Con ingredientes fáciles de conseguir en el país de: México y en el estado de Veracruz.`;
 
   console.log('🟢🟢🟢 messageToSend 🟢🟢🟢');
   console.log(messageToSend);

@@ -9,11 +9,15 @@ Table User {
   email String [unique, not null]
   birthDate DateTime
   gender UserGender
-  dietaryPreference DietaryPreference [not null, default: 'NONE']
+  dietaryPreference DietaryPreference
   country String
   state String
-  physicalActivity PhysicalActivityLevel [default: 'SEDENTARY']
-  status UserStatus [not null, default: 'ACTIVE']
+  metricUnit String
+  height String
+  weight String
+  goal Goals
+  physicalActivity PhysicalActivityLevel
+  status UserStatus [default: 'ACTIVE']
   role UserRole [not null, default: 'USER']
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
@@ -244,6 +248,15 @@ Enum DietaryPreference {
   HALAL
   KOSHER
   NONE
+}
+
+Enum Goals {
+  lose_weight
+  gain_muscle
+  maintain_health
+  increase_energy
+  improve_digestion
+  balanced_diet
 }
 
 Enum BodyType {

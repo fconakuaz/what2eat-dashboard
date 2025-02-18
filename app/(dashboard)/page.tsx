@@ -1,6 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AccordionFilter } from '@/components/dashboard/AccordionFilter';
 import { Button } from '@/components/ui/button';
 import { runGemini, GenerateHTMLFromJson } from '../AI/getRecipe';
@@ -11,25 +11,47 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { Info, Sparkles } from 'lucide-react';
+import { Info, Loader, Sparkles } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
 import { useIncludeFoodStore } from 'app/store/includeFoodStore';
+import { useProfileStore } from 'app/store/profileStore';
+import { useRouter } from 'next/navigation';
+import { SpinLoading } from 'app/components/layout/SpinLoading';
 
 const HomePage = () => {
   const [menu, setMenu] = useState<any>([]);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(true); // Nuevo estado de carga del perfil
+
   const { ingredientsToInclude } = useIncludeFoodStore();
   const { ingredientsToExclude } = useExcludeFoodStore();
   const t = useTranslations('HomePage');
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
 
-  async function run() {
+  const { profile, fetchUserProfile } = useProfileStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      await fetchUserProfile(router);
+      setIsLoadingProfile(false);
+    };
+
+    if (!profile?.userActive) {
+      loadProfile();
+    } else {
+      setIsLoadingProfile(false);
+    }
+  }, [profile, fetchUserProfile, router]);
+
+  async function runIA() {
     try {
       setLoadingTrue();
       const response = await runGemini(
         ingredientsToInclude,
-        ingredientsToExclude
+        ingredientsToExclude,
+        profile
       );
       console.log('Response:', response);
       setMenu(response);
@@ -38,6 +60,12 @@ const HomePage = () => {
       console.error('Error:', error);
     }
   }
+
+  // 🔹 Muestra un loader mientras se obtiene el perfil
+  if (!profile?.userActive) {
+    return <SpinLoading />;
+  }
+
   return (
     <Card className="rounded-none">
       <CardHeader>
@@ -50,7 +78,7 @@ const HomePage = () => {
             <Button
               size="sm"
               className={`h-8 gap-1 ${loading && 'bg-transparent text-white'}`}
-              onClick={run}
+              onClick={runIA}
               disabled={loading}
             >
               <Sparkles
@@ -85,4 +113,5 @@ const HomePage = () => {
     </Card>
   );
 };
+
 export default HomePage;

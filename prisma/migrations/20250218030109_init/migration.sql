@@ -20,6 +20,9 @@ CREATE TYPE "FoodCategory" AS ENUM ('FRUITS', 'VEGETABLES', 'GRAINS', 'PROTEINS'
 CREATE TYPE "DietaryPreference" AS ENUM ('VEGAN', 'VEGETARIAN', 'GLUTEN_FREE', 'KETO', 'PALEO', 'HALAL', 'KOSHER', 'NONE');
 
 -- CreateEnum
+CREATE TYPE "Goals" AS ENUM ('lose_weight', 'gain_muscle', 'maintain_health', 'increase_energy', 'improve_digestion', 'balanced_diet');
+
+-- CreateEnum
 CREATE TYPE "BodyType" AS ENUM ('ECTOMORPH', 'SLENDER', 'ATHLETIC', 'THICK_SET', 'STOCKY', 'HEAVYSET', 'OBESE');
 
 -- CreateTable
@@ -30,11 +33,15 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "birthDate" TIMESTAMP(3),
     "gender" "UserGender",
-    "dietaryPreference" "DietaryPreference" NOT NULL DEFAULT 'NONE',
+    "dietaryPreference" "DietaryPreference",
     "country" TEXT,
     "state" TEXT,
-    "physicalActivity" "PhysicalActivityLevel" DEFAULT 'SEDENTARY',
-    "status" "UserStatus" NOT NULL DEFAULT 'ACTIVE',
+    "metricUnit" TEXT,
+    "height" TEXT,
+    "weight" TEXT,
+    "goal" "Goals",
+    "physicalActivity" "PhysicalActivityLevel",
+    "status" "UserStatus" DEFAULT 'ACTIVE',
     "role" "UserRole" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

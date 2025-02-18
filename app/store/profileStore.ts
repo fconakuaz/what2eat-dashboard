@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { persist, createJSONStorage, devtools } from 'zustand/middleware';
 import { Affliction } from './afflictionStore';
 import { HealthIndicatorUser } from './healthIndicatorStore';
+import axios from 'axios';
+import { useAuthStore } from './authStore';
 
 type UserGender = 'MALE' | 'FEMALE' | 'OTHER';
 type DietaryPreference =
@@ -29,6 +31,7 @@ export type UserGoal =
 export type Unit = 'metric' | 'imperial';
 
 type Profile = {
+  email?: string;
   birthDate?: Date;
   age?: number;
   gender?: UserGender | null;
@@ -46,20 +49,42 @@ type Profile = {
   updatedAt?: Date;
   afflictions?: Affliction[]; // Realation with AfflictionUser
   healthIndicators?: HealthIndicatorUser; // Realation with HealthIndicatorUser
+  userActive: boolean;
 };
 
 type ProfileStore = {
   profile: Profile;
   setProfile: (updatedProfile: Partial<Profile>) => void;
+  fetchUserProfile: (router: any) => Promise<void>;
+  saveProfileToDB: () => Promise<void>;
+};
+
+export const calculateAge = (birthDate: string | Date): number => {
+  if (!birthDate) return 0; // Retorna 0 si no hay fecha
+
+  const birth = new Date(birthDate);
+  if (isNaN(birth.getTime())) return 0; // Manejo de error en caso de fecha inválida
+
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+
+  // Si aún no ha cumplido años en este año, restar 1
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+
+  return age;
 };
 
 export const useProfileStore = create(
   devtools(
     persist<ProfileStore>(
-      (set) => ({
+      (set, get) => ({
         profile: {
           physicalActivity: null,
-          gender: null
+          gender: null,
+          userActive: false
         },
         setProfile: (updatedProfile) =>
           set((state) => {
@@ -81,9 +106,30 @@ export const useProfileStore = create(
                 newProfile.age = age;
               }
             }
-
             return { profile: newProfile };
-          })
+          }),
+        saveProfileToDB: async () => {
+          const { profile } = get();
+          try {
+            const { userActive, ...profileToUpdate } = profile;
+            const response = await axios.post('/api/profile', profileToUpdate);
+            console.log('✅ Perfil guardado en la BD:', response.data);
+          } catch (error) {
+            console.error('❌ Error al guardar el perfil:', error);
+          }
+        },
+        fetchUserProfile: async (router) => {
+          try {
+            const { data } = await axios.get('/api/profile');
+            const age = calculateAge(data.birthDate);
+            set({ profile: { ...data, userActive: true, age } });
+            if (!data.gender) {
+              router.push('/wizard');
+            }
+          } catch (error) {
+            console.error('Error al obtener el perfil:', error);
+          }
+        }
       }),
       {
         name: 'profile-store',
