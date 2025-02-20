@@ -29,7 +29,8 @@ const generationConfig = {
 export async function runGemini(
   ingredientsToInclude,
   ingredientsToExclude,
-  profile
+  profile,
+  locale
 ) {
   const chatSession = model.startChat({
     generationConfig,
@@ -72,7 +73,7 @@ export async function runGemini(
       Género: ${profile?.gender}.
       Debe tener la proteína necesaria según la estatura y peso dicho, además de la edad  
       Y que sea para una persona con actividad: ${profile?.physicalActivity}.
-      Idioma: español.
+      Idioma: ${locale === 'en' ? 'Inglés' : 'Español'}.
       Con ingredientes fáciles de conseguir en el país de: México y en el estado de Veracruz.`;
 
   console.log('🟢🟢🟢 messageToSend 🟢🟢🟢');
@@ -121,7 +122,7 @@ export function GenerateHTMLFromJson({ meal, mealName }) {
               <p className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0">
                 <div className="space-y-1">
                   <p className="text-sm font-normal text-muted-foreground">
-                    Preparación de {recipe_time_preparation}
+                    {t('preparation_time')}: {recipe_time_preparation}
                   </p>
                 </div>
               </p>
@@ -137,7 +138,7 @@ export function GenerateHTMLFromJson({ meal, mealName }) {
                 <Flame size={18} className="mr-2 text-primary" />
                 <div className="space-y-1">
                   <p className="text-sm font-normal text-muted-foreground">
-                    Calorías: {recipe_calories_cant}
+                    {t('calories')}: {recipe_calories_cant}
                   </p>
                 </div>
               </div>
@@ -147,7 +148,7 @@ export function GenerateHTMLFromJson({ meal, mealName }) {
                 <Egg size={17} className="mr-2 text-primary" />
                 <div className="space-y-1">
                   <p className="text-sm font-normal text-muted-foreground">
-                    Grasa: {recipe_fat_cant}
+                    {t('fat')}: {recipe_fat_cant}
                   </p>
                 </div>
               </div>
@@ -157,7 +158,7 @@ export function GenerateHTMLFromJson({ meal, mealName }) {
                 <Drumstick size={19} className="mr-2 text-primary" />
                 <div className="space-y-1">
                   <p className="text-sm font-normal text-muted-foreground">
-                    Proteína: {recipe_protein_cant}
+                    {t('protein')}: {recipe_protein_cant}
                   </p>
                 </div>
               </div>

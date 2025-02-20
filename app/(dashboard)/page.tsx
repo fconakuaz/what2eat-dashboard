@@ -20,6 +20,7 @@ import { useProfileStore } from 'app/store/profileStore';
 import { useRouter } from 'next/navigation';
 import { SpinLoading } from 'app/components/layout/SpinLoading';
 import { useMenuStore } from 'app/store/menuStore';
+import { useLanguageStore } from 'app/store/languajeStore';
 
 const HomePage = () => {
   const { ingredientsToInclude } = useIncludeFoodStore();
@@ -29,6 +30,7 @@ const HomePage = () => {
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
 
   const { profile, fetchUserProfile } = useProfileStore();
+  const { locale } = useLanguageStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -47,7 +49,8 @@ const HomePage = () => {
       const response = await runGemini(
         ingredientsToInclude,
         ingredientsToExclude,
-        profile
+        profile,
+        locale
       );
       console.log('Response:', response);
       setMenu({
