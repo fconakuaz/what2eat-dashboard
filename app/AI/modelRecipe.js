@@ -2,7 +2,7 @@ export const responseSchema = {
   type: 'object',
   description: 'Return some of the most popular cookie recipes',
   properties: {
-    breackfast: {
+    Breakfast: {
       type: 'object',
       properties: {
         recipe_name: {
@@ -298,5 +298,5 @@ export const responseSchema = {
       ]
     }
   },
-  required: ['breackfast', 'snack1', 'lunch', 'snack2', 'dinner']
+  required: ['Breakfast', 'snack1', 'lunch', 'snack2', 'dinner']
 };
