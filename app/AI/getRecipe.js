@@ -93,7 +93,6 @@ export async function runGemini(
 export function GenerateHTMLFromJson({ meal, mealName }) {
   const t = useTranslations('HomePage');
   const {
-    recipe_description,
     recipe_ingredients,
     recipe_instructions,
     recipe_name,
