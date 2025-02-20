@@ -16,18 +16,19 @@ type AuthState = {
 };
 
 export const useAuthStore = create<AuthState>()(
-  // devtools(
-  persist(
-    (set) => ({
-      user: null,
-      session: null,
-      setUser: (user) => set({ user }),
-      setSession: (session) => set({ session, user: session?.user || null }),
-      logout: () => set({ user: null, session: null })
-    }),
-    {
-      name: 'auth-storage'
-    }
+  devtools(
+    persist(
+      (set) => ({
+        user: null,
+        session: null,
+        setUser: (user) => set({ user }),
+        setSession: (session) => set({ session, user: session?.user || null }),
+        logout: () => set({ user: null, session: null })
+      }),
+      {
+        name: 'auth-storage'
+      }
+    ),
+    { name: 'AuthStore' }
   )
-  // ,    { name: 'AuthStore' }  )
 );

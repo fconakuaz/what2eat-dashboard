@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { Info, Sparkles } from 'lucide-react';
+import { Info, Sparkles, Save, Bookmark } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
@@ -21,11 +21,21 @@ import { useRouter } from 'next/navigation';
 import { SpinLoading } from 'app/components/layout/SpinLoading';
 import { useMenuStore } from 'app/store/menuStore';
 import { useLanguageStore } from 'app/store/languajeStore';
+import { useAuthStore } from 'app/store/authStore';
 
 const HomePage = () => {
   const { ingredientsToInclude } = useIncludeFoodStore();
   const { ingredientsToExclude } = useExcludeFoodStore();
-  const { breakfast, snack1, snack2, lunch, dinner, setMenu } = useMenuStore();
+  const {
+    breakfast,
+    snack1,
+    snack2,
+    lunch,
+    dinner,
+    setMenu,
+    saveDailyMenu,
+    saving
+  } = useMenuStore();
   const t = useTranslations('HomePage');
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
 
@@ -80,7 +90,24 @@ const HomePage = () => {
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-4">
-          <div className="w-full grid place-items-end">
+          <div className="w-full flex justify-end space-x-3">
+            {/* 🔹 Guardar menú */}
+            <Button
+              size="sm"
+              variant={'secondary'}
+              className="h-8 gap-1"
+              onClick={() =>
+                saveDailyMenu('842d6aa6-d939-4b2e-9089-9eb19a4f1e2e')
+              }
+              disabled={!breakfast || saving}
+            >
+              <Bookmark className="h-4 w-4" />
+              <span className="sm:not-sr-only sm:whitespace-nowrap">
+                {saving ? 'Guardando...' : 'Guardar '}
+              </span>
+            </Button>
+
+            {/* 🔹 Generar menú */}
             <Button
               size="sm"
               className={`h-8 gap-1 ${loading && 'bg-transparent text-white'}`}

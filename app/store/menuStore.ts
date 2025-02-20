@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { create } from 'zustand';
 import { persist, createJSONStorage, devtools } from 'zustand/middleware';
 
@@ -27,21 +28,28 @@ type MenuState = {
   lunch: Recipe | null;
   snack2: Recipe | null;
   dinner: Recipe | null;
+  saving: boolean;
+  setSaving: (status: boolean) => void;
   setMenu: (newMenu: Partial<MenuState>) => void;
   updateMeal: (meal: keyof MenuState, data: Recipe) => void;
   resetMenu: () => void;
+  saveDailyMenu: (userId: string) => Promise<void>;
 };
 
 // Creamos el store con Zustand, persistencia y Devtools
 export const useMenuStore = create<MenuState>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         breakfast: null,
         snack1: null,
         lunch: null,
         snack2: null,
         dinner: null,
+        saving: false,
+
+        // 🔹 Actualiza el estado de "saving"
+        setSaving: (status) => set({ saving: status }),
 
         // Setea un nuevo menú
         setMenu: (newMenu) => set((state) => ({ ...state, ...newMenu })),
@@ -52,6 +60,30 @@ export const useMenuStore = create<MenuState>()(
             ...state,
             [meal]: data
           })),
+
+        saveDailyMenu: async (userId: string) => {
+          const { breakfast, snack1, lunch, snack2, dinner } = get();
+          set({ saving: true });
+
+          try {
+            const menuToSave = {
+              userId,
+              date: '2025-02-19', //new Date().toISOString(),
+              breakfast,
+              snack1,
+              lunch,
+              snack2,
+              dinner
+            };
+
+            const response = await axios.post('/api/menu', menuToSave);
+            console.log('✅ Menú guardado:', response.data);
+          } catch (error) {
+            console.error('❌ Error al guardar el menú:', error);
+          } finally {
+            set({ saving: false });
+          }
+        },
 
         // Resetea todo el menú
         resetMenu: () =>
