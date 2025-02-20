@@ -123,8 +123,14 @@ CREATE TABLE "ExcludedFoodUser" (
 CREATE TABLE "SavedMenu" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "items" JSONB NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
+    "breakfast" JSONB,
+    "snack1" JSONB,
+    "lunch" JSONB,
+    "snack2" JSONB,
+    "dinner" JSONB,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "SavedMenu_pkey" PRIMARY KEY ("id")
 );

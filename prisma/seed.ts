@@ -369,15 +369,6 @@ async function main() {
             : []
       },
 
-      SavedMenus: {
-        create: [
-          {
-            name: 'Healthy Menu',
-            items: ''
-          }
-        ]
-      },
-
       HealthIndicators: {
         create: {
           weight: 110,

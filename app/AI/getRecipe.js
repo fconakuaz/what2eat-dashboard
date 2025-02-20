@@ -39,7 +39,8 @@ export async function runGemini(
 
   const arrIngredientsToInclude =
     ingredientsToInclude.length > 0
-      ? ' Se puede incluir sólo los siguientes ingredientes pero ninguno más que ' +
+      ? //' Se puede incluir sólo los siguientes ingredientes pero ninguno más que ' +
+        ' Se puede incluir los siguientes ingredientes: ' +
         ingredientsToInclude
           .filter(({ state }) => state)
           .map(({ name }) => name)
