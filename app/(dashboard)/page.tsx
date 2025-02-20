@@ -1,6 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { AccordionFilter } from '@/components/dashboard/AccordionFilter';
 import { Button } from '@/components/ui/button';
 import { runGemini, GenerateHTMLFromJson } from '../AI/getRecipe';
@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { Info, Loader, Sparkles } from 'lucide-react';
+import { Info, Sparkles } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
@@ -19,13 +19,12 @@ import { useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useProfileStore } from 'app/store/profileStore';
 import { useRouter } from 'next/navigation';
 import { SpinLoading } from 'app/components/layout/SpinLoading';
+import { useMenuStore } from 'app/store/menuStore';
 
 const HomePage = () => {
-  const [menu, setMenu] = useState<any>([]);
-  const [isLoadingProfile, setIsLoadingProfile] = useState(true); // Nuevo estado de carga del perfil
-
   const { ingredientsToInclude } = useIncludeFoodStore();
   const { ingredientsToExclude } = useExcludeFoodStore();
+  const { breakfast, snack1, snack2, lunch, dinner, setMenu } = useMenuStore();
   const t = useTranslations('HomePage');
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
 
@@ -35,13 +34,10 @@ const HomePage = () => {
   useEffect(() => {
     const loadProfile = async () => {
       await fetchUserProfile(router);
-      setIsLoadingProfile(false);
     };
 
     if (!profile?.userActive) {
       loadProfile();
-    } else {
-      setIsLoadingProfile(false);
     }
   }, [profile, fetchUserProfile, router]);
 
@@ -54,7 +50,14 @@ const HomePage = () => {
         profile
       );
       console.log('Response:', response);
-      setMenu(response);
+      setMenu({
+        breakfast: response?.Breakfast,
+        snack1: response?.snack1,
+        lunch: response?.lunch,
+        snack2: response?.snack2,
+        dinner: response?.dinner
+      });
+
       setLoadingFalse();
     } catch (error) {
       console.error('Error:', error);
@@ -98,8 +101,17 @@ const HomePage = () => {
               <SkeletonMenu />
             ) : (
               <div className="bg-muted/30 px-4 py-4 md:px-10 md:py-8 ml-0 mr-0 md:ml-3 md:mr-4 mt-10 md:mt-0">
-                {menu && Object.keys(menu).length > 0 ? (
-                  <GenerateHTMLFromJson json={menu} />
+                {breakfast && Object.keys(breakfast).length > 0 ? (
+                  <>
+                    <GenerateHTMLFromJson
+                      meal={breakfast}
+                      mealName={'Breakfast'}
+                    />
+                    <GenerateHTMLFromJson meal={snack1} mealName={'Snack1'} />
+                    <GenerateHTMLFromJson meal={lunch} mealName={'Lunch'} />
+                    <GenerateHTMLFromJson meal={snack2} mealName={'Snack2'} />
+                    <GenerateHTMLFromJson meal={dinner} mealName={'Dinner'} />
+                  </>
                 ) : (
                   <p className="text-muted-foreground">
                     <Info className="mb-2" /> {t('info')}

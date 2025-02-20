@@ -1,13 +1,13 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 import { responseSchema } from './modelRecipe';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Asegúrate de tener este componente disponible.
-
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader
 } from '@/components/ui/card';
+import { Check, Drumstick, Egg, Flame } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
@@ -90,78 +90,125 @@ export async function runGemini(
   }
 }
 
-export function GenerateHTMLFromJson({ json }) {
+export function GenerateHTMLFromJson({ meal, mealName }) {
   const t = useTranslations('HomePage');
+  const {
+    recipe_description,
+    recipe_ingredients,
+    recipe_instructions,
+    recipe_name,
+    recipe_calories_cant,
+    recipe_fat_cant,
+    recipe_protein_cant,
+    recipe_time_preparation
+  } = meal;
 
   return (
     <div className="">
-      {Object.entries(json).map(([meal, recipe]) => (
-        <Card
-          key={recipe.recipe_name}
-          className="w-1/1 p-2 lg:p-3  mb-8 md:mb-8 block"
-        >
-          <CardHeader className="flex flex-row items-start justify-between">
-            <div className="flex items-center space-x-2">
-              <Avatar className="w-14 h-14 mr-2">
-                <AvatarImage src="food.webp" alt="User Avatar" />
-                <AvatarFallback>FD</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="text-xl md:text-2xl font-medium   ">
-                  {t(meal.charAt(0).toUpperCase() + meal.slice(1))}
-                </p>
-                <p className="text-sm md:text-xl font-medium leading-none text-muted-foreground">
-                  {recipe.recipe_name}
-                </p>
-              </div>
+      <Card key={recipe_name} className="w-1/1 p-2 lg:p-3  mb-8 md:mb-8 block">
+        <CardHeader className="flex flex-row items-start justify-between">
+          <div className="flex items-center space-x-2">
+            <Avatar className="w-14 h-14 mr-2">
+              <AvatarImage src="food.webp" alt="User Avatar" />
+              <AvatarFallback>FD</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-xl md:text-2xl font-medium   ">
+                {t(mealName)}
+              </p>
+              <p className="text-sm md:text-xl font-medium leading-none text-muted-foreground">
+                {recipe_name}
+              </p>
+              <p className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0">
+                <div className="space-y-1">
+                  <p className="text-sm font-normal text-muted-foreground">
+                    Preparación de {recipe_time_preparation}
+                  </p>
+                </div>
+              </p>
             </div>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            {/* Ingredients */}
-            <h3 className="mb-1  font-medium">{t('ingredients')}</h3>
-            <ul className="list-disc ml-5">
-              {recipe.recipe_ingredients.map((ingredient, index) => (
-                <li key={index}>
-                  <div
-                    key={index}
-                    className="mb-4 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0"
-                  >
-                    🔹
-                    <div className="space-y-1">
-                      <p className="text-sm font-normal text-muted-foreground">
-                        {ingredient}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+          </div>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          {/* Nutrition Facts */}
+          <h3 className="mb-1  font-medium">{t('nutrition_facts')}</h3>
+          <ul className="list-disc ml-5">
+            <li>
+              <div className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0">
+                <Flame size={18} className="mr-2 text-primary" />
+                <div className="space-y-1">
+                  <p className="text-sm font-normal text-muted-foreground">
+                    Calorías: {recipe_calories_cant}
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0">
+                <Egg size={17} className="mr-2 text-primary" />
+                <div className="space-y-1">
+                  <p className="text-sm font-normal text-muted-foreground">
+                    Grasa: {recipe_fat_cant}
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0">
+                <Drumstick size={19} className="mr-2 text-primary" />
+                <div className="space-y-1">
+                  <p className="text-sm font-normal text-muted-foreground">
+                    Proteína: {recipe_protein_cant}
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
 
-            {/* Instructions */}
-            <h3 className="mb-1 mt-2 font-medium">{t('instructions')}</h3>
-            <ol className="list-decimal ml-5">
-              {recipe.recipe_instructions.map((instruction, index) => (
-                <li key={index}>
-                  <div
-                    key={index}
-                    className="mb-4 flex flex-row pr-3 items-start pb-4 last:mb-0 last:pb-0"
-                  >
-                    <span className="text-sm font-normal leading-3 text-sky-500">
-                      {index + 1}.{' '}
-                    </span>
-                    <div className="ml-2 space-y-1">
-                      <p className="text-sm font-normal leading-3 text-muted-foreground">
-                        {instruction}
-                      </p>
-                    </div>
+          {/* Ingredients */}
+          <h3 className="mb-1  font-medium">{t('ingredients')}</h3>
+          <ul className="list-disc ml-5">
+            {recipe_ingredients.map((ingredient, index) => (
+              <li key={index}>
+                <div
+                  key={index}
+                  className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0"
+                >
+                  <Check size={18} className="mr-2 text-primary" />
+                  <div className="space-y-1">
+                    <p className="text-sm font-normal text-muted-foreground">
+                      {ingredient}
+                    </p>
                   </div>
-                </li>
-              ))}
-            </ol>
-          </CardContent>
-          <CardFooter className="flex justify-end"></CardFooter>
-        </Card>
-      ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          {/* Instructions */}
+          <h3 className="mb-1 mt-2 font-medium">{t('instructions')}</h3>
+          <ol className="list-decimal ml-5">
+            {recipe_instructions.map((instruction, index) => (
+              <li key={index}>
+                <div
+                  key={index}
+                  className="mb-0 flex flex-row pr-3 items-start pb-4 last:mb-0 last:pb-0"
+                >
+                  <span className="text-sm font-normal leading-3 text-primary">
+                    {index + 1}.{' '}
+                  </span>
+                  <div className="ml-2 space-y-1">
+                    <p className="text-sm font-normal leading-3 text-muted-foreground">
+                      {instruction}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </CardContent>
+        <CardFooter className="flex justify-end"></CardFooter>
+      </Card>
     </div>
   );
 }

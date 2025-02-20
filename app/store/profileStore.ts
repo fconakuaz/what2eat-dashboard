@@ -78,64 +78,64 @@ export const calculateAge = (birthDate: string | Date): number => {
 };
 
 export const useProfileStore = create(
-  devtools(
-    persist<ProfileStore>(
-      (set, get) => ({
-        profile: {
-          physicalActivity: null,
-          gender: null,
-          userActive: false
-        },
-        setProfile: (updatedProfile) =>
-          set((state) => {
-            let newProfile = { ...state.profile, ...updatedProfile };
+  // devtools(
+  persist<ProfileStore>(
+    (set, get) => ({
+      profile: {
+        physicalActivity: null,
+        gender: null,
+        userActive: false
+      },
+      setProfile: (updatedProfile) =>
+        set((state) => {
+          let newProfile = { ...state.profile, ...updatedProfile };
 
-            // Calculate Age
-            if (updatedProfile.birthDate) {
-              const birthDate = new Date(updatedProfile.birthDate);
-              if (!isNaN(birthDate.getTime())) {
-                const today = new Date();
-                let age = today.getFullYear() - birthDate.getFullYear();
-                const monthDiff = today.getMonth() - birthDate.getMonth();
-                if (
-                  monthDiff < 0 ||
-                  (monthDiff === 0 && today.getDate() < birthDate.getDate())
-                ) {
-                  age--;
-                }
-                newProfile.age = age;
+          // Calculate Age
+          if (updatedProfile.birthDate) {
+            const birthDate = new Date(updatedProfile.birthDate);
+            if (!isNaN(birthDate.getTime())) {
+              const today = new Date();
+              let age = today.getFullYear() - birthDate.getFullYear();
+              const monthDiff = today.getMonth() - birthDate.getMonth();
+              if (
+                monthDiff < 0 ||
+                (monthDiff === 0 && today.getDate() < birthDate.getDate())
+              ) {
+                age--;
               }
+              newProfile.age = age;
             }
-            return { profile: newProfile };
-          }),
-        saveProfileToDB: async () => {
-          const { profile } = get();
-          try {
-            const { userActive, ...profileToUpdate } = profile;
-            const response = await axios.post('/api/profile', profileToUpdate);
-            console.log('✅ Perfil guardado en la BD:', response.data);
-          } catch (error) {
-            console.error('❌ Error al guardar el perfil:', error);
           }
-        },
-        fetchUserProfile: async (router) => {
-          try {
-            const { data } = await axios.get('/api/profile');
-            const age = calculateAge(data.birthDate);
-            set({ profile: { ...data, userActive: true, age } });
-            if (!data.gender) {
-              router.push('/wizard');
-            }
-          } catch (error) {
-            console.error('Error al obtener el perfil:', error);
-          }
+          return { profile: newProfile };
+        }),
+      saveProfileToDB: async () => {
+        const { profile } = get();
+        try {
+          const { userActive, ...profileToUpdate } = profile;
+          const response = await axios.post('/api/profile', profileToUpdate);
+          console.log('✅ Perfil guardado en la BD:', response.data);
+        } catch (error) {
+          console.error('❌ Error al guardar el perfil:', error);
         }
-      }),
-      {
-        name: 'profile-store',
-        storage: createJSONStorage(() => localStorage)
+      },
+      fetchUserProfile: async (router) => {
+        try {
+          const { data } = await axios.get('/api/profile');
+          const age = calculateAge(data.birthDate);
+          set({ profile: { ...data, userActive: true, age } });
+          if (!data.gender) {
+            router.push('/wizard');
+          }
+        } catch (error) {
+          console.error('Error al obtener el perfil:', error);
+        }
       }
-    ),
-    { name: 'ProfileStore' }
+    }),
+    {
+      name: 'profile-store',
+      storage: createJSONStorage(() => localStorage)
+    }
   )
+  //, { name: 'ProfileStore' }
+  // )
 );
