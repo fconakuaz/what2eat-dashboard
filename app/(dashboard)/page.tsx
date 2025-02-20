@@ -94,7 +94,7 @@ const HomePage = () => {
             <div className="h-auto">
               <AccordionFilter />
             </div>
-            {loading ? (
+            {!loading ? (
               <SkeletonMenu />
             ) : (
               <div className="bg-muted/30 px-4 py-4 md:px-10 md:py-8 ml-0 mr-0 md:ml-3 md:mr-4 mt-10 md:mt-0">

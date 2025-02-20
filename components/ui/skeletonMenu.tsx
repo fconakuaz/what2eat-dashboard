@@ -1,22 +1,38 @@
+import { Skeleton } from './skeleton';
+
 export const SkeletonMenu = (): any => {
   return (
-    <div className="animate-pulse space-y-4 p-0 md:p-10 md:pl-20 mt-10 md:mt-0">
-      <div className="h-4 bg-white/20 rounded w-1/2 md:w-1/5"></div>
-      <br></br>
-      <div className="h-4 bg-white/20 rounded w-1/2 md:w-1/4"></div>
-      <div className="h-4 bg-white/20 rounded w-2/3 md:w-2/5"></div>
-      <br></br>
-      <div className="h-4 bg-white/20 rounded w-1/2 md:w-1/4"></div>
-      <div className="h-4 bg-white/20 rounded w-1/3 md:w-1/6"></div>
-      <div className="h-4 bg-white/20 rounded w-1/3 md:w-1/6"></div>
-      <div className="h-4 bg-white/20 rounded w-1/3 md:w-1/6"></div>
-      <div className="h-4 bg-white/20 rounded w-1/3 md:w-1/6"></div>
-      <br></br>
-      <div className="h-4 bg-white/20 rounded w-1/2 md:w-1/4"></div>
-      <div className="h-4 bg-white/20 rounded w-1/3 md:w-1/6"></div>
-      <div className="h-4 bg-white/20 rounded w-1/3 md:w-1/6"></div>
-      <div className="h-4 bg-white/20 rounded w-1/3 md:w-1/6"></div>
-      <div className="h-4 bg-white/20 rounded w-1/ md:w-1/6"></div>
-    </div>
+    <>
+      <div className="flex flex-col p-0 pt-10 sm:p-8 space-y-3">
+        <div className="flex space-x-3 mb-5">
+          <Skeleton className="h-[105px] w-1/5 rounded-xl" />
+          <Skeleton className="h-[105px] w-1/5 rounded-xl" />
+          <Skeleton className="h-[105px] w-1/5 rounded-xl" />
+          <Skeleton className="h-[105px] w-1/5 rounded-xl" />
+          <Skeleton className="h-[105px] w-1/5 rounded-xl" />
+        </div>
+        <div className="flex flex-col space-y-3">
+          <Skeleton className="h-[105px] mb-5 w-full rounded-xl" />
+          <div className="space-y-2 pb-10">
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
+            <Skeleton className="h-4 w-[250px]" />
+
+            <Skeleton className="h-4 w-[200px]" />
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
+            <Skeleton className="h-4 w-[250px]" />
+
+            <Skeleton className="h-4 w-[200px]" />
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
