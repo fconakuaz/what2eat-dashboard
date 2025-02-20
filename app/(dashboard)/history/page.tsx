@@ -42,11 +42,11 @@ export default async function HistoryPage(props: {
         </div>
       </div>
       <TabsContent value="all">
-        <ProductsTable
+        {/* <ProductsTable
           products={products}
           offset={newOffset ?? 0}
           totalProducts={totalProducts}
-        />
+        /> */}
       </TabsContent>
     </Tabs>
   );

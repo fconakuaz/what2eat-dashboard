@@ -132,7 +132,7 @@ const HomePage = () => {
             ) : (
               <div className="bg-muted/0 sm:bg-muted/30 px-0 py-0 sm:px-4 sm:py-4 md:px-10 md:py-8 ml-0 mr-0 md:ml-3 md:mr-4 mt-10 md:mt-0">
                 {breakfast && Object.keys(breakfast).length > 0 ? (
-                  <>
+                  <div>
                     <GenerateHTMLFromJson
                       meal={breakfast}
                       mealName={'Breakfast'}
@@ -141,7 +141,7 @@ const HomePage = () => {
                     <GenerateHTMLFromJson meal={lunch} mealName={'Lunch'} />
                     <GenerateHTMLFromJson meal={snack2} mealName={'Snack2'} />
                     <GenerateHTMLFromJson meal={dinner} mealName={'Dinner'} />
-                  </>
+                  </div>
                 ) : (
                   <p className="text-muted-foreground">
                     <Info className="mb-2" /> {t('info')}

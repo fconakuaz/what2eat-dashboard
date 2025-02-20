@@ -120,13 +120,13 @@ export function GenerateHTMLFromJson({ meal, mealName }) {
               <p className="text-sm md:text-xl font-medium leading-none text-muted-foreground">
                 {recipe_name}
               </p>
-              <p className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0">
+              <div className="mb-0 text-sm font-normal flex flex-row leading-3 items-start pb-4 last:mb-0 last:pb-0">
                 <div className="space-y-1">
-                  <p className="text-sm font-normal text-muted-foreground">
+                  <div className="text-sm font-normal text-muted-foreground">
                     {t('preparation_time')}: {recipe_time_preparation}
-                  </p>
+                  </div>
                 </div>
-              </p>
+              </div>
             </div>
           </div>
         </CardHeader>
