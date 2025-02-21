@@ -1,53 +1,38 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { File, PlusCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { getProducts } from '@/lib/db';
-import { ProductsTable } from '../products-table';
+import { Info } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup
+} from '@/components/ui/resizable';
+import { CalendarHistory } from '@/components/calendarHistory';
 
 export default async function HistoryPage(props: {
   searchParams: Promise<{ q: string; offset: string }>;
 }) {
-  const searchParams = await props.searchParams;
-  const search = searchParams.q ?? '';
-  const offset = searchParams.offset ?? 0;
-  const { products, newOffset, totalProducts } = await getProducts(
-    search,
-    Number(offset)
-  );
-
+  // const { products, newOffset, totalProducts } = await getProducts(
+  //   search,
+  //   Number(offset)
+  // );
   return (
-    <Tabs defaultValue="all">
-      <div className="flex items-center">
-        <TabsList>
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="active">Active</TabsTrigger>
-          <TabsTrigger value="draft">Draft</TabsTrigger>
-          <TabsTrigger value="archived" className="hidden sm:flex">
-            Archived
-          </TabsTrigger>
-        </TabsList>
-        <div className="ml-auto flex items-center gap-2">
-          <Button size="sm" variant="outline" className="h-8 gap-1">
-            <File className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Export
-            </span>
-          </Button>
-          <Button size="sm" className="h-8 gap-1">
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Add Product
-            </span>
-          </Button>
+    <ResizablePanelGroup
+      direction="horizontal"
+      className="min-h-[calc(100vh-88px)]  rounded-lg border md:min-w-[450px]"
+    >
+      <ResizablePanel defaultSize={25} minSize={18}>
+        <div className="flex h-full items-start justify-center p-0">
+          <CalendarHistory />
         </div>
-      </div>
-      <TabsContent value="all">
-        {/* <ProductsTable
-          products={products}
-          offset={newOffset ?? 0}
-          totalProducts={totalProducts}
-        /> */}
-      </TabsContent>
-    </Tabs>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={75}>
+        <div className="flex h-full w-full items-start justify-center p-6">
+          <p className="text-muted-foreground">
+            <Info className="mb-2" /> Haz clic en 'Crear menú del día' para
+            mostrar el menú de hoy...
+          </p>
+        </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }
