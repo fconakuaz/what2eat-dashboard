@@ -1,38 +1,32 @@
 import { Info } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup
-} from '@/components/ui/resizable';
+
 import { CalendarHistory } from '@/components/calendarHistory';
 
-export default async function HistoryPage(props: {
-  searchParams: Promise<{ q: string; offset: string }>;
-}) {
-  // const { products, newOffset, totalProducts } = await getProducts(
-  //   search,
-  //   Number(offset)
-  // );
+export default async function HistoryPage() {
   return (
-    <ResizablePanelGroup
-      direction="horizontal"
-      className="min-h-[calc(100vh-88px)]  rounded-lg border md:min-w-[450px]"
-    >
-      <ResizablePanel defaultSize={25} minSize={18}>
+    <div className="flex flex-col min-h-screen">
+      {/* Header */}
+      <header className="w-full h-16 p-4 text-2xl text-center md:text-left">
+        📆 Mis menús guardados
+      </header>
+
+      <div className="flex flex-1 md:flex-row gap-4 pt-2 flex-col  ">
+        {/* LEFT */}
         <div className="flex h-full items-start justify-center p-0">
           <CalendarHistory />
         </div>
-      </ResizablePanel>
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={75}>
-        <div className="flex h-full w-full items-start justify-center p-6">
-          <p className="text-muted-foreground">
-            <Info className="mb-2" /> Haz clic en 'Crear menú del día' para
-            mostrar el menú de hoy...
-          </p>
+
+        {/* RIGHT */}
+        <div className="md:w-3/4  w-full rounded-lg p-4 border">
+          {' '}
+          <div className="flex h-full w-full items-start justify-start p-6">
+            <p className="text-muted-foreground flex flex-row">
+              <Info size={25} className="mr-2" /> Haz clic en una día del
+              calendario para mostrar el menú de ese día...
+            </p>
+          </div>
         </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
+      </div>
+    </div>
   );
 }
