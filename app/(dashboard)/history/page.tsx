@@ -84,7 +84,7 @@ const HomePage = () => {
   }
 
   return (
-    <Card className="rounded-none px-8 py-3">
+    <Card className="rounded-none px-0 py-0 md:px-8 md:py-3">
       <CardHeader className="w-full h-[80px] p-4 text-2xl pl-5 justify-center text-center md:text-left">
         <CardTitle>📆 Mis menús guardados</CardTitle>
         {/* <CardDescription>{t('subtitle')}</CardDescription> */}
