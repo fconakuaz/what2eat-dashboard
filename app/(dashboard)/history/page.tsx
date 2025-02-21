@@ -11,7 +11,14 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { Info, Sparkles, Save, Bookmark, BookmarkIcon } from 'lucide-react';
+import {
+  Info,
+  Sparkles,
+  Save,
+  Bookmark,
+  BookmarkIcon,
+  Calendar
+} from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
@@ -85,15 +92,17 @@ const HomePage = () => {
 
   return (
     <Card className="rounded-none px-0 py-0 md:px-8 md:py-3">
-      <CardHeader className="w-full h-[80px] p-4 text-2xl pl-5 justify-center text-center md:text-left">
-        <CardTitle>📆 Mis menús guardados</CardTitle>
+      <CardHeader className="w-full h-[80px] px-4 text-2xl pl-5 justify-center items-center md:items-start ">
+        <CardTitle className="flex flex-row  ">
+          <Calendar className="text-primary mr-2" /> Mis menús guardados
+        </CardTitle>
         {/* <CardDescription>{t('subtitle')}</CardDescription> */}
       </CardHeader>
-      <CardContent className="flex flex-1 md:flex-row gap-4 pt-2 flex-col">
+      <CardContent className="flex flex-1 md:flex-row gap-4 flex-col">
         {/* LEFT */}
         <div className="flex flex-col h-full items-start justify-center p-0 w-full md:max-w-[270px] md:min-w-[270px] md:w-1/4">
           {/* 🔹 Botones apilados */}
-          <div className="mt-0 w-full flex flex-col items-center justify-center  gap-3 ">
+          <div className="mt-0 w-full flex flex-col items-center justify-center gap-3 ">
             <CalendarHistory />
           </div>
 
@@ -110,7 +119,7 @@ const HomePage = () => {
 
         {/* RIGHT */}
         <div className="md:w-3/4 w-full rounded-lg p-0 ">
-          <div className="flex h-full w-full items-start justify-center p-6 pt-0">
+          <div className="flex h-full w-full items-start justify-center p-0 md:p-0 pt-0">
             {loading ? (
               <SkeletonMenu />
             ) : (
