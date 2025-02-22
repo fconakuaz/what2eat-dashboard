@@ -39,19 +39,19 @@ const HomePage = () => {
   const t = useTranslations('HomePage');
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
 
-  const { profile, fetchUserProfile } = useProfileStore();
+  const { profile, getUserProfile } = useProfileStore();
   const { locale } = useLanguageStore();
   const router = useRouter();
 
   useEffect(() => {
     const loadProfile = async () => {
-      await fetchUserProfile(router);
+      await getUserProfile(router);
     };
 
     if (!profile?.userActive) {
       loadProfile();
     }
-  }, [profile, fetchUserProfile, router]);
+  }, [profile, getUserProfile, router]);
 
   async function runIA() {
     try {
@@ -77,7 +77,7 @@ const HomePage = () => {
     }
   }
 
-  // 🔹 Muestra un loader mientras se obtiene el perfil
+  // Muestra un loader mientras se obtiene el perfil
   if (!profile?.userActive) {
     return <SpinLoading />;
   }
@@ -91,7 +91,7 @@ const HomePage = () => {
       <CardContent>
         <div className="flex flex-col gap-4">
           <div className="w-full flex justify-end space-x-3">
-            {/* 🔹 Guardar menú */}
+            {/* Guardar menú */}
             <Button
               size="sm"
               variant={'secondary'}
@@ -107,7 +107,7 @@ const HomePage = () => {
               </span>
             </Button>
 
-            {/* 🔹 Generar menú */}
+            {/* Generar menú */}
             <Button
               size="sm"
               className={`h-8 gap-1 ${loading && 'bg-transparent text-white'}`}

@@ -55,7 +55,7 @@ type Profile = {
 type ProfileStore = {
   profile: Profile;
   setProfile: (updatedProfile: Partial<Profile>) => void;
-  fetchUserProfile: (router: any) => Promise<void>;
+  getUserProfile: (router: any) => Promise<void>;
   saveProfileToDB: () => Promise<void>;
 };
 
@@ -118,7 +118,7 @@ export const useProfileStore = create(
           console.error('❌ Error al guardar el perfil:', error);
         }
       },
-      fetchUserProfile: async (router) => {
+      getUserProfile: async (router) => {
         try {
           const { data } = await axios.get('/api/profile');
           const age = calculateAge(data.birthDate);

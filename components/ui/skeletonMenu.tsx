@@ -3,7 +3,7 @@ import { Skeleton } from './skeleton';
 export const SkeletonMenu = (): any => {
   return (
     <>
-      <div className="flex flex-col p-0 pt-10 sm:p-8 space-y-3">
+      <div className="flex flex-col p-0 pt-10 sm:p-8 space-y-3 w-full">
         <div className="flex space-x-3 mb-5">
           <Skeleton className="h-[105px] w-1/5 rounded-xl" />
           <Skeleton className="h-[105px] w-1/5 rounded-xl" />

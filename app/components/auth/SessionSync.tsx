@@ -9,10 +9,10 @@ export default function SessionSync() {
   const { setSession, logout } = useAuthStore();
   useEffect(() => {
     if (session) {
-      setSession(session); // 🔹 Guarda la sesión en Zustand
+      setSession(session); // Guarda la sesión en Zustand
     }
     if (session?.user === undefined) {
-      logout(); // 🔹 Guarda la sesión en Zustand
+      logout(); // Guarda la sesión en Zustand
     }
   }, [session, setSession]);
   return null; // No renderiza nada, solo sincroniza

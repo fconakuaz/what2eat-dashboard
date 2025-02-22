@@ -1,16 +1,15 @@
 'use client';
 
-import * as React from 'react';
-
 import { Calendar } from '@/components/ui/calendar';
+import { useCommonStore } from 'app/store/commonStore';
 
 export function CalendarHistory() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const { selectedDate, setDate } = useCommonStore();
 
   return (
     <Calendar
       mode="single"
-      selected={date}
+      selected={selectedDate}
       onSelect={setDate}
       className="rounded-md border shadow"
     />

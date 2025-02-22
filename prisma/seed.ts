@@ -13,10 +13,10 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Seeding database...');
 
-  // 🔹 Hash the password
+  // Hash the password
   const hashedPassword = await bcrypt.hash('passwordSeguro123', 10);
 
-  // 🔹 List of common afflictions
+  // List of common afflictions
   const afflictionsItems = [
     'Diabetes',
     'Hypertension',
@@ -48,7 +48,7 @@ async function main() {
     'Alzheimer’s Disease'
   ];
 
-  // 🔹 Insert afflictions into DB
+  // Insert afflictions into DB
   for (const name of afflictionsItems) {
     await prisma.affliction.upsert({
       where: { name },
@@ -59,7 +59,7 @@ async function main() {
 
   console.log('✅ Afflictions seeded successfully');
 
-  // 🔹 Full Food Catalog
+  // Full Food Catalog
   const foodItems = [
     // FRUITS
     { name: 'Apple', category: FoodCategory.FRUITS },
@@ -288,7 +288,7 @@ async function main() {
     { name: 'Mustard seeds', category: FoodCategory.HERBS_SPICES }
   ];
 
-  // 🔹 Insert food first
+  // Insert food first
   for (const food of foodItems) {
     await prisma.food.upsert({
       where: { name: food.name },
@@ -302,7 +302,7 @@ async function main() {
 
   console.log('✅ Food Catalog seeded successfully');
 
-  // 🔹 Fetch affliction IDs to use for `connect`
+  // Fetch affliction IDs to use for `connect`
   const afflictionRecords = await prisma.affliction.findMany({
     where: { name: { in: afflictionsItems.map((f) => f) } }
   });
@@ -316,7 +316,7 @@ async function main() {
     {} as Record<string, string>
   );
 
-  // 🔹 Fetch affliction IDs to use for `connect`
+  // Fetch affliction IDs to use for `connect`
   const foodRecords = await prisma.food.findMany({
     where: { name: { in: foodItems.map((f) => f.name) } }
   });
@@ -330,7 +330,7 @@ async function main() {
     {} as Record<string, string>
   );
 
-  // 🔹 Create or update user
+  // Create or update user
   const user = await prisma.user.upsert({
     where: { email: 'paco@example.com' },
     update: {},
@@ -382,7 +382,7 @@ async function main() {
 
   console.log('✅ User created or updated:', user);
 
-  // 🔹 Create authentication entry for user
+  // Create authentication entry for user
   await prisma.auth.upsert({
     where: { userId: user.id },
     update: {},

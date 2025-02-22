@@ -20,10 +20,10 @@ export default function DatePickerDropdown({
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(0);
 
-  // 🔹 Lista de días (1-31)
+  // Lista de días (1-31)
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
-  // 🔹 Lista de meses (1-12)
+  // Lista de meses (1-12)
   const months = [
     { value: 1, label: 'Enero' },
     { value: 2, label: 'Febrero' },
@@ -39,7 +39,7 @@ export default function DatePickerDropdown({
     { value: 12, label: 'Diciembre' }
   ];
 
-  // 🔹 Lista de años (1900 - Año actual)
+  // Lista de años (1900 - Año actual)
   const startYear = 1925;
   const endYear = new Date().getFullYear();
   const years = Array.from(
