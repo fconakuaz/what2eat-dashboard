@@ -51,10 +51,10 @@ const HomePage = () => {
 
   return (
     <Card className="rounded-none px-0 py-0 md:px-8 md:py-3">
-      <CardHeader className="w-full h-[80px] px-4 text-2xl pl-5 justify-center items-center md:items-start ">
+      <CardHeader className="w-full h-[80px] px-4 text-lg md:text-2xl pl-5 justify-center items-center md:items-start ">
         <CardTitle className="flex flex-row w-full  ">
-          <div className="mt-0  flex flex-row  min-w-[300px] items-center justify-start pr-4 pb-4 gap-3 ">
-            <Calendar className="text-primary mr-2" /> Mis menús guardados
+          <div className="hidden md:flex mt-0 flex-row text-lg min-w-[120px] md:min-w-[300px] items-center justify-start pr-4 pb-4 gap-3">
+            <Calendar className="text-primary mr-1" /> Mis Menús
           </div>
           <div className="mt-0 w-full flex flex-row items-center justify-end pr-6 pb-2 gap-3 ">
             <Button
@@ -68,7 +68,7 @@ const HomePage = () => {
             >
               <BookmarkX className="h-4 w-4" />
               <span className="sm:not-sr-only sm:whitespace-nowrap">
-                {saving ? 'Quitando...' : 'Dejar de guardar '}
+                {saving ? 'Quitando...' : 'Eliminar '}
               </span>
             </Button>
             <Button
@@ -82,7 +82,7 @@ const HomePage = () => {
             >
               <Share className="h-4 w-4" />
               <span className="sm:not-sr-only sm:whitespace-nowrap">
-                {'Compartir'}
+                Compartir
               </span>
             </Button>
           </div>
