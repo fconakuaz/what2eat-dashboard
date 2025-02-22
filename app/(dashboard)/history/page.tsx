@@ -1,24 +1,10 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { AccordionFilter } from '@/components/dashboard/AccordionFilter';
 import { Button } from '@/components/ui/button';
 import { runGemini, GenerateHTMLFromJson } from '../../AI/getRecipe';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
-import {
-  Info,
-  Sparkles,
-  Save,
-  Bookmark,
-  BookmarkIcon,
-  Calendar
-} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Info, BookmarkIcon, Calendar, BookmarkX, Share } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
@@ -34,6 +20,11 @@ import { CalendarHistory } from '@/components/calendarHistory';
 const HomePage = () => {
   const { ingredientsToInclude } = useIncludeFoodStore();
   const { ingredientsToExclude } = useExcludeFoodStore();
+  const { user, session } = useAuthStore();
+  console.log('🟢🟢🟢 user 🟢🟢🟢');
+  console.log(user);
+  console.log('🔵🔵🔵 session 🔵🔵🔵');
+  console.log(session);
   const {
     breakfast,
     snack1,
@@ -93,10 +84,41 @@ const HomePage = () => {
   return (
     <Card className="rounded-none px-0 py-0 md:px-8 md:py-3">
       <CardHeader className="w-full h-[80px] px-4 text-2xl pl-5 justify-center items-center md:items-start ">
-        <CardTitle className="flex flex-row  ">
-          <Calendar className="text-primary mr-2" /> Mis menús guardados
+        <CardTitle className="flex flex-row w-full  ">
+          <div className="mt-0  flex flex-row  min-w-[300px] items-center justify-start pr-4 pb-4 gap-3 ">
+            <Calendar className="text-primary mr-2" /> Mis menús guardados
+          </div>
+          <div className="mt-0 w-full flex flex-row items-center justify-end pr-6 pb-2 gap-3 ">
+            <Button
+              size="sm"
+              variant={'secondary'}
+              className="h-8 gap-1"
+              onClick={() =>
+                saveDailyMenu('842d6aa6-d939-4b2e-9089-9eb19a4f1e2e')
+              }
+              disabled={!breakfast || saving}
+            >
+              <BookmarkX className="h-4 w-4" />
+              <span className="sm:not-sr-only sm:whitespace-nowrap">
+                {saving ? 'Quitando...' : 'Dejar de guardar '}
+              </span>
+            </Button>
+            <Button
+              size="sm"
+              variant={'default'}
+              className="h-8 gap-1"
+              onClick={() =>
+                saveDailyMenu('842d6aa6-d939-4b2e-9089-9eb19a4f1e2e')
+              }
+              disabled={!breakfast || saving}
+            >
+              <Share className="h-4 w-4" />
+              <span className="sm:not-sr-only sm:whitespace-nowrap">
+                {'Compartir'}
+              </span>
+            </Button>
+          </div>
         </CardTitle>
-        {/* <CardDescription>{t('subtitle')}</CardDescription> */}
       </CardHeader>
       <CardContent className="flex flex-1 md:flex-row gap-4 flex-col">
         {/* LEFT */}
