@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } } // ✅ Usa `context` correctamente
 ) {
   try {
-    const id = params.id; // 🔹 Extrae el ID correctamente
+    const id = context.params.id; // ✅ Extraer `id` correctamente
 
     if (!id) {
       return NextResponse.json(
