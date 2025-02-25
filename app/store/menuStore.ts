@@ -75,7 +75,7 @@ export const useMenuStore = create<MenuState>()(
 
         loadSharedMenu: async (id) => {
           try {
-            const response = await fetch(`/api/menu/${id}`);
+            const response = await fetch(`/api/shared/${id}`);
             const data = await response.json();
             set({ sharedMenu: data?.menu });
           } catch (error) {

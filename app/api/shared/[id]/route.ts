@@ -1,15 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
-
-export async function GET(
-  req: NextRequest,
-  { params }: { params: Record<string, string> } // ✅ Usa Record<string, string>
-) {
+export async function GET(req: Request, context: { params: { id: string } }) {
   try {
-    const id = params.id; // ✅ Extraer `id` correctamente
-
+    const { id } = await context.params;
     if (!id) {
       return NextResponse.json(
         { error: 'El ID del menú es obligatorio' },
@@ -17,7 +12,6 @@ export async function GET(
       );
     }
 
-    // Buscar el menú en la base de datos con Prisma
     const menu = await prisma.savedMenu.findUnique({
       where: { id }
     });
