@@ -7,8 +7,6 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const id = await params?.id;
-  console.log('🚩🚩🚩 params 🚩🚩🚩');
-  console.log(id);
   try {
     if (!id) {
       return NextResponse.json(

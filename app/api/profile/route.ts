@@ -16,9 +16,6 @@ export async function GET(req: NextRequest) {
     // include: { afflictions: true, healthIndicators: true }
   });
 
-  console.log('🟢🟢🟢 user 🟢🟢🟢');
-  console.log(user);
-
   if (!user) {
     return NextResponse.json(
       { error: 'Usuario no encontrado' },
@@ -43,8 +40,6 @@ export async function POST(req: Request) {
       weight,
       goal
     } = body;
-    console.log('🔵🔵🔵 body 🔵🔵🔵');
-    console.log(body);
 
     if (!email) {
       return NextResponse.json(

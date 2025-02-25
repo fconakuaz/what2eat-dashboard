@@ -35,8 +35,6 @@ export const useCommonStore = create<CommonState>((set) => ({
   },
 
   setDate: (date: Date | undefined) => {
-    console.log('🟡🟡🟡 date 🟡🟡🟡');
-    console.log(date);
     set({ selectedDate: date });
   },
 

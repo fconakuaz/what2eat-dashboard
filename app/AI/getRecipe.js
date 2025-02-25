@@ -77,9 +77,6 @@ export async function runGemini(
       Idioma: ${locale === 'en' ? 'Inglés' : 'Español'}.
       Con ingredientes fáciles de conseguir en el país de: México y en el estado de Veracruz.`;
 
-  console.log('🟢🟢🟢 messageToSend 🟢🟢🟢');
-  console.log(messageToSend);
-
   const result = await chatSession.sendMessage(messageToSend);
 
   try {

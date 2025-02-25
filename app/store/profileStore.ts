@@ -112,8 +112,7 @@ export const useProfileStore = create(
         const { profile } = get();
         try {
           const { userActive, ...profileToUpdate } = profile;
-          const response = await axios.post('/api/profile', profileToUpdate);
-          console.log('✅ Perfil guardado en la BD:', response.data);
+          await axios.post('/api/profile', profileToUpdate);
         } catch (error) {
           console.error('❌ Error al guardar el perfil:', error);
         }

@@ -13,7 +13,9 @@ export async function middleware(req: NextRequest) {
     '/favicon.ico',
     '/manifest.json',
     '/banner.webp',
-    '/dashboard.webp'
+    '/dashboard.webp',
+    'apple-touch-icon.png',
+    '/menu'
   ];
 
   // Permitir archivos en `public/`

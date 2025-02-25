@@ -62,7 +62,6 @@ const HomePage = () => {
         profile,
         locale
       );
-      console.log('Response:', response);
       setMenu({
         breakfast: response?.Breakfast,
         snack1: response?.snack1,

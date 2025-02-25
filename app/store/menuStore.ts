@@ -47,6 +47,8 @@ type MenuState = {
   savedMenus: SavedMenu[]; // Nuevo array para almacenar los menús guardados
   selectedSavedMenu: SavedMenu | null;
   saving: boolean;
+  sharedMenu: SavedMenu | null;
+  loadSharedMenu: (id: string) => void;
   setSaving: (status: boolean) => void;
   setMenu: (newMenu: Partial<MenuState>) => void;
   updateMeal: (meal: keyof MenuState, data: Recipe) => void;
@@ -69,6 +71,17 @@ export const useMenuStore = create<MenuState>()(
         savedMenus: [], // Inicializamos el array vacío
         selectedSavedMenu: null,
         saving: false,
+        sharedMenu: null,
+
+        loadSharedMenu: async (id) => {
+          try {
+            const response = await fetch(`/api/menu/${id}`);
+            const data = await response.json();
+            set({ sharedMenu: data?.menu });
+          } catch (error) {
+            console.error('Error cargando el menú compartido', error);
+          }
+        },
 
         // 🔹 Actualiza el estado de "saving"
         setSaving: (status) => set({ saving: status }),
@@ -98,8 +111,7 @@ export const useMenuStore = create<MenuState>()(
               snack2,
               dinner
             };
-            const response = await axios.post('/api/menu', menuToSave);
-            console.log('✅ Menú guardado:', response.data);
+            await axios.post('/api/menu', menuToSave);
           } catch (error) {
             console.error('❌ Error al guardar el menú:', error);
           } finally {
