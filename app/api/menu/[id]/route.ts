@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } } // ✅ Usa `context` correctamente
+  { params }: { params: Record<string, string> } // ✅ Usa Record<string, string>
 ) {
   try {
-    const id = context.params.id; // ✅ Extraer `id` correctamente
+    const id = params.id; // ✅ Extraer `id` correctamente
 
     if (!id) {
       return NextResponse.json(
