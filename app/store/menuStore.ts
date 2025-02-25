@@ -53,7 +53,7 @@ type MenuState = {
   setMenu: (newMenu: Partial<MenuState>) => void;
   updateMeal: (meal: keyof MenuState, data: Recipe) => void;
   resetMenu: () => void;
-  saveDailyMenu: (userId: string) => Promise<void>;
+  saveDailyMenu: (userId: string | undefined) => Promise<void>;
   getSavedMenus: () => Promise<void>;
   setSavedMenu: (menuId: string) => void; // Nueva función
 };
@@ -97,7 +97,10 @@ export const useMenuStore = create<MenuState>()(
           })),
 
         // 🔹 Guarda el menú diario en la BD
-        saveDailyMenu: async (userId: string) => {
+        saveDailyMenu: async (userId: string | undefined) => {
+          if (userId !== undefined) {
+            return;
+          }
           const { breakfast, snack1, lunch, snack2, dinner } = get();
           set({ saving: true });
 

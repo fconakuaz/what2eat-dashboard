@@ -22,6 +22,7 @@ import { SpinLoading } from 'app/components/layout/SpinLoading';
 import { useMenuStore } from 'app/store/menuStore';
 import { useLanguageStore } from 'app/store/languajeStore';
 import { useAuthStore } from 'app/store/authStore';
+import ShareButton from 'app/components/layout/ShareButton';
 
 const HomePage = () => {
   const { ingredientsToInclude } = useIncludeFoodStore();
@@ -32,13 +33,13 @@ const HomePage = () => {
     snack2,
     lunch,
     dinner,
+    saving,
+    selectedSavedMenu,
     setMenu,
-    saveDailyMenu,
-    saving
+    saveDailyMenu
   } = useMenuStore();
   const t = useTranslations('HomePage');
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
-
   const { profile, getUserProfile } = useProfileStore();
   const { locale } = useLanguageStore();
   const router = useRouter();
@@ -90,21 +91,26 @@ const HomePage = () => {
       <CardContent>
         <div className="flex flex-col gap-4">
           <div className="w-full flex justify-end space-x-3">
-            {/* Guardar menú */}
-            <Button
-              size="sm"
-              variant={'secondary'}
-              className="h-8 gap-1"
-              onClick={() =>
-                saveDailyMenu('842d6aa6-d939-4b2e-9089-9eb19a4f1e2e')
-              }
-              disabled={!breakfast || saving}
+            <div
+              className={` ${(loading || selectedSavedMenu?.id == null) && 'hidden'}`}
             >
-              <Bookmark className="h-4 w-4" />
-              <span className="sm:not-sr-only sm:whitespace-nowrap">
-                {saving ? 'Guardando...' : 'Guardar '}
-              </span>
-            </Button>
+              {/* Compartir menú */}
+              <ShareButton menuId={selectedSavedMenu?.id} />
+
+              {/* Guardar menú */}
+              <Button
+                size="sm"
+                variant={'secondary'}
+                className="h-8 gap-1 ml-4"
+                onClick={() => saveDailyMenu(selectedSavedMenu?.id)}
+                disabled={!breakfast || saving}
+              >
+                <Bookmark className="h-4 w-4" />
+                <span className="sm:not-sr-only sm:whitespace-nowrap">
+                  {saving ? 'Guardando...' : 'Guardar '}
+                </span>
+              </Button>
+            </div>
 
             {/* Generar menú */}
             <Button

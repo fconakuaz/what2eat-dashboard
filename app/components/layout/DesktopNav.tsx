@@ -24,7 +24,7 @@ export const DesktopNav: FC = (): any => {
           className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-transparent text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
           {/* <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" /> */}
-          <img src="apple-touch-icon.png" alt="logo" />
+          <img src="/apple-touch-icon.png" alt="logo" />
           <span className="sr-only">What2Eat</span>
         </Link>
 

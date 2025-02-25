@@ -13,6 +13,7 @@ import { SpinLoading } from 'app/components/layout/SpinLoading';
 import { useMenuStore } from 'app/store/menuStore';
 import { CalendarHistory } from '@/components/calendarHistory';
 import { SkeletonListSavedMenus } from '../../../components/ui/skeletonListSavedMenus';
+import ShareButton from 'app/components/layout/ShareButton';
 
 const HomePage = () => {
   const { selectedSavedMenu, saveDailyMenu, saving, setSavedMenu } =
@@ -23,6 +24,8 @@ const HomePage = () => {
   const { profile, getUserProfile } = useProfileStore();
   const router = useRouter();
 
+  console.log('🟢🟢🟢 selectedSavedMenu 🟢🟢🟢');
+  console.log(selectedSavedMenu);
   const handleSetSavedMenu = (id: string) => {
     setSavedMenu(id);
   };
@@ -56,14 +59,14 @@ const HomePage = () => {
           <div className="hidden md:flex mt-0 flex-row text-lg min-w-[120px] md:min-w-[300px] items-center justify-start pr-4 pb-4 gap-3">
             <Calendar className="text-primary mr-1" /> Mis Menús
           </div>
-          <div className="mt-0 w-full flex flex-row items-center justify-end pr-6 pb-2 gap-3 ">
+          <div
+            className={`${selectedSavedMenu?.id == null ? 'hidden' : ''} mt-0 w-full flex flex-row items-center justify-end pr-6 pb-2 gap-3`}
+          >
             <Button
               size="sm"
               variant={'outline'}
               className="h-8 gap-1"
-              onClick={() =>
-                saveDailyMenu('842d6aa6-d939-4b2e-9089-9eb19a4f1e2e')
-              }
+              onClick={() => saveDailyMenu(selectedSavedMenu?.id)}
               disabled={saving}
             >
               <BookmarkX className="h-4 w-4" />
@@ -71,20 +74,7 @@ const HomePage = () => {
                 {saving ? 'Quitando...' : 'Eliminar '}
               </span>
             </Button>
-            <Button
-              size="sm"
-              variant={'default'}
-              className="h-8 gap-1"
-              onClick={() =>
-                saveDailyMenu('842d6aa6-d939-4b2e-9089-9eb19a4f1e2e')
-              }
-              disabled={saving}
-            >
-              <Share className="h-4 w-4" />
-              <span className="sm:not-sr-only sm:whitespace-nowrap">
-                Compartir
-              </span>
-            </Button>
+            <ShareButton menuId={selectedSavedMenu?.id} />
           </div>
         </CardTitle>
       </CardHeader>
