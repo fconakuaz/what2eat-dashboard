@@ -49,7 +49,7 @@ export default function SharedMenuPage() {
                     target="_blank"
                   >
                     <Button variant={'default'}>
-                      ¿Quieres crear tus propios menús? Accede aquí a What2Eat
+                      Crea tus propios menús aquí
                     </Button>
                   </Link>
                 </div>

@@ -1,0 +1,250 @@
+commit 24fb8310883242b72b40b76c49af043119c3282a
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Feb 19 21:25:21 2025 -0600
+
+    Se agrega ordenamiento de menú del día y se cambian useState por el state de Zustand persistente.
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+M	app/store/profileStore.ts
+M	messages/en.json
+M	messages/es.json
+
+commit d4d75ac1008a341f02ae5c33cf66792418bad254
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Feb 19 21:32:02 2025 -0600
+
+    Mejora de cards de recetas y responsividad
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+
+commit 7b3e0a3616333bd723c54565f1abf3bf058ee859
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Feb 19 21:47:21 2025 -0600
+
+    Se agrega internacionalización en menú diario
+
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+M	messages/en.json
+
+commit d07e0eb864c5f047310ceb877d99723d712ec48c
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Feb 19 23:03:51 2025 -0600
+
+    Se crea modelo de MenuSaved, además del servicio Menu junto con el servicio GET y POST de menús guardados
+
+M	app/AI/getRecipe.js
+A	app/api/menu/route.ts
+M	prisma/dbml/schema.dbml
+R097	prisma/migrations/20250218030109_init/migration.sql	prisma/migrations/20250220041712_init/migration.sql
+M	prisma/schema.prisma
+M	prisma/seed.ts
+
+commit f1cb865837ca8ad9cee73a28c985790675be0de5
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Feb 19 23:26:37 2025 -0600
+
+    Se agrega actión y function para el botón de guardado de Menú diario
+
+M	app/(dashboard)/page.tsx
+M	app/store/authStore.ts
+M	app/store/menuStore.ts
+
+commit c24c665a6e3f7c42adbb38abcde514ccf4ca6efd
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Feb 20 17:52:24 2025 -0600
+
+    Se corrige bug de parrafos, se agrega componente resizable
+
+M	app/(dashboard)/history/page.tsx
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+A	components/ui/resizable.tsx
+M	package-lock.json
+M	package.json
+
+commit d77efbf8b4730bdf2f5733917bd306f5dfbc13f8
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Feb 20 18:06:45 2025 -0600
+
+    inicia calendario de menús diarios guardados
+
+M	app/(dashboard)/history/page.tsx
+A	components/calendarHistory.tsx
+A	components/ui/calendar.tsx
+M	package-lock.json
+M	package.json
+
+commit e0627bedce6fa5e9682c3f39268c9d4001ccf6dd
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 13:24:53 2025 -0600
+
+    Corrección de conflictos en librería de fechas
+
+M	bun.lock
+M	package.json
+
+commit ad209928f2092d244645a57ae57d5ebf3bdd2ddd
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 13:27:45 2025 -0600
+
+    Corrección de conflictos en librería de fechas
+
+M	bun.lock
+M	package.json
+
+commit 9b6411114a5df29365d7c4f1073f777ab51c81fc
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 14:03:08 2025 -0600
+
+    Se agrega layout de menús guardados
+
+M	app/(dashboard)/history/page.tsx
+
+commit 14b8250e53465613fab8c763c66b02398da5c82c
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 15:42:07 2025 -0600
+
+    Se realiza estilo y responsive de Menús guardados
+
+M	app/(dashboard)/history/page.tsx
+M	app/globals.css
+
+commit df7515c02480df04544c7ea5e4b1735a06d60773
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 15:45:46 2025 -0600
+
+    Se realiza estilo y responsive de Menús guardados
+
+M	app/(dashboard)/history/page.tsx
+
+commit fb20e912273ba29b05f05b2488518248a3487d40
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 16:05:30 2025 -0600
+
+    Se realiza estilo y responsive de Menús guardados
+
+M	app/(dashboard)/history/page.tsx
+
+commit 9d1e550d066fa496bca65fce2212e8df4a48b750
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 20:05:41 2025 -0600
+
+    Se agregan botones de Compartir y dejar de compartir
+
+M	app/(dashboard)/history/page.tsx
+
+commit 0d8adc3a74564b772f9d562a147d218457998436
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 22:16:27 2025 -0600
+
+    Se carga lista de menús disponibles por día y al dar clic en el botón del menú lo visualiza
+
+M	app/(dashboard)/history/page.tsx
+M	app/(dashboard)/page.tsx
+A	app/api/savedMenu/route.ts
+M	app/components/auth/SessionSync.tsx
+M	app/store/commonStore.ts
+M	app/store/menuStore.ts
+M	app/store/profileStore.ts
+M	components/calendarHistory.tsx
+M	components/datePickerWithYearsSelector.tsx
+A	components/ui/skeletonListSavedMenus.tsx
+M	components/ui/skeletonMenu.tsx
+M	messages/en.json
+M	messages/es.json
+M	middleware.ts
+M	prisma/seed.ts
+
+commit 9c3191104bab883e08c45f1448324f4c4cf02042
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Feb 21 22:32:04 2025 -0600
+
+    Se corrige responsividad en menús guardados
+
+M	app/(dashboard)/history/page.tsx
+
+commit 3557ca3b11681b562e3c90414eaadaaf136852cd
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 21:51:40 2025 -0600
+
+    Se crea servicio para obtener menú a compartir a otras personas sin usuario
+
+A	app/api/menu/[id]/route.ts
+
+commit ae502e3ae4d95ff7243464729071f66534b4d815
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 22:38:14 2025 -0600
+
+    Se crea página para compartir menú sin necesidad de estar conectado
+
+M	app/(dashboard)/layout.tsx
+A	app/(dashboard)/menu/[id]/page.tsx
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+M	app/api/menu/[id]/route.ts
+M	app/api/profile/route.ts
+M	app/store/commonStore.ts
+M	app/store/menuStore.ts
+M	app/store/profileStore.ts
+M	messages/en.json
+M	messages/es.json
+M	middleware.ts
+
+commit adfc45a68883922009c184161705bae5aead0ef9
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 23:21:37 2025 -0600
+
+    Se agrega botón para compartir en generador de menús diarios e historial
+
+M	app/(dashboard)/history/page.tsx
+M	app/(dashboard)/page.tsx
+M	app/api/menu/[id]/route.ts
+M	app/components/layout/DesktopNav.tsx
+M	app/components/layout/MobileNav.tsx
+A	app/components/layout/ShareButton.tsx
+M	app/store/menuStore.ts
+A	public/whatsapp.webp
+
+commit fbb01db7da698947e1c4f3649a24f31c6f8f091a
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 23:24:35 2025 -0600
+
+    prueba de correción de error en servicio
+
+M	app/api/menu/[id]/route.ts
+
+commit 3b6bbdfefff35cf7f188b86b9c7dfd1431f68787
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 23:27:11 2025 -0600
+
+    prueba de correción de error en servicio
+
+M	app/api/menu/[id]/route.ts
+
+commit 648ba4cd15c4f3cef3cfb8bdeac83e8544944431
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 23:28:47 2025 -0600
+
+    prueba de correción de error en servicio
+
+M	app/api/menu/[id]/route.ts
+
+commit 1aba38a15c0097f8aac95740fb805991d21817c2
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 23:35:02 2025 -0600
+
+    prueba de correción de error en servicio
+
+R069	app/api/menu/[id]/route.ts	app/api/shared/[id]/route.ts
+M	app/store/menuStore.ts
+
+commit b1f2c80eb63ae9c85b2a2ba33f3515e911659db5
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Feb 24 23:43:51 2025 -0600
+
+    prueba de correción de error en servicio
+
+M	app/api/shared/[id]/route.ts
