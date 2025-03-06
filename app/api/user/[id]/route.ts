@@ -6,7 +6,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Obtener el usuario actual
     const user = await prisma.user.findUnique({ where: { id } });
