@@ -1,11 +1,15 @@
 'use client';
 import { NavItem } from 'app/(dashboard)/nav-item';
 import {
+  Activity,
+  ActivityIcon,
   CalendarCheck2,
   LineChart,
   NotebookPen,
   Settings,
-  Users
+  Users,
+  Weight,
+  WeightIcon
 } from 'lucide-react';
 import {
   Tooltip,
@@ -47,8 +51,12 @@ export const DesktopNav: FC = (): any => {
           <LineChart className="h-5 w-5" />
         </NavItem>
 
+        <NavItem href="/activity" label="Actividad física">
+          <ActivityIcon className="h-5 w-5" />
+        </NavItem>
+
         {role === 'ADMIN' && (
-          <NavItem href="/users" label="Estadísticas">
+          <NavItem href="/users" label="Usuarios">
             <Users className="h-5 w-5" />
           </NavItem>
         )}
