@@ -5,66 +5,96 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
-  LineChart,
-  Line
+  ResponsiveContainer
 } from 'recharts';
 import { useHealthStore } from 'app/store/healthStore';
 
 export default function ProgressPage() {
-  const { records, addRecord } = useHealthStore();
-  const [weight, setWeight] = useState('');
-  const [bodyMassIndex, setBodyMassIndex] = useState('');
+  const {
+    dates,
+    weight,
+    bmi,
+    bodyFat,
+    bodyWater,
+    bodyProtein,
+    basalMetabolism,
+    visceralFat,
+    boneMass,
+    addRecord
+  } = useHealthStore();
+
+  const [formData, setFormData] = useState({
+    weight: '',
+    bmi: '',
+    bodyFat: '',
+    bodyWater: '',
+    bodyProtein: '',
+    basalMetabolism: '',
+    visceralFat: '',
+    boneMass: ''
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!weight || !bodyMassIndex) return;
-
     addRecord({
       date: new Date().toLocaleDateString(),
-      weight: parseFloat(weight),
-      bodyMassIndex: parseFloat(bodyMassIndex)
+      weight: parseFloat(formData.weight),
+      bmi: parseFloat(formData.bmi),
+      bodyFat: parseFloat(formData.bodyFat),
+      bodyWater: parseFloat(formData.bodyWater),
+      bodyProtein: parseFloat(formData.bodyProtein),
+      basalMetabolism: parseFloat(formData.basalMetabolism),
+      visceralFat: parseFloat(formData.visceralFat),
+      boneMass: parseFloat(formData.boneMass)
     });
 
-    setWeight('');
-    setBodyMassIndex('');
+    setFormData({
+      weight: '',
+      bmi: '',
+      bodyFat: '',
+      bodyWater: '',
+      bodyProtein: '',
+      basalMetabolism: '',
+      visceralFat: '',
+      boneMass: ''
+    });
   };
+
+  const generateChartData = (dataArray: number[]) =>
+    dates.map((date, index) => ({
+      date,
+      value: dataArray[index]
+    }));
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6">
-      {/* 📋 IZQUIERDA: FORMULARIO */}
+      {/* 📋 Formulario */}
       <Card className="md:w-1/3 w-full p-4">
         <CardHeader>
-          <CardTitle>Registro de datos</CardTitle>
+          <CardTitle>Registrar Datos</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div>
-              <label className="block text-sm font-medium">Peso (kg)</label>
-              <Input
-                type="number"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium">
-                Índice de Masa Corporal
-              </label>
-              <Input
-                type="number"
-                step="0.1"
-                value={bodyMassIndex}
-                onChange={(e) => setBodyMassIndex(e.target.value)}
-                required
-              />
-            </div>
+            {Object.keys(formData).map((key) => (
+              <div key={key}>
+                <label className="block text-sm font-medium capitalize">
+                  {key.replace(/([A-Z])/g, ' $1')}
+                </label>
+                <Input
+                  type="number"
+                  value={formData[key as keyof typeof formData]}
+                  onChange={(e) =>
+                    setFormData({ ...formData, [key]: e.target.value })
+                  }
+                  required
+                />
+              </div>
+            ))}
             <Button type="submit" className="mt-2">
               Guardar Registro
             </Button>
@@ -72,44 +102,39 @@ export default function ProgressPage() {
         </CardContent>
       </Card>
 
-      {/* 📊 DERECHA: GRÁFICAS */}
+      {/* 📊 Gráficas */}
       <div className="md:w-2/3 w-full flex flex-col gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Evolución del Peso</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={250}>
-              <LineChart data={records}>
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="weight"
-                  stroke="#8884d8"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Índice de Masa Corporal</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={records}>
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="bodyMassIndex" fill="#82ca9d" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+        {[
+          { title: 'Evolución del Peso', data: weight },
+          { title: 'Índice de Masa Corporal', data: bmi },
+          { title: 'Porcentaje de Grasa Corporal', data: bodyFat },
+          { title: 'Porcentaje de Agua Corporal', data: bodyWater },
+          { title: 'Proteína Corporal', data: bodyProtein },
+          { title: 'Metabolismo Basal', data: basalMetabolism },
+          { title: 'Grasa Visceral', data: visceralFat },
+          { title: 'Masa Ósea', data: boneMass }
+        ].map(({ title, data }) => (
+          <Card key={title}>
+            <CardHeader>
+              <CardTitle>{title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={generateChartData(data)}>
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line
+                    type="monotone"
+                    dataKey="value"
+                    stroke="#8884d8"
+                    strokeWidth={2}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );
