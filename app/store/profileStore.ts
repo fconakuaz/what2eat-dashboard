@@ -31,6 +31,7 @@ export type UserGoal =
 export type Unit = 'metric' | 'imperial';
 
 type Profile = {
+  id?: string;
   email?: string;
   birthDate?: Date;
   age?: number;

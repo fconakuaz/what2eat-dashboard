@@ -6,7 +6,6 @@ import { ToggleTheme } from './toggle-theme';
 import { ToggleLanguage } from 'app/components/header/ToggleLanguage';
 import { DesktopNav } from 'app/components/layout/DesktopNav';
 import { MobileNav } from 'app/components/layout/MobileNav';
-import { useProfileStore } from 'app/store/profileStore';
 import { auth } from '@/lib/auth';
 
 export default async function DashboardLayout({
@@ -15,8 +14,6 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  console.log('🚩🚩🚩 session 🚩🚩🚩');
-  console.log(session);
   return (
     <Providers>
       <main className="flex min-h-screen w-full flex-col bg-muted/40">

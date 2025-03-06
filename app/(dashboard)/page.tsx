@@ -21,23 +21,14 @@ import { useRouter } from 'next/navigation';
 import { SpinLoading } from 'app/components/layout/SpinLoading';
 import { useMenuStore } from 'app/store/menuStore';
 import { useLanguageStore } from 'app/store/languajeStore';
-import { useAuthStore } from 'app/store/authStore';
 import ShareButton from 'app/components/layout/ShareButton';
+import SaveButton from 'app/components/layout/SaveButton';
 
 const HomePage = () => {
   const { ingredientsToInclude } = useIncludeFoodStore();
   const { ingredientsToExclude } = useExcludeFoodStore();
-  const {
-    breakfast,
-    snack1,
-    snack2,
-    lunch,
-    dinner,
-    saving,
-    selectedSavedMenu,
-    setMenu,
-    saveDailyMenu
-  } = useMenuStore();
+  const { breakfast, snack1, snack2, lunch, dinner, setMenu, resetMenu } =
+    useMenuStore();
   const t = useTranslations('HomePage');
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
   const { profile, getUserProfile } = useProfileStore();
@@ -57,6 +48,7 @@ const HomePage = () => {
   async function runIA() {
     try {
       setLoadingTrue();
+      resetMenu();
       const response = await runGemini(
         ingredientsToInclude,
         ingredientsToExclude,
@@ -91,25 +83,9 @@ const HomePage = () => {
       <CardContent>
         <div className="flex flex-col gap-4">
           <div className="w-full flex justify-end space-x-3">
-            <div
-              className={` ${(loading || selectedSavedMenu?.id == null) && 'hidden'}`}
-            >
-              {/* Compartir menú */}
-              <ShareButton menuId={selectedSavedMenu?.id} />
-
-              {/* Guardar menú */}
-              <Button
-                size="sm"
-                variant={'secondary'}
-                className="h-8 gap-1 ml-4"
-                onClick={() => saveDailyMenu(selectedSavedMenu?.id)}
-                disabled={!breakfast || saving}
-              >
-                <Bookmark className="h-4 w-4" />
-                <span className="sm:not-sr-only sm:whitespace-nowrap">
-                  {saving ? 'Guardando...' : 'Guardar '}
-                </span>
-              </Button>
+            <div className={` ${loading && 'hidden'}`}>
+              <SaveButton />
+              <ShareButton />
             </div>
 
             {/* Generar menú */}

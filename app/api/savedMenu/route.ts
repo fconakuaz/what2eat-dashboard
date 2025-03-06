@@ -27,7 +27,7 @@ export async function GET(req: Request) {
         date: new Date(date)
       },
       orderBy: {
-        createdAt: 'desc'
+        createdAt: 'asc'
       }
     });
 

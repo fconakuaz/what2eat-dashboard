@@ -3,7 +3,6 @@ import { create } from 'zustand';
 import { persist, createJSONStorage, devtools } from 'zustand/middleware';
 import { useProfileStore } from './profileStore';
 import { useCommonStore } from './commonStore';
-
 // Definimos el tipo de los valores nutricionales
 type NutritionFact = {
   recipe_nutrition_fact_name: string;
@@ -25,7 +24,7 @@ type Recipe = {
 
 // Tipo para los menús guardados
 type SavedMenu = {
-  id: string;
+  id?: string;
   userId: string;
   date: string;
   breakfast: Recipe | null;
@@ -39,6 +38,7 @@ type SavedMenu = {
 
 // Definimos el estado para almacenar el menú
 type MenuState = {
+  idMenu?: string | null;
   breakfast: Recipe | null;
   snack1: Recipe | null;
   lunch: Recipe | null;
@@ -53,7 +53,7 @@ type MenuState = {
   setMenu: (newMenu: Partial<MenuState>) => void;
   updateMeal: (meal: keyof MenuState, data: Recipe) => void;
   resetMenu: () => void;
-  saveDailyMenu: (userId: string | undefined) => Promise<void>;
+  saveDailyMenu: () => Promise<void>;
   getSavedMenus: () => Promise<void>;
   setSavedMenu: (menuId: string) => void; // Nueva función
 };
@@ -63,6 +63,7 @@ export const useMenuStore = create<MenuState>()(
   devtools(
     persist(
       (set, get) => ({
+        idMenu: null,
         breakfast: null,
         snack1: null,
         lunch: null,
@@ -83,30 +84,30 @@ export const useMenuStore = create<MenuState>()(
           }
         },
 
-        // 🔹 Actualiza el estado de "saving"
+        // Actualiza el estado de "saving"
         setSaving: (status) => set({ saving: status }),
 
-        // 🔹 Setea un nuevo menú
+        // Setea un nuevo menú
         setMenu: (newMenu) => set((state) => ({ ...state, ...newMenu })),
 
-        // 🔹 Actualiza una comida específica
+        // Actualiza una comida específica
         updateMeal: (meal, data) =>
           set((state) => ({
             ...state,
             [meal]: data
           })),
 
-        // 🔹 Guarda el menú diario en la BD
-        saveDailyMenu: async (userId: string | undefined) => {
-          if (userId !== undefined) {
+        // Guarda el menú diario en la BD
+        saveDailyMenu: async () => {
+          const { profile } = useProfileStore.getState();
+          if (profile?.id === undefined) {
             return;
           }
           const { breakfast, snack1, lunch, snack2, dinner } = get();
           set({ saving: true });
-
           try {
             const menuToSave = {
-              userId,
+              userId: profile?.id,
               date: new Date().toISOString().split('T')[0], // Formato YYYY-MM-DD
               breakfast,
               snack1,
@@ -114,7 +115,9 @@ export const useMenuStore = create<MenuState>()(
               snack2,
               dinner
             };
-            await axios.post('/api/menu', menuToSave);
+            const resp = await axios.post('/api/menu', menuToSave);
+            const { menu } = resp?.data;
+            set({ idMenu: menu?.id });
           } catch (error) {
             console.error('❌ Error al guardar el menú:', error);
           } finally {
@@ -122,7 +125,7 @@ export const useMenuStore = create<MenuState>()(
           }
         },
 
-        // 🔹 Obtiene los menús guardados de un usuario en una fecha específica
+        // Obtiene los menús guardados de un usuario en una fecha específica
         getSavedMenus: async () => {
           const { profile } = useProfileStore.getState();
           const { selectedDate, setLoadingTrue, setLoadingFalse } =
@@ -165,7 +168,7 @@ export const useMenuStore = create<MenuState>()(
           setLoadingFalse();
         },
 
-        // 🔹 Guarda en `selectedSavedMenu` un menú por su ID
+        // Guarda en `selectedSavedMenu` un menú por su ID
         setSavedMenu: (menuId: string) => {
           const { savedMenus } = get(); // Obtenemos los menús guardados
           const selectedMenu = savedMenus.find((menu) => menu.id === menuId); // Buscamos el menú por ID
@@ -177,9 +180,10 @@ export const useMenuStore = create<MenuState>()(
           }
         },
 
-        // 🔹 Resetea todo el menú
+        // Resetea todo el menú
         resetMenu: () =>
           set({
+            idMenu: null,
             breakfast: null,
             snack1: null,
             lunch: null,

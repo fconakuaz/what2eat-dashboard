@@ -66,7 +66,7 @@ const HomePage = () => {
               size="sm"
               variant={'outline'}
               className="h-8 gap-1"
-              onClick={() => saveDailyMenu(selectedSavedMenu?.id)}
+              onClick={() => saveDailyMenu()}
               disabled={saving}
             >
               <BookmarkX className="h-4 w-4" />

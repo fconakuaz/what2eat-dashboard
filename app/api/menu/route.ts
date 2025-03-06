@@ -44,6 +44,8 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    console.log('🟡🟡🟡 body 🟡🟡🟡');
+    console.log(body);
     const { userId, date, breakfast, snack1, lunch, snack2, dinner } = body;
 
     if (!userId) {
