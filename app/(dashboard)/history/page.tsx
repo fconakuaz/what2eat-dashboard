@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { GenerateHTMLFromJson } from '../../AI/getRecipe';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Info, BookmarkIcon, Calendar, BookmarkX, Share } from 'lucide-react';
+import { Info, BookmarkIcon, Calendar, BookmarkX } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { useProfileStore } from 'app/store/profileStore';
@@ -24,8 +24,6 @@ const HomePage = () => {
   const { profile, getUserProfile } = useProfileStore();
   const router = useRouter();
 
-  console.log('🟢🟢🟢 selectedSavedMenu 🟢🟢🟢');
-  console.log(selectedSavedMenu);
   const handleSetSavedMenu = (id: string | undefined) => {
     if (id !== undefined) {
       setSavedMenu(id);

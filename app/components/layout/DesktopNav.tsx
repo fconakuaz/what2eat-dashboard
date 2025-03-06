@@ -18,6 +18,7 @@ import { useProfileStore } from 'app/store/profileStore';
 
 export const DesktopNav: FC = (): any => {
   const { profile } = useProfileStore();
+  const { role } = profile;
 
   return (
     <aside
@@ -46,9 +47,11 @@ export const DesktopNav: FC = (): any => {
           <LineChart className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/users" label="Estadísticas">
-          <Users className="h-5 w-5" />
-        </NavItem>
+        {role === 'ADMIN' && (
+          <NavItem href="/users" label="Estadísticas">
+            <Users className="h-5 w-5" />
+          </NavItem>
+        )}
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <Tooltip>

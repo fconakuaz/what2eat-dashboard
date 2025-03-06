@@ -16,6 +16,7 @@ import { useProfileStore } from 'app/store/profileStore';
 
 export const MobileNav: FC = (): any => {
   const { profile } = useProfileStore();
+  const { role } = profile;
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -60,14 +61,15 @@ export const MobileNav: FC = (): any => {
             <LineChart className="h-5 w-5" />
             Estadísticas
           </Link>
-
-          <Link
-            href="/users"
-            className="flex items-center gap-4 px-2.5  text-muted-foreground hover:text-foreground"
-          >
-            <Users className="h-5 w-5" />
-            Usuarios
-          </Link>
+          {role === 'ADMIN' && (
+            <Link
+              href="/users"
+              className="flex items-center gap-4 px-2.5  text-muted-foreground hover:text-foreground"
+            >
+              <Users className="h-5 w-5" />
+              Usuarios
+            </Link>
+          )}
 
           <Link
             href="/settings"
