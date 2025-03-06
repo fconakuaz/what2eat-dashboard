@@ -26,8 +26,10 @@ const HomePage = () => {
 
   console.log('🟢🟢🟢 selectedSavedMenu 🟢🟢🟢');
   console.log(selectedSavedMenu);
-  const handleSetSavedMenu = (id: string) => {
-    setSavedMenu(id);
+  const handleSetSavedMenu = (id: string | undefined) => {
+    if (id !== undefined) {
+      setSavedMenu(id);
+    }
   };
 
   useEffect(() => {
@@ -74,7 +76,7 @@ const HomePage = () => {
                 {saving ? 'Quitando...' : 'Eliminar '}
               </span>
             </Button>
-            <ShareButton menuId={selectedSavedMenu?.id} />
+            <ShareButton />
           </div>
         </CardTitle>
       </CardHeader>
