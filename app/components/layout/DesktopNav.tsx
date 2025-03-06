@@ -1,6 +1,12 @@
 'use client';
 import { NavItem } from 'app/(dashboard)/nav-item';
-import { CalendarCheck2, LineChart, NotebookPen, Settings } from 'lucide-react';
+import {
+  CalendarCheck2,
+  LineChart,
+  NotebookPen,
+  Settings,
+  Users
+} from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -38,6 +44,10 @@ export const DesktopNav: FC = (): any => {
 
         <NavItem href="/stats" label="Estadísticas">
           <LineChart className="h-5 w-5" />
+        </NavItem>
+
+        <NavItem href="/users" label="Estadísticas">
+          <Users className="h-5 w-5" />
         </NavItem>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">

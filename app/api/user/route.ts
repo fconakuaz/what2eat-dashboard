@@ -2,16 +2,39 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
 // Get all users
-export async function GET() {
+
+export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const page = parseInt(url.searchParams.get('page') || '1', 10);
+    const pageSize = 5;
+
+    const totalUsers = await prisma.user.count();
     const users = await prisma.user.findMany({
-      include: { Auth: true } // Includes authentication info if needed
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+      orderBy: { createdAt: 'desc' },
+      select: {
+        id: true, // Ocultar en frontend, pero necesario para actualizar
+        name: true,
+        image: true,
+        email: true,
+        role: true,
+        country: true,
+        createdAt: true,
+        updatedAt: true,
+        status: true
+      }
     });
 
-    return NextResponse.json(users);
+    return NextResponse.json({
+      users,
+      totalPages: Math.ceil(totalUsers / pageSize)
+    });
   } catch (error) {
+    console.error('Error al obtener usuarios:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch users' },
+      { error: 'Error interno del servidor' },
       { status: 500 }
     );
   }
