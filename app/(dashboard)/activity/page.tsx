@@ -19,6 +19,17 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar
+} from 'recharts';
 import { useActivityStore } from 'app/store/activityStore';
 
 export default function ActivityPage() {
@@ -32,7 +43,7 @@ export default function ActivityPage() {
 
   // 📌 Estado del formulario
   const [formData, setFormData] = useState({
-    activityId: '', // 🔹 Corregido, antes era activityType
+    activityId: '',
     date: new Date().toISOString().split('T')[0], // 🔹 Formato YYYY-MM-DD
     steps: '',
     caloriesBurned: '',
@@ -42,7 +53,7 @@ export default function ActivityPage() {
 
   useEffect(() => {
     fetchActivityTypes();
-    fetchActivityRecords(); // 🔹 Cargar registros al iniciar
+    fetchActivityRecords();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,16 +62,16 @@ export default function ActivityPage() {
     await addActivity({
       date: formData.date,
       activityId: formData.activityId,
-      steps: formData.steps ? parseInt(formData.steps) : undefined, // 🔹 Cambiado a undefined
+      steps: formData.steps ? parseInt(formData.steps) : undefined,
       caloriesBurned: formData.caloriesBurned
         ? parseFloat(formData.caloriesBurned)
-        : undefined, // 🔹 Cambiado a undefined
+        : undefined,
       distanceMeters: formData.distanceMeters
         ? parseFloat(formData.distanceMeters)
-        : undefined, // 🔹 Cambiado a undefined
+        : undefined,
       activeMinutes: formData.activeMinutes
         ? parseInt(formData.activeMinutes)
-        : undefined // 🔹 Cambiado a undefined
+        : undefined
     });
 
     setFormData({
@@ -171,7 +182,9 @@ export default function ActivityPage() {
 
                   return (
                     <TableRow key={activity.id}>
-                      <TableCell>{activity.date}</TableCell>
+                      <TableCell>
+                        {new Date(activity.date).toLocaleDateString('es-ES')}
+                      </TableCell>
                       <TableCell>{activityName}</TableCell>
                       <TableCell>{activity.steps ?? '-'}</TableCell>
                       <TableCell>{activity.caloriesBurned ?? '-'}</TableCell>
@@ -184,6 +197,31 @@ export default function ActivityPage() {
             </Table>
           </CardContent>
         </Card>
+
+        {/* 📊 Gráficas */}
+        {[
+          { title: 'Pasos diarios', key: 'steps' },
+          { title: 'Calorías quemadas', key: 'caloriesBurned' },
+          { title: 'Distancia recorrida (m)', key: 'distanceMeters' },
+          { title: 'Minutos activos', key: 'activeMinutes' }
+        ].map(({ title, key }) => (
+          <Card key={key}>
+            <CardHeader>
+              <CardTitle>{title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={activities}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey={key} fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );
