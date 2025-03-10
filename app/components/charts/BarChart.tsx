@@ -1,13 +1,6 @@
 'use client';
 import { FC } from 'react';
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  LabelList,
-  XAxis,
-  YAxis
-} from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from 'recharts';
 import {
   Card,
   CardContent,
