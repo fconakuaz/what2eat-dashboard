@@ -7,7 +7,8 @@ import {
   PanelLeft,
   Settings,
   CalendarCheck2,
-  Users
+  Users,
+  Dumbbell
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -65,7 +66,7 @@ export const MobileNav: FC = (): any => {
             href="/activity"
             className="flex items-center gap-4 px-2.5  text-muted-foreground hover:text-foreground"
           >
-            <LineChart className="h-5 w-5" />
+            <Dumbbell className="h-5 w-5" />
             Actividad física
           </Link>
           {role === 'ADMIN' && (
