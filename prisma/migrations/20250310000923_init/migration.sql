@@ -158,74 +158,26 @@ CREATE TABLE "HealthIndicatorUser" (
 -- CreateTable
 CREATE TABLE "Activity" (
     "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "steps" INTEGER NOT NULL,
-    "caloriesBurned" DOUBLE PRECISION NOT NULL,
-    "distanceMeters" DOUBLE PRECISION NOT NULL,
-    "activeMinutes" INTEGER NOT NULL,
-    "heartPoints" INTEGER NOT NULL,
-    "moveMinutes" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "name" TEXT NOT NULL,
+    "includesSteps" BOOLEAN NOT NULL,
 
     CONSTRAINT "Activity_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "WorkoutSession" (
+CREATE TABLE "ActivityUser" (
     "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "activityId" TEXT NOT NULL,
-    "activityType" TEXT NOT NULL,
-    "startTime" TIMESTAMP(3) NOT NULL,
-    "endTime" TIMESTAMP(3) NOT NULL,
-    "caloriesBurned" DOUBLE PRECISION NOT NULL,
-    "distanceMeters" DOUBLE PRECISION NOT NULL,
-    "averageHeartRateBpm" INTEGER NOT NULL,
-
-    CONSTRAINT "WorkoutSession_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "SleepSession" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "startTime" TIMESTAMP(3) NOT NULL,
-    "endTime" TIMESTAMP(3) NOT NULL,
-    "totalSleepHrs" DOUBLE PRECISION NOT NULL,
-
-    CONSTRAINT "SleepSession_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "SleepStage" (
-    "id" TEXT NOT NULL,
-    "sleepSessionId" TEXT NOT NULL,
-    "lightSleepMinutes" INTEGER NOT NULL,
-    "deepSleepMinutes" INTEGER NOT NULL,
-    "remSleepMinutes" INTEGER NOT NULL,
-
-    CONSTRAINT "SleepStage_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "HeartRate" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "restingHeartRate" INTEGER NOT NULL,
-    "averageHeartRate" INTEGER NOT NULL,
+    "steps" INTEGER,
+    "caloriesBurned" DOUBLE PRECISION,
+    "distanceMeters" DOUBLE PRECISION,
+    "activeMinutes" INTEGER,
+    "activeHours" INTEGER,
+    "startDateTime" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "HeartRate_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "HeartRateZone" (
-    "id" TEXT NOT NULL,
-    "heartRateId" TEXT NOT NULL,
-    "fatBurn" INTEGER NOT NULL,
-    "cardio" INTEGER NOT NULL,
-    "peak" INTEGER NOT NULL,
-
-    CONSTRAINT "HeartRateZone_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "ActivityUser_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -256,6 +208,9 @@ CREATE UNIQUE INDEX "Affliction_name_key" ON "Affliction"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Food_name_key" ON "Food"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Activity_name_key" ON "Activity"("name");
 
 -- AddForeignKey
 ALTER TABLE "Auth" ADD CONSTRAINT "Auth_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -288,22 +243,10 @@ ALTER TABLE "SavedMenu" ADD CONSTRAINT "SavedMenu_userId_fkey" FOREIGN KEY ("use
 ALTER TABLE "HealthIndicatorUser" ADD CONSTRAINT "HealthIndicatorUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Activity" ADD CONSTRAINT "Activity_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ActivityUser" ADD CONSTRAINT "ActivityUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WorkoutSession" ADD CONSTRAINT "WorkoutSession_activityId_fkey" FOREIGN KEY ("activityId") REFERENCES "Activity"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SleepSession" ADD CONSTRAINT "SleepSession_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SleepStage" ADD CONSTRAINT "SleepStage_sleepSessionId_fkey" FOREIGN KEY ("sleepSessionId") REFERENCES "SleepSession"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HeartRate" ADD CONSTRAINT "HeartRate_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HeartRateZone" ADD CONSTRAINT "HeartRateZone_heartRateId_fkey" FOREIGN KEY ("heartRateId") REFERENCES "HeartRate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ActivityUser" ADD CONSTRAINT "ActivityUser_activityId_fkey" FOREIGN KEY ("activityId") REFERENCES "Activity"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Nutrition" ADD CONSTRAINT "Nutrition_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

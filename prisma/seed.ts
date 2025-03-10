@@ -300,7 +300,32 @@ async function main() {
     });
   }
 
-  console.log('✅ Food Catalog seeded successfully');
+  console.log('✅ Food list seeded successfully');
+
+  // Full Activities Catalog
+  const activityList = [
+    { name: 'Running', includesSteps: true },
+    { name: 'Walking', includesSteps: true },
+    { name: 'Hiking', includesSteps: true },
+    { name: 'Dancing', includesSteps: true },
+    { name: 'Cycling', includesSteps: false },
+    { name: 'Swimming', includesSteps: false },
+    { name: 'Weightlifting', includesSteps: false },
+    { name: 'Yoga', includesSteps: false }
+  ];
+  // Insert activity
+  for (const activity of activityList) {
+    await prisma.activity.upsert({
+      where: { name: activity.name },
+      update: {},
+      create: {
+        name: activity.name,
+        includesSteps: activity.includesSteps
+      }
+    });
+  }
+
+  console.log('✅ Activities Catalog seeded successfully');
 
   // Fetch affliction IDs to use for `connect`
   const afflictionRecords = await prisma.affliction.findMany({

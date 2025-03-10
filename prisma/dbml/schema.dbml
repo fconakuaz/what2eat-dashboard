@@ -26,9 +26,7 @@ Table User {
   ExcludedFoods ExcludedFoodUser [not null]
   SavedMenus SavedMenu [not null]
   HealthIndicators HealthIndicatorUser [not null]
-  Activities Activity [not null]
-  SleepSessions SleepSession [not null]
-  HeartRates HeartRate [not null]
+  Activities ActivityUser [not null]
   Nutrition Nutrition [not null]
   Auth Auth
 }
@@ -128,66 +126,24 @@ Table HealthIndicatorUser {
 
 Table Activity {
   id String [pk]
-  userId String [not null]
-  steps Int [not null]
-  caloriesBurned Float [not null]
-  distanceMeters Float [not null]
-  activeMinutes Int [not null]
-  heartPoints Int [not null]
-  moveMinutes Int [not null]
-  createdAt DateTime [default: `now()`, not null]
-  user User [not null]
-  WorkoutSessions WorkoutSession [not null]
+  name String [unique, not null]
+  includesSteps Boolean [not null]
+  ActivityUser ActivityUser [not null]
 }
 
-Table WorkoutSession {
+Table ActivityUser {
   id String [pk]
+  userId String [not null]
   activityId String [not null]
-  activityType String [not null]
-  startTime DateTime [not null]
-  endTime DateTime [not null]
-  caloriesBurned Float [not null]
-  distanceMeters Float [not null]
-  averageHeartRateBpm Int [not null]
-  activity Activity [not null]
-}
-
-Table SleepSession {
-  id String [pk]
-  userId String [not null]
-  startTime DateTime [not null]
-  endTime DateTime [not null]
-  totalSleepHrs Float [not null]
-  user User [not null]
-  SleepStages SleepStage [not null]
-}
-
-Table SleepStage {
-  id String [pk]
-  sleepSessionId String [not null]
-  lightSleepMinutes Int [not null]
-  deepSleepMinutes Int [not null]
-  remSleepMinutes Int [not null]
-  sleepSession SleepSession [not null]
-}
-
-Table HeartRate {
-  id String [pk]
-  userId String [not null]
-  restingHeartRate Int [not null]
-  averageHeartRate Int [not null]
+  steps Int
+  caloriesBurned Float
+  distanceMeters Float
+  activeMinutes Int
+  activeHours Int
+  startDateTime DateTime [not null]
   createdAt DateTime [default: `now()`, not null]
   user User [not null]
-  HeartRateZones HeartRateZone [not null]
-}
-
-Table HeartRateZone {
-  id String [pk]
-  heartRateId String [not null]
-  fatBurn Int [not null]
-  cardio Int [not null]
-  peak Int [not null]
-  heartRate HeartRate [not null]
+  activity Activity [not null]
 }
 
 Table Nutrition {
@@ -295,16 +251,8 @@ Ref: SavedMenu.userId > User.id
 
 Ref: HealthIndicatorUser.userId > User.id
 
-Ref: Activity.userId > User.id
+Ref: ActivityUser.userId > User.id
 
-Ref: WorkoutSession.activityId > Activity.id
-
-Ref: SleepSession.userId > User.id
-
-Ref: SleepStage.sleepSessionId > SleepSession.id
-
-Ref: HeartRate.userId > User.id
-
-Ref: HeartRateZone.heartRateId > HeartRate.id
+Ref: ActivityUser.activityId > Activity.id
 
 Ref: Nutrition.userId > User.id

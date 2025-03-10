@@ -110,9 +110,7 @@ model User {
   ExcludedFoods     ExcludedFoodUser[]
   SavedMenus        SavedMenu[]
   HealthIndicators  HealthIndicatorUser[]
-  Activities        Activity[]
-  SleepSessions     SleepSession[]
-  HeartRates        HeartRate[]
+  Activities        ActivityUser[]
   Nutrition         Nutrition[]
   Auth              Auth?
 }
@@ -211,67 +209,27 @@ model HealthIndicatorUser {
 }
 
 model Activity {
-  id              String           @id @default(uuid())
-  userId          String
-  steps           Int
-  caloriesBurned  Float
-  distanceMeters  Float
-  activeMinutes   Int
-  heartPoints     Int
-  moveMinutes     Int
-  createdAt       DateTime         @default(now())
-  user            User             @relation(fields: [userId], references: [id])
-  WorkoutSessions WorkoutSession[]
+  id            String  @id @default(uuid())
+  name          String  @unique
+  includesSteps Boolean
+
+  ActivityUser ActivityUser[]
 }
 
-model WorkoutSession {
-  id                  String   @id @default(uuid())
-  activityId          String
-  activityType        String
-  startTime           DateTime
-  endTime             DateTime
-  caloriesBurned      Float
-  distanceMeters      Float
-  averageHeartRateBpm Int
-  activity            Activity @relation(fields: [activityId], references: [id])
-}
+model ActivityUser {
+  id             String   @id @default(uuid())
+  userId         String
+  activityId     String
+  steps          Int?
+  caloriesBurned Float?
+  distanceMeters Float?
+  activeMinutes  Int?
+  activeHours    Int?
+  startDateTime  DateTime
+  createdAt      DateTime @default(now())
 
-model SleepSession {
-  id            String       @id @default(uuid())
-  userId        String
-  startTime     DateTime
-  endTime       DateTime
-  totalSleepHrs Float
-  user          User         @relation(fields: [userId], references: [id])
-  SleepStages   SleepStage[]
-}
-
-model SleepStage {
-  id                String       @id @default(uuid())
-  sleepSessionId    String
-  lightSleepMinutes Int
-  deepSleepMinutes  Int
-  remSleepMinutes   Int
-  sleepSession      SleepSession @relation(fields: [sleepSessionId], references: [id])
-}
-
-model HeartRate {
-  id               String          @id @default(uuid())
-  userId           String
-  restingHeartRate Int
-  averageHeartRate Int
-  createdAt        DateTime        @default(now())
-  user             User            @relation(fields: [userId], references: [id])
-  HeartRateZones   HeartRateZone[]
-}
-
-model HeartRateZone {
-  id          String    @id @default(uuid())
-  heartRateId String
-  fatBurn     Int
-  cardio      Int
-  peak        Int
-  heartRate   HeartRate @relation(fields: [heartRateId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+  activity Activity @relation(fields: [activityId], references: [id])
 }
 
 model Nutrition {
