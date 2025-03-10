@@ -9,17 +9,10 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table';
-import {
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar
-} from 'recharts';
 import { useActivityStore } from 'app/store/activityStore';
 import { DrawerActivity } from 'app/components/activities/DrawerActivity';
+import { BarChartActivities } from 'app/components/charts/BarChart';
+import { Flame, Footprints, Hourglass, Ruler } from 'lucide-react';
 
 export default function ActivityPage() {
   const {
@@ -41,27 +34,49 @@ export default function ActivityPage() {
       {/* 📊 Visualización */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
-          { title: 'Pasos diarios', key: 'steps' },
-          { title: 'Calorías quemadas', key: 'caloriesBurned' },
-          { title: 'Distancia recorrida (m)', key: 'distanceMeters' },
-          { title: 'Minutos activos', key: 'activeMinutes' }
+          {
+            title: (
+              <span className="flex flex-row">
+                <Footprints color="#2662d9" className={`size-6 mr-2`} /> Pasos
+                diarios
+              </span>
+            ),
+            key: 'steps'
+          },
+          {
+            title: (
+              <span className="flex flex-row">
+                <Flame color="#2662d9" className={`size-6 mr-1`} /> Calorías
+                quemadas
+              </span>
+            ),
+            key: 'caloriesBurned'
+          },
+          {
+            title: (
+              <span className="flex flex-row">
+                <Ruler color="#2662d9" className={`size-6 mr-1`} /> Distancia
+                recorrida (m)
+              </span>
+            ),
+            key: 'distanceMeters'
+          },
+          {
+            title: (
+              <span className="flex flex-row">
+                <Hourglass color="#2662d9" className={`size-6 mr-1`} /> Minutos
+                activos
+              </span>
+            ),
+            key: 'activeMinutes'
+          }
         ].map(({ title, key }) => (
-          <Card key={key} className="w-full">
-            <CardHeader>
-              <CardTitle>{title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={250}>
-                <BarChart data={activities}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey={key} fill="#8884d8" />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
+          <BarChartActivities
+            key={key}
+            dataKey={key}
+            title={title}
+            data={activities}
+          />
         ))}
       </div>
 
@@ -84,13 +99,13 @@ export default function ActivityPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {activities.map((activity) => {
+                {activities.map((activity, index) => {
                   const activityName =
                     activityTypes.find((a) => a.id === activity.activityId)
                       ?.name || 'Desconocida';
 
                   return (
-                    <TableRow key={activity.id}>
+                    <TableRow key={index}>
                       <TableCell>
                         {new Date(activity.date).toLocaleDateString('es-ES')}
                       </TableCell>
