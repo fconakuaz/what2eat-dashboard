@@ -111,7 +111,6 @@ model User {
   SavedMenus        SavedMenu[]
   HealthIndicators  HealthIndicatorUser[]
   Activities        ActivityUser[]
-  Nutrition         Nutrition[]
   Auth              Auth?
 }
 
@@ -230,16 +229,4 @@ model ActivityUser {
 
   user     User     @relation(fields: [userId], references: [id])
   activity Activity @relation(fields: [activityId], references: [id])
-}
-
-model Nutrition {
-  id               String   @id @default(uuid())
-  userId           String
-  waterIntakeMl    Int
-  caloriesConsumed Float
-  carbohydratesG   Float
-  proteinsG        Float
-  fatsG            Float
-  createdAt        DateTime @default(now())
-  user             User     @relation(fields: [userId], references: [id])
 }

@@ -27,7 +27,6 @@ Table User {
   SavedMenus SavedMenu [not null]
   HealthIndicators HealthIndicatorUser [not null]
   Activities ActivityUser [not null]
-  Nutrition Nutrition [not null]
   Auth Auth
 }
 
@@ -146,18 +145,6 @@ Table ActivityUser {
   activity Activity [not null]
 }
 
-Table Nutrition {
-  id String [pk]
-  userId String [not null]
-  waterIntakeMl Int [not null]
-  caloriesConsumed Float [not null]
-  carbohydratesG Float [not null]
-  proteinsG Float [not null]
-  fatsG Float [not null]
-  createdAt DateTime [default: `now()`, not null]
-  user User [not null]
-}
-
 Enum PhysicalActivityLevel {
   SEDENTARY
   LIGHT
@@ -254,5 +241,3 @@ Ref: HealthIndicatorUser.userId > User.id
 Ref: ActivityUser.userId > User.id
 
 Ref: ActivityUser.activityId > Activity.id
-
-Ref: Nutrition.userId > User.id
