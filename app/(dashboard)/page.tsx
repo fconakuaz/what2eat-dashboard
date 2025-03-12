@@ -23,6 +23,7 @@ import { useMenuStore } from 'app/store/menuStore';
 import { useLanguageStore } from 'app/store/languajeStore';
 import ShareButton from 'app/components/layout/ShareButton';
 import SaveButton from 'app/components/layout/SaveButton';
+import { useActivityStore } from 'app/store/activityStore';
 
 const HomePage = () => {
   const { ingredientsToInclude } = useIncludeFoodStore();
@@ -33,7 +34,13 @@ const HomePage = () => {
   const { loading, setLoadingTrue, setLoadingFalse } = useCommonStore();
   const { profile, getUserProfile } = useProfileStore();
   const { locale } = useLanguageStore();
+  const { activities } = useActivityStore();
+  const { currentPage, fetchActivityRecords } = useActivityStore();
   const router = useRouter();
+
+  useEffect(() => {
+    fetchActivityRecords(currentPage);
+  }, []);
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -53,7 +60,8 @@ const HomePage = () => {
         ingredientsToInclude,
         ingredientsToExclude,
         profile,
-        locale
+        locale,
+        activities
       );
       setMenu({
         breakfast: response?.Breakfast,

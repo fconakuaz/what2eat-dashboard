@@ -37,7 +37,7 @@ export const BarChartActivities: FC<Props> = ({
     <Card>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>En la última semana </CardDescription>
+        {/* <CardDescription>En la última semana </CardDescription> */}
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>

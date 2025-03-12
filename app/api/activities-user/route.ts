@@ -22,7 +22,7 @@ export async function GET(req: Request) {
       orderBy: { startDateTime: 'desc' }
     });
 
-    // 🔹 Agrupar por fecha y sumar valores
+    //Agrupar por fecha y sumar valores
     const groupedActivities = activities.reduce(
       (acc, activity) => {
         const date = activity.startDateTime.toISOString().split('T')[0];
@@ -56,15 +56,20 @@ export async function GET(req: Request) {
       >
     );
 
-    // 🔹 Convertir objeto en array y paginar
+    //Convertir objeto en array y paginar
     const result = Object.values(groupedActivities)
       .sort((a, b) => b.date.localeCompare(a.date)) // Orden descendente por fecha
       .slice(offset, offset + limit); // Aplicar paginación
 
-    // 🔹 Obtener total de páginas
+    //Obtener total de páginas
     const totalPages = Math.ceil(Object.keys(groupedActivities).length / limit);
 
-    return NextResponse.json({ activities: result, totalPages });
+    const resp = {
+      group: result,
+      all: activities
+    };
+
+    return NextResponse.json({ activities: resp, totalPages });
   } catch (error) {
     console.error('Error al obtener actividades:', error);
     return NextResponse.json(

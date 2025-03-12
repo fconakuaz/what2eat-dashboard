@@ -3,9 +3,13 @@ import { useProfileStore } from './profileStore';
 
 interface ActivityRecord {
   id: string;
-  date: string; //Se almacena en formato YYYY-MM-DD
+  startDateTime: string; //Se almacena en formato YYYY-MM-DD
   activityId: string;
-  activityName: string; //Se mostrará en la UI
+  activity: {
+    id: string;
+    includesSteps: boolean;
+    name: string;
+  };
   steps?: number;
   caloriesBurned?: number;
   distanceMeters?: number;
@@ -13,7 +17,7 @@ interface ActivityRecord {
 }
 
 interface ActivityState {
-  activities: ActivityRecord[];
+  activities: { group: ActivityRecord[]; all: ActivityRecord[] };
   activityTypes: { id: string; name: string }[];
   fetchActivityTypes: () => Promise<void>;
   totalPages: number;
@@ -26,7 +30,7 @@ interface ActivityState {
 }
 
 export const useActivityStore = create<ActivityState>((set) => ({
-  activities: [],
+  activities: { group: [], all: [] },
   totalPages: 1,
   currentPage: 1,
 
@@ -61,8 +65,6 @@ export const useActivityStore = create<ActivityState>((set) => ({
 
   // Agregar nuevo registro de actividad
   addActivity: async (activity) => {
-    console.log('🚩🚩🚩 activity 🚩🚩🚩');
-    console.log(activity);
     const { profile } = useProfileStore.getState();
     if (profile?.id === undefined) {
       return;
@@ -74,7 +76,7 @@ export const useActivityStore = create<ActivityState>((set) => ({
         body: JSON.stringify({
           userId: profile?.id,
           activityId: activity.activityId,
-          date: activity.date,
+          startDateTime: activity.startDateTime,
           steps: activity.steps ?? null,
           caloriesBurned: activity.caloriesBurned ?? null,
           distanceMeters: activity.distanceMeters ?? null,
@@ -96,21 +98,6 @@ export const useActivityStore = create<ActivityState>((set) => ({
         'Desconocida';
 
       // Actualizar el estado con la nueva actividad
-      set((state) => ({
-        activities: [
-          ...state.activities,
-          {
-            id: activityUser.id,
-            date: activityUser.startDateTime.split('T')[0],
-            activityId: activityUser.activityId,
-            activityName,
-            steps: activityUser.steps,
-            caloriesBurned: activityUser.caloriesBurned,
-            distanceMeters: activityUser.distanceMeters,
-            activeMinutes: activityUser.activeMinutes
-          }
-        ]
-      }));
     } catch (error) {
       console.error('Error al registrar actividad:', error);
     }
