@@ -24,9 +24,7 @@ interface ActivityState {
   currentPage: number;
   setPage: (page: number) => void;
   fetchActivityRecords: (page: number) => Promise<void>;
-  addActivity: (
-    activity: Omit<ActivityRecord, 'id' | 'activityName'>
-  ) => Promise<void>;
+  addActivity: (activity: Omit<ActivityRecord, 'id'>) => Promise<void>;
 }
 
 export const useActivityStore = create<ActivityState>((set) => ({
