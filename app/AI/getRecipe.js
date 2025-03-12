@@ -79,8 +79,6 @@ export async function runGemini(
       ${activitiesString !== '{"group":[],"all":[]}' ? `Considera el menú diario para alguiente que haga la siguiente actividad física en el periodo de una semana: ${JSON.stringify(activities)}.` : ''}
       Con ingredientes fáciles de conseguir en el país de: México y en el estado de Veracruz.`;
 
-  console.log('🔵🔵🔵 messageToSend 🔵🔵🔵');
-  console.log(messageToSend);
   const result = await chatSession.sendMessage(messageToSend);
 
   try {

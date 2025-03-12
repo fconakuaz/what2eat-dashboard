@@ -42,9 +42,6 @@ export const ActivityForm = ({ className }: React.ComponentProps<'form'>) => {
         : undefined
     };
 
-    console.log('🟡🟡🟡 newActivity 🟡🟡🟡');
-    console.log(newActivity);
-
     await addActivity(newActivity);
 
     setFormData({
