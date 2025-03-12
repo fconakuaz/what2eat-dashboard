@@ -3,9 +3,9 @@ import { useProfileStore } from './profileStore';
 
 interface ActivityRecord {
   id: string;
-  date: string; // 🔹 Se almacena en formato YYYY-MM-DD
+  date: string; //Se almacena en formato YYYY-MM-DD
   activityId: string;
-  activityName: string; // 🔹 Se mostrará en la UI
+  activityName: string; //Se mostrará en la UI
   steps?: number;
   caloriesBurned?: number;
   distanceMeters?: number;
@@ -16,7 +16,10 @@ interface ActivityState {
   activities: ActivityRecord[];
   activityTypes: { id: string; name: string }[];
   fetchActivityTypes: () => Promise<void>;
-  fetchActivityRecords: () => Promise<void>;
+  totalPages: number;
+  currentPage: number;
+  setPage: (page: number) => void;
+  fetchActivityRecords: (page: number) => Promise<void>;
   addActivity: (
     activity: Omit<ActivityRecord, 'id' | 'activityName'>
   ) => Promise<void>;
@@ -24,10 +27,12 @@ interface ActivityState {
 
 export const useActivityStore = create<ActivityState>((set) => ({
   activities: [],
+  totalPages: 1,
+  currentPage: 1,
 
   activityTypes: [],
 
-  // 📌 Cargar catálogo de actividades
+  // Cargar catálogo de actividades
   fetchActivityTypes: async () => {
     try {
       const res = await fetch('/api/activities');
@@ -38,18 +43,23 @@ export const useActivityStore = create<ActivityState>((set) => ({
     }
   },
 
-  // 📌 Cargar registros de actividad desde la API
-  fetchActivityRecords: async () => {
+  setPage: (page) => set({ currentPage: page }),
+
+  fetchActivityRecords: async (page = 1) => {
     try {
-      const res = await fetch('/api/activities-user');
+      const res = await fetch(`/api/activities-user?page=${page}`);
       const data = await res.json();
-      set({ activities: data.activities });
+      set({
+        activities: data.activities,
+        totalPages: data.totalPages,
+        currentPage: page
+      });
     } catch (error) {
       console.error('Error al obtener registros de actividad:', error);
     }
   },
 
-  // 📌 Agregar nuevo registro de actividad
+  // Agregar nuevo registro de actividad
   addActivity: async (activity) => {
     console.log('🚩🚩🚩 activity 🚩🚩🚩');
     console.log(activity);

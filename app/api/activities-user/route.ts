@@ -3,33 +3,33 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// 📌 GET: Obtener registros de actividad
+// GET: Obtener registros de actividad
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7); // 🔹 Obtener fecha hace 7 días
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get('page') || '1', 10);
+    const limit = 7;
+    const offset = (page - 1) * limit;
 
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    // Obtener todos los registros de los últimos 7 días
     const activities = await prisma.activityUser.findMany({
-      where: {
-        startDateTime: {
-          gte: sevenDaysAgo // 🔹 Filtrar registros últimos 7 días
-        }
-      },
-      include: { activity: true }, // 🔹 Incluir nombre de la actividad
-      orderBy: { startDateTime: 'asc' }
+      where: { startDateTime: { gte: sevenDaysAgo } },
+      include: { activity: true },
+      orderBy: { startDateTime: 'desc' }
     });
 
     // 🔹 Agrupar por fecha y sumar valores
     const groupedActivities = activities.reduce(
       (acc, activity) => {
-        const date = activity.startDateTime.toISOString().split('T')[0]; // 🔹 Formato YYYY-MM-DD
+        const date = activity.startDateTime.toISOString().split('T')[0];
 
         if (!acc[date]) {
           acc[date] = {
             date,
-            activityId: activity.activityId,
-            activityName: activity.activity.name,
             steps: 0,
             caloriesBurned: 0,
             distanceMeters: 0,
@@ -48,8 +48,6 @@ export async function GET() {
         string,
         {
           date: string;
-          activityId: string;
-          activityName: string;
           steps: number;
           caloriesBurned: number;
           distanceMeters: number;
@@ -58,12 +56,15 @@ export async function GET() {
       >
     );
 
-    // 🔹 Convertir objeto en array ordenado
-    const result = Object.values(groupedActivities).sort((a, b) =>
-      a.date.localeCompare(b.date)
-    );
+    // 🔹 Convertir objeto en array y paginar
+    const result = Object.values(groupedActivities)
+      .sort((a, b) => b.date.localeCompare(a.date)) // Orden descendente por fecha
+      .slice(offset, offset + limit); // Aplicar paginación
 
-    return NextResponse.json({ activities: result });
+    // 🔹 Obtener total de páginas
+    const totalPages = Math.ceil(Object.keys(groupedActivities).length / limit);
+
+    return NextResponse.json({ activities: result, totalPages });
   } catch (error) {
     console.error('Error al obtener actividades:', error);
     return NextResponse.json(
@@ -73,10 +74,10 @@ export async function GET() {
   }
 }
 
-// 📌 POST: Agregar un registro de actividad
+// POST: Agregar un registro de actividad
 export async function POST(req: Request) {
   try {
-    // 📌 Verificar si el body es válido
+    // Verificar si el body es válido
     const body = await req.json();
     if (!body) {
       return NextResponse.json(
@@ -95,7 +96,7 @@ export async function POST(req: Request) {
       activeMinutes
     } = body;
 
-    // 📌 Validar datos requeridos
+    // Validar datos requeridos
     if (!userId || !activityId || !date) {
       return NextResponse.json(
         { error: 'userId, activityId y date son requeridos' },
@@ -103,7 +104,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 📌 Crear el registro en ActivityUser
+    // Crear el registro en ActivityUser
     const activityUser = await prisma.activityUser.create({
       data: {
         userId,

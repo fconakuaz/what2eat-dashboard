@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 export const ProfileForm = ({ className }: React.ComponentProps<'form'>) => {
   const [formData, setFormData] = useState({
     activityId: '',
-    date: new Date().toISOString().split('T')[0], // 🔹 Formato YYYY-MM-DD
+    date: new Date().toISOString().split('T')[0], //Formato YYYY-MM-DD
     steps: '',
     caloriesBurned: '',
     distanceMeters: '',

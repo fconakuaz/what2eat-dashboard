@@ -68,7 +68,7 @@ export const BarChartActivities: FC<Props> = ({
                 fontSize={12}
                 formatter={
                   (value: number) =>
-                    value.toLocaleString('en-US', { maximumFractionDigits: 0 }) // 🔹 Separador de miles con comas
+                    value.toLocaleString('en-US', { maximumFractionDigits: 0 }) //Separador de miles con comas
                 }
               />
             </Bar>

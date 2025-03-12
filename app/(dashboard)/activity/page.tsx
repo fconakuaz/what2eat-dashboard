@@ -13,65 +13,72 @@ import { useActivityStore } from 'app/store/activityStore';
 import { DrawerActivity } from 'app/components/activities/DrawerActivity';
 import { BarChartActivities } from 'app/components/charts/BarChart';
 import { Flame, Footprints, Hourglass, Ruler } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function ActivityPage() {
   const {
     activities,
     activityTypes,
+    currentPage,
+    totalPages,
+    setPage,
     fetchActivityTypes,
     fetchActivityRecords
   } = useActivityStore();
 
   useEffect(() => {
     fetchActivityTypes();
-    fetchActivityRecords();
   }, []);
+
+  useEffect(() => {
+    fetchActivityRecords(currentPage);
+  }, [currentPage]);
+
+  const arrChartsActivities = [
+    {
+      title: (
+        <span className="flex flex-row">
+          <Footprints color="#2662d9" className={`size-6 mr-2`} /> Pasos diarios
+        </span>
+      ),
+      key: 'steps'
+    },
+    {
+      title: (
+        <span className="flex flex-row">
+          <Flame color="#2662d9" className={`size-6 mr-1`} /> Calorías quemadas
+        </span>
+      ),
+      key: 'caloriesBurned'
+    },
+    {
+      title: (
+        <span className="flex flex-row">
+          <Ruler color="#2662d9" className={`size-6 mr-1`} /> Distancia
+          recorrida (m)
+        </span>
+      ),
+      key: 'distanceMeters'
+    },
+    {
+      title: (
+        <span className="flex flex-row">
+          <Hourglass color="#2662d9" className={`size-6 mr-1`} /> Minutos
+          activos
+        </span>
+      ),
+      key: 'activeMinutes'
+    }
+  ];
 
   return (
     <div className="flex flex-col md:flex-col gap-6 p-6 max-w-full justify-center items-center ">
-      <div className="flex flex-col md:flex-col gap-6 p-6 max-w-[900px] ">
+      <div className="flex flex-col md:flex-col gap-6 p-6 max-w-[89vw] md:max-w-[900px] ">
         <DrawerActivity />
 
         {/* 📊 Visualización */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            {
-              title: (
-                <span className="flex flex-row">
-                  <Footprints color="#2662d9" className={`size-6 mr-2`} /> Pasos
-                  diarios
-                </span>
-              ),
-              key: 'steps'
-            },
-            {
-              title: (
-                <span className="flex flex-row">
-                  <Flame color="#2662d9" className={`size-6 mr-1`} /> Calorías
-                  quemadas
-                </span>
-              ),
-              key: 'caloriesBurned'
-            },
-            {
-              title: (
-                <span className="flex flex-row">
-                  <Ruler color="#2662d9" className={`size-6 mr-1`} /> Distancia
-                  recorrida (m)
-                </span>
-              ),
-              key: 'distanceMeters'
-            },
-            {
-              title: (
-                <span className="flex flex-row">
-                  <Hourglass color="#2662d9" className={`size-6 mr-1`} />{' '}
-                  Minutos activos
-                </span>
-              ),
-              key: 'activeMinutes'
-            }
-          ].map(({ title, key }) => (
+          {arrChartsActivities.map(({ title, key }) => (
             <BarChartActivities
               key={key}
               dataKey={key}
@@ -82,6 +89,7 @@ export default function ActivityPage() {
         </div>
 
         {/* Tabla de Registros */}
+        {/* 📋 Tabla de Registros */}
         <div className="max-w-[87vw] md:max-w-[100vw] w-full flex flex-col gap-6">
           <Card>
             <CardHeader>
@@ -100,26 +108,49 @@ export default function ActivityPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {activities.map((activity, index) => {
-                    const activityName =
-                      activityTypes.find((a) => a.id === activity.activityId)
-                        ?.name || 'Desconocida';
-
-                    return (
-                      <TableRow key={index}>
-                        <TableCell>
-                          {new Date(activity.date).toLocaleDateString('es-ES')}
-                        </TableCell>
-                        <TableCell>{activityName}</TableCell>
-                        <TableCell>{activity.steps ?? '-'}</TableCell>
-                        <TableCell>{activity.caloriesBurned ?? '-'}</TableCell>
-                        <TableCell>{activity.distanceMeters ?? '-'}</TableCell>
-                        <TableCell>{activity.activeMinutes ?? '-'}</TableCell>
-                      </TableRow>
-                    );
-                  })}
+                  {activities.map((activity, index) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        {new Date(activity.date).toLocaleDateString('es-ES')}
+                      </TableCell>
+                      <TableCell>{activity.activityName}</TableCell>
+                      <TableCell>
+                        {activity.steps?.toLocaleString('en-US') ?? '-'}
+                      </TableCell>
+                      <TableCell>
+                        {activity.caloriesBurned?.toLocaleString('en-US') ??
+                          '-'}
+                      </TableCell>
+                      <TableCell>
+                        {activity.distanceMeters?.toLocaleString('en-US') ??
+                          '-'}
+                      </TableCell>
+                      <TableCell>
+                        {activity.activeMinutes?.toLocaleString('en-US') ?? '-'}
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
+
+              {/* 📌 Controles de Paginación */}
+              <div className="flex justify-between items-center mt-4">
+                <Button
+                  onClick={() => setPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Anterior
+                </Button>
+                <span>
+                  Página {currentPage} de {totalPages}
+                </span>
+                <Button
+                  onClick={() => setPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Siguiente
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
