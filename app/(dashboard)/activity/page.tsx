@@ -84,7 +84,7 @@ export default function ActivityPage() {
                           'es-ES'
                         )}
                       </TableCell>
-                      <TableCell>{activity.activity.name}</TableCell>
+                      <TableCell>{activity?.activity?.name}</TableCell>
                       <TableCell>
                         {activity.steps?.toLocaleString('en-US') ?? '-'}
                       </TableCell>

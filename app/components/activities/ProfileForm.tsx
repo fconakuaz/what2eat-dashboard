@@ -28,7 +28,7 @@ export const ProfileForm = ({ className }: React.ComponentProps<'form'>) => {
     e.preventDefault();
 
     await addActivity({
-      date: formData.date,
+      startDateTime: formData.date,
       activityId: formData.activityId,
       steps: formData.steps ? parseInt(formData.steps) : undefined,
       caloriesBurned: formData.caloriesBurned

@@ -5,7 +5,7 @@ interface ActivityRecord {
   id: string;
   startDateTime: string; //Se almacena en formato YYYY-MM-DD
   activityId: string;
-  activity: {
+  activity?: {
     id: string;
     includesSteps: boolean;
     name: string;
@@ -64,6 +64,8 @@ export const useActivityStore = create<ActivityState>((set) => ({
   // Agregar nuevo registro de actividad
   addActivity: async (activity) => {
     const { profile } = useProfileStore.getState();
+    const { fetchActivityRecords } = useActivityStore.getState();
+
     if (profile?.id === undefined) {
       return;
     }
@@ -86,14 +88,7 @@ export const useActivityStore = create<ActivityState>((set) => ({
         throw new Error('Error al agregar actividad');
       }
 
-      const { activityUser } = await response.json();
-
-      // Obtener el nombre de la actividad
-      const activityName =
-        useActivityStore
-          .getState()
-          .activityTypes.find((a) => a.id === activityUser.activityId)?.name ||
-        'Desconocida';
+      await fetchActivityRecords(1);
 
       // Actualizar el estado con la nueva actividad
     } catch (error) {
