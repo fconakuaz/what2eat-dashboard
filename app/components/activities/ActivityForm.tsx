@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export const ProfileForm = ({ className }: React.ComponentProps<'form'>) => {
+export const ActivityForm = ({ className }: React.ComponentProps<'form'>) => {
   const [formData, setFormData] = useState({
     activityId: '',
     date: new Date().toISOString().split('T')[0], //Formato YYYY-MM-DD
@@ -27,7 +27,7 @@ export const ProfileForm = ({ className }: React.ComponentProps<'form'>) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await addActivity({
+    const newActivity = {
       startDateTime: formData.date,
       activityId: formData.activityId,
       steps: formData.steps ? parseInt(formData.steps) : undefined,
@@ -40,7 +40,12 @@ export const ProfileForm = ({ className }: React.ComponentProps<'form'>) => {
       activeMinutes: formData.activeMinutes
         ? parseInt(formData.activeMinutes)
         : undefined
-    });
+    };
+
+    console.log('🟡🟡🟡 newActivity 🟡🟡🟡');
+    console.log(newActivity);
+
+    await addActivity(newActivity);
 
     setFormData({
       activityId: '',

@@ -20,7 +20,7 @@ import {
 import { useIsMobile } from '@/components/hooks/use-mobile';
 import { useState } from 'react';
 import { Asterisk } from '../common/Asterisk';
-import { ProfileForm } from './ProfileForm';
+import { ActivityForm } from './ActivityForm';
 import { Dumbbell } from 'lucide-react';
 
 export const DrawerActivity = () => {
@@ -46,7 +46,7 @@ export const DrawerActivity = () => {
               obligatorios están marcados con un (*).
             </DialogDescription>
           </DialogHeader>
-          <ProfileForm />
+          <ActivityForm />
         </DialogContent>
       </Dialog>
     );
@@ -70,7 +70,7 @@ export const DrawerActivity = () => {
             están marcados con un (<Asterisk />)
           </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm className="px-4" />
+        <ActivityForm className="px-4" />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancelar</Button>

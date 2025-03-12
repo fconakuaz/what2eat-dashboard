@@ -94,7 +94,7 @@ export async function POST(req: Request) {
     const {
       userId,
       activityId,
-      date,
+      startDateTime,
       steps,
       caloriesBurned,
       distanceMeters,
@@ -102,7 +102,7 @@ export async function POST(req: Request) {
     } = body;
 
     // Validar datos requeridos
-    if (!userId || !activityId || !date) {
+    if (!userId || !activityId || !startDateTime) {
       return NextResponse.json(
         { error: 'userId, activityId y date son requeridos' },
         { status: 400 }
@@ -118,7 +118,7 @@ export async function POST(req: Request) {
         caloriesBurned: caloriesBurned ?? null,
         distanceMeters: distanceMeters ?? null,
         activeMinutes: activeMinutes ?? null,
-        startDateTime: new Date(date)
+        startDateTime: new Date(startDateTime)
       }
     });
 
