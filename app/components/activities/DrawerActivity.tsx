@@ -18,13 +18,13 @@ import {
   DrawerTrigger
 } from '@/components/ui/drawer';
 import { useIsMobile } from '@/components/hooks/use-mobile';
-import { useState } from 'react';
 import { Asterisk } from '../common/Asterisk';
 import { ActivityForm } from './ActivityForm';
 import { Dumbbell } from 'lucide-react';
+import { useActivityStore } from 'app/store/activityStore';
 
 export const DrawerActivity = () => {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useActivityStore();
   const isMobile = useIsMobile();
 
   if (!isMobile) {
