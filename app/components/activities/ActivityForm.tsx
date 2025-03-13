@@ -56,10 +56,13 @@ export const ActivityForm = ({ className }: React.ComponentProps<'form'>) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={cn('grid items-start gap-4', className)}
+      className={cn(
+        'grid items-start gap-4 max-h-[60vh] overflow-y-auto',
+        className
+      )}
     >
       {/* Select de Actividades */}
-      <div className="grid gap-2">
+      <div className="grid gap-2 ">
         <label className="block text-sm font-medium">
           Tipo de Actividad <Asterisk />
         </label>
