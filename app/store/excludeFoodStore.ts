@@ -1,46 +1,41 @@
 import { create } from 'zustand';
-
-type Ingredient = {
-  name: string;
-  state: boolean; // true = incluir, false = no incluir
-};
+import { Ingredient } from './includeFoodStore';
 
 type ExcludeFoodStore = {
   ingredientsToExclude: Ingredient[];
+  fetchExcludedFoods: (userId: string) => Promise<void>;
   addExcludeIngredient: (ingredient: Ingredient) => void;
   removeExcludeIngredient: (ingredientName: string) => void;
   toggleExcludeIngredientState: (ingredientName: string) => void;
   resetExcludeIngredients: () => void;
+  toggleExcludeFoodSelection: (food: Ingredient) => void;
 };
 
 export const useExcludeFoodStore = create<ExcludeFoodStore>((set) => ({
-  ingredientsToExclude: [
-    {
-      name: 'Cacahuates',
-      state: true
-    },
-    {
-      name: 'Harina',
-      state: true
-    },
-    {
-      name: 'Chayotes',
-      state: true
-    },
-    {
-      name: 'Pescado',
-      state: true
-    },
-    {
-      name: 'Mariscos',
-      state: false
-    }
-  ],
+  ingredientsToExclude: [],
 
   addExcludeIngredient: (ingredient) =>
     set((state) => ({
       ingredientsToExclude: [...state.ingredientsToExclude, ingredient]
     })),
+
+  fetchExcludedFoods: async (userId) => {
+    try {
+      const response = await fetch(`/api/exclude-foods?userId=${userId}`);
+      const data = await response.json();
+      if (data.includeFoods) {
+        set({
+          ingredientsToExclude: data.includeFoods.map((food: any) => ({
+            id: food.id,
+            name: food.name,
+            state: true
+          }))
+        });
+      }
+    } catch (error) {
+      console.error('Error al obtener alimentos incluidos:', error);
+    }
+  },
 
   removeExcludeIngredient: (ingredientName) =>
     set((state) => ({
@@ -57,6 +52,19 @@ export const useExcludeFoodStore = create<ExcludeFoodStore>((set) => ({
           : ingredient
       )
     })),
+
+  toggleExcludeFoodSelection: (food) => {
+    set((state) => {
+      const isSelected = state.ingredientsToExclude.some(
+        (f) => f.id === food.id
+      );
+      return {
+        ingredientsToExclude: isSelected
+          ? state.ingredientsToExclude.filter((f) => f.id !== food.id)
+          : [...state.ingredientsToExclude, { ...food, state: true }]
+      };
+    });
+  },
 
   resetExcludeIngredients: () =>
     set(() => ({

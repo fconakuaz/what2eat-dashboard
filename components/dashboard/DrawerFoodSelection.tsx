@@ -20,6 +20,7 @@ import { Check, Plus } from 'lucide-react';
 import { useFoodStore } from 'app/store/foodUserStore';
 import { Ingredient, useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useTranslations } from 'next-intl';
+import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
 
 interface Props {
   data: any;
@@ -30,6 +31,7 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   const isMobile = useIsMobile();
   const { foods, fetchFoods, saveSelectedFoods } = useFoodStore();
   const { toggleIncludeFoodSelection } = useIncludeFoodStore();
+  const { toggleExcludeFoodSelection } = useExcludeFoodStore();
   const t = useTranslations('Food');
 
   const [open, setOpen] = useState(false); // Estado para abrir/cerrar el modal o drawer
@@ -39,13 +41,16 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   }, []);
 
   const handleSave = () => {
-    saveSelectedFoods();
-    setOpen(false); // Cierra el modal o drawer después de guardar
+    saveSelectedFoods(typeDrawer);
+    setOpen(false);
   };
 
   const handleFoodSelection = (food: Ingredient) => {
     if (typeDrawer === 'include') {
       toggleIncludeFoodSelection(food);
+    }
+    if (typeDrawer === 'exclude') {
+      toggleExcludeFoodSelection(food);
     }
   };
 

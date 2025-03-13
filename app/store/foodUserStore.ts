@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { useProfileStore } from './profileStore';
 import { Ingredient, useIncludeFoodStore } from './includeFoodStore';
+import { useExcludeFoodStore } from './excludeFoodStore';
 
 interface FoodStoreState {
   foods: Record<string, Ingredient[]>;
@@ -8,7 +9,7 @@ interface FoodStoreState {
   open: boolean;
   fetchFoods: () => Promise<void>;
   toggleFoodSelection: (food: Ingredient) => void;
-  saveSelectedFoods: () => Promise<void>;
+  saveSelectedFoods: (typeDrawer: string) => Promise<void>;
   setOpen: () => void;
 }
 
@@ -41,18 +42,20 @@ export const useFoodStore = create<FoodStoreState>((set, get) => ({
   },
 
   // Guardar los alimentos seleccionados
-  saveSelectedFoods: async () => {
+  saveSelectedFoods: async (typeDrawer: string) => {
     const { profile } = useProfileStore.getState();
     const { ingredientsToInclude } = useIncludeFoodStore.getState();
+    const { ingredientsToExclude } = useExcludeFoodStore.getState();
     if (!profile?.id) {
       console.error('Usuario no autenticado');
       return;
     }
 
-    const insertFoods = ingredientsToInclude;
+    const insertFoods =
+      typeDrawer === 'include' ? ingredientsToInclude : ingredientsToExclude;
 
     try {
-      await fetch('/api/include-foods', {
+      await fetch(`/api/${typeDrawer}-foods`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

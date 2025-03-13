@@ -17,12 +17,13 @@ import { useProfileStore } from 'app/store/profileStore';
 export const AccordionFilter = () => {
   const t = useTranslations('HomePage');
   const { ingredientsToInclude, fetchIncludedFoods } = useIncludeFoodStore();
-  const { ingredientsToExclude } = useExcludeFoodStore();
+  const { ingredientsToExclude, fetchExcludedFoods } = useExcludeFoodStore();
   const { profile } = useProfileStore();
 
   useEffect(() => {
     if (profile?.id) {
       fetchIncludedFoods(profile?.id);
+      fetchExcludedFoods(profile?.id);
     }
   }, [profile?.id]);
 
@@ -66,14 +67,22 @@ export const AccordionFilter = () => {
         <AccordionTrigger>{t('exclude_foods')}</AccordionTrigger>
         <AccordionContent>
           <Card className="w-full p-4 pt-7">
-            {ingredientsToExclude.map(({ name, state }, index) => (
-              <BadgeIngredient
-                key={index}
-                name={name}
-                state={state}
-                type="exclude"
+            <div className="flex justify-start mb-7  ">
+              <DrawerFoodSelection
+                data={ingredientsToExclude}
+                typeDrawer={'exclude'}
               />
-            ))}
+            </div>
+            <div className="  ">
+              {ingredientsToExclude.map(({ name, state }, index) => (
+                <BadgeIngredient
+                  key={index}
+                  name={name}
+                  state={state}
+                  type="include"
+                />
+              ))}
+            </div>
           </Card>
         </AccordionContent>
       </AccordionItem>
