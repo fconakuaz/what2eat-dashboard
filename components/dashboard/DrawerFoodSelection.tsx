@@ -8,27 +8,28 @@ import {
 } from '@/components/ui/dialog';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer';
 import { useIsMobile } from '@/components/hooks/use-mobile';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Check, Plus } from 'lucide-react';
-import { useIncludeFoodStore } from 'app/store/foodUserStore';
+import { useFoodStore } from 'app/store/foodUserStore';
+import { Ingredient, useIncludeFoodStore } from 'app/store/includeFoodStore';
+import { useTranslations } from 'next-intl';
+interface Props {
+  data: any;
+  typeDrawer: string;
+}
 
-export const DrawerFoodSelection = () => {
+export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   const isMobile = useIsMobile();
-  const {
-    foods,
-    selectedFoods,
-    fetchFoods,
-    toggleFoodSelection,
-    saveSelectedFoods
-  } = useIncludeFoodStore();
+  const { foods, fetchFoods, saveSelectedFoods } = useFoodStore();
+  const { toggleIncludeFoodSelection } = useIncludeFoodStore();
+  const t = useTranslations('Food');
 
   useEffect(() => {
     fetchFoods();
@@ -38,27 +39,36 @@ export const DrawerFoodSelection = () => {
     saveSelectedFoods();
   };
 
+  const handleFoodSelection = (food: Ingredient) => {
+    if (typeDrawer === 'include') {
+      toggleIncludeFoodSelection(food);
+    }
+  };
+
   const content = (
     <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
       {Object.entries(foods).map(([category, items]) => (
         <div key={category}>
-          <h3 className="font-semibold text-md mb-2">{category}</h3>
-          <div className="flex flex-wrap gap-2">
+          <h3 className="font-semibold text-xl mb-3"> {t(category)}</h3>
+          <div className="flex flex-wrap gap-2 mb-12 pt-1">
             {items.map((food) => {
-              const isSelected = selectedFoods.some((f) => f.id === food.id);
+              const isSelected = data.some(
+                (f: { id: string; state: boolean }) =>
+                  f.id === food.id && f.state === true
+              );
               return (
                 <Badge
                   key={food.id}
                   variant={isSelected ? 'default' : 'outline'}
                   className="cursor-pointer"
-                  onClick={() => toggleFoodSelection(food)}
+                  onClick={() => handleFoodSelection(food)}
                 >
                   {isSelected ? (
                     <Check className="w-3 h-3 mr-1" />
                   ) : (
                     <Plus className="w-3 h-3 mr-1" />
                   )}
-                  {food.name}
+                  {t(food.name)}
                 </Badge>
               );
             })}

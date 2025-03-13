@@ -1,24 +1,20 @@
 import { create } from 'zustand';
 import { useProfileStore } from './profileStore';
-
-interface Food {
-  id: string;
-  name: string;
-}
+import { Ingredient, useIncludeFoodStore } from './includeFoodStore';
 
 interface FoodStoreState {
-  foods: Record<string, Food[]>; // Alimentos agrupados por categoría
-  selectedFoods: Food[]; // Alimentos seleccionados
+  foods: Record<string, Ingredient[]>; // Alimentos agrupados por categoría
+  selectedFoods: Ingredient[]; // Alimentos seleccionados
   fetchFoods: () => Promise<void>;
-  toggleFoodSelection: (food: Food) => void;
+  toggleFoodSelection: (food: Ingredient) => void;
   saveSelectedFoods: () => Promise<void>;
 }
 
-export const useIncludeFoodStore = create<FoodStoreState>((set, get) => ({
+export const useFoodStore = create<FoodStoreState>((set, get) => ({
   foods: {},
   selectedFoods: [],
 
-  // 📌 Cargar alimentos desde la API
+  // Cargar alimentos desde la API
   fetchFoods: async () => {
     try {
       const res = await fetch('/api/foods');
@@ -29,7 +25,7 @@ export const useIncludeFoodStore = create<FoodStoreState>((set, get) => ({
     }
   },
 
-  // 📌 Alternar selección de un alimento
+  // Alternar selección de un alimento
   toggleFoodSelection: (food) => {
     set((state) => {
       const isSelected = state.selectedFoods.some((f) => f.id === food.id);
@@ -41,13 +37,16 @@ export const useIncludeFoodStore = create<FoodStoreState>((set, get) => ({
     });
   },
 
-  // 📌 Guardar los alimentos seleccionados
+  // Guardar los alimentos seleccionados
   saveSelectedFoods: async () => {
     const { profile } = useProfileStore.getState();
+    const { ingredientsToInclude } = useIncludeFoodStore.getState();
     if (!profile?.id) {
       console.error('Usuario no autenticado');
       return;
     }
+
+    const insertFoods = ingredientsToInclude;
 
     try {
       await fetch('/api/include-foods', {
@@ -55,7 +54,7 @@ export const useIncludeFoodStore = create<FoodStoreState>((set, get) => ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: profile.id,
-          foodIds: get().selectedFoods.map((f) => f.id)
+          foodIds: insertFoods.map((f) => f.id)
         })
       });
       console.log('Alimentos guardados correctamente');

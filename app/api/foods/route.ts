@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// 📌 GET: Obtener lista de alimentos agrupados por categoría
+// GET: Obtener lista de alimentos agrupados por categoría
 export async function GET() {
   try {
     const foods = await prisma.food.findMany();

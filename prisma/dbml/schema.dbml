@@ -79,6 +79,7 @@ Table IncludedFoodUser {
   id String [pk]
   userId String [not null]
   foodId String [not null]
+  state Boolean [not null, default: true]
   user User [not null]
   food Food [not null]
 }
@@ -87,6 +88,7 @@ Table ExcludedFoodUser {
   id String [pk]
   userId String [not null]
   foodId String [not null]
+  state Boolean [not null, default: true]
   user User [not null]
   food Food [not null]
 }

@@ -160,19 +160,23 @@ model Food {
 }
 
 model IncludedFoodUser {
-  id     String @id @default(uuid())
+  id     String  @id @default(uuid())
   userId String
   foodId String
-  user   User   @relation(fields: [userId], references: [id])
-  food   Food   @relation(fields: [foodId], references: [id])
+  state  Boolean @default(true)
+
+  user User @relation(fields: [userId], references: [id])
+  food Food @relation(fields: [foodId], references: [id])
 }
 
 model ExcludedFoodUser {
-  id     String @id @default(uuid())
+  id     String  @id @default(uuid())
   userId String
   foodId String
-  user   User   @relation(fields: [userId], references: [id])
-  food   Food   @relation(fields: [foodId], references: [id])
+  state  Boolean @default(true)
+
+  user User @relation(fields: [userId], references: [id])
+  food Food @relation(fields: [foodId], references: [id])
 }
 
 model SavedMenu {

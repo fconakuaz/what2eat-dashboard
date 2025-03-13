@@ -10,14 +10,21 @@ import { useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
 import { BadgeIngredient } from './BadgeIngredient';
 import { Card } from '../ui/card';
-import { Button } from '../ui/button';
-import { Edit2Icon, Plus } from 'lucide-react';
 import { DrawerFoodSelection } from './DrawerFoodSelection';
-export function AccordionFilter() {
+import { useEffect } from 'react';
+import { useProfileStore } from 'app/store/profileStore';
+
+export const AccordionFilter = () => {
   const t = useTranslations('HomePage');
-  const { ingredientsToInclude } = useIncludeFoodStore();
+  const { ingredientsToInclude, fetchIncludedFoods } = useIncludeFoodStore();
   const { ingredientsToExclude } = useExcludeFoodStore();
-  const tc = useTranslations('Common');
+  const { profile } = useProfileStore();
+
+  useEffect(() => {
+    if (profile?.id) {
+      fetchIncludedFoods(profile?.id);
+    }
+  }, [profile?.id]);
 
   return (
     <Accordion type="single" collapsible className="w-full">
@@ -35,7 +42,10 @@ export function AccordionFilter() {
         <AccordionContent>
           <Card className="w-full p-4 pt-7">
             <div className="flex justify-start mb-7  ">
-              <DrawerFoodSelection />
+              <DrawerFoodSelection
+                data={ingredientsToInclude}
+                typeDrawer={'include'}
+              />
             </div>
             <div className="  ">
               {ingredientsToInclude.map(({ name, state }, index) => (
@@ -69,4 +79,4 @@ export function AccordionFilter() {
       </AccordionItem>
     </Accordion>
   );
-}
+};
