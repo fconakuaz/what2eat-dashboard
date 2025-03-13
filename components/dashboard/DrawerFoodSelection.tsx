@@ -14,12 +14,13 @@ import {
   DrawerTrigger
 } from '@/components/ui/drawer';
 import { useIsMobile } from '@/components/hooks/use-mobile';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Check, Plus } from 'lucide-react';
 import { useFoodStore } from 'app/store/foodUserStore';
 import { Ingredient, useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useTranslations } from 'next-intl';
+
 interface Props {
   data: any;
   typeDrawer: string;
@@ -31,12 +32,15 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   const { toggleIncludeFoodSelection } = useIncludeFoodStore();
   const t = useTranslations('Food');
 
+  const [open, setOpen] = useState(false); // Estado para abrir/cerrar el modal o drawer
+
   useEffect(() => {
     fetchFoods();
   }, []);
 
   const handleSave = () => {
     saveSelectedFoods();
+    setOpen(false); // Cierra el modal o drawer después de guardar
   };
 
   const handleFoodSelection = (food: Ingredient) => {
@@ -80,9 +84,9 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
 
   if (!isMobile) {
     return (
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => setOpen(true)}>
             <Plus className="w-3 h-3 mr-0" /> Agregar
           </Button>
         </DialogTrigger>
@@ -100,9 +104,9 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   }
 
   return (
-    <Drawer>
+    <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" onClick={() => setOpen(true)}>
           <Plus className="w-3 h-3 mr-0" /> Agregar
         </Button>
       </DrawerTrigger>

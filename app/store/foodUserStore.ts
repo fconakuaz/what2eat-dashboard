@@ -3,16 +3,19 @@ import { useProfileStore } from './profileStore';
 import { Ingredient, useIncludeFoodStore } from './includeFoodStore';
 
 interface FoodStoreState {
-  foods: Record<string, Ingredient[]>; // Alimentos agrupados por categoría
-  selectedFoods: Ingredient[]; // Alimentos seleccionados
+  foods: Record<string, Ingredient[]>;
+  selectedFoods: Ingredient[];
+  open: boolean;
   fetchFoods: () => Promise<void>;
   toggleFoodSelection: (food: Ingredient) => void;
   saveSelectedFoods: () => Promise<void>;
+  setOpen: () => void;
 }
 
 export const useFoodStore = create<FoodStoreState>((set, get) => ({
   foods: {},
   selectedFoods: [],
+  open: false,
 
   // Cargar alimentos desde la API
   fetchFoods: async () => {
@@ -61,5 +64,8 @@ export const useFoodStore = create<FoodStoreState>((set, get) => ({
     } catch (error) {
       console.error('Error al guardar alimentos:', error);
     }
+  },
+  setOpen: () => {
+    set((state) => ({ open: !state.open }));
   }
 }));
