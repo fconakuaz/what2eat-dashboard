@@ -32,259 +32,144 @@ export const RightArrow = () => <svg
   <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
 </svg>
 
-<Meta title="Configure your project" />
+<Meta title="README" />
 
-<div className="sb-container">
-  <div className='sb-section-title'>
-    # Configure your project
-
-    Because Storybook works separately from your app, you'll need to configure it for your specific stack and setup. Below, explore guides for configuring Storybook with popular frameworks and tools. If you get stuck, learn how you can ask for help from our community.
-  </div>
-  <div className="sb-section">
-    <div className="sb-section-item">
-      <Image
-        src={Styling}
-        alt="A wall of logos representing different styling technologies"
-        width={0}
-        height={0}
-        style={{ width: '100%', height: 'auto' }}
-      />
-      <h4 className="sb-section-item-heading">Add styling and CSS</h4>
-      <p className="sb-section-item-paragraph">Like with web applications, there are many ways to include CSS within Storybook. Learn more about setting up styling within Storybook.</p>
-      <a
-        href="https://storybook.js.org/docs/configure/styling-and-css/?renderer=react"
-        target="_blank"
-      >Learn more<RightArrow /></a>
+ 
+<div className="sb-container"> 
+ <h1 align="center"><strong>🍎 What2Eat</strong></h1>
+    <h3 align="center"><strong>Dashboard administrativo</strong></h3>
+    <br />
+    <div align="center">
+        <a style={{fontSize: '18px'}} href="https://what2eat-dashboard.vercel.app/">Demo</a>
+        <span> · </span>
+        <a style={{fontSize: '18px'}} href="https://github.com/fconakuaz/what2eat-dashboard">Repositorio en Git</a>
+        <span> · </span>
+        <a style={{fontSize: '18px'}} href="https://dbdiagram.io/d/What2Eat-679c125f263d6cf9a0952c89">Diagrama de la Base de datos</a>
     </div>
-    <div className="sb-section-item">
-      <Image 
-        width={0}
-        height={0}
-        style={{ width: '100%', height: 'auto' }}
-        src={Context}
-        alt="An abstraction representing the composition of data for a component"
-      />
-      <h4 className="sb-section-item-heading">Provide context and mocking</h4>
-      <p className="sb-section-item-paragraph">Often when a story doesn't render, it's because your component is expecting a specific environment or context (like a theme provider) to be available.</p>
-      <a
-        href="https://storybook.js.org/docs/writing-stories/decorators/?renderer=react#context-for-mocking"
-        target="_blank"
-      >Learn more<RightArrow /></a>
-    </div>
-    <div className="sb-section-item">
-      <Image 
-        width={0}
-        height={0}
-        style={{ width: '100%', height: 'auto' }} 
-        src={Assets} 
-        alt="A representation of typography and image assets" 
-      />
-      <div>
-        <h4 className="sb-section-item-heading">Load assets and resources</h4>
-        <p className="sb-section-item-paragraph">To link static files (like fonts) to your projects and stories, use the
-        `staticDirs` configuration option to specify folders to load when
-        starting Storybook.</p>
-        <a
-          href="https://storybook.js.org/docs/configure/images-and-assets/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-    </div>
-  </div>
-</div>
-<div className="sb-container">
-  <div className='sb-section-title'>
-    # Do more with Storybook
 
-    Now that you know the basics, let's explore other parts of Storybook that will improve your experience. This list is just to get you started. You can customise Storybook in many ways to fit your needs.
-  </div>
 
-  <div className="sb-section">
-    <div className="sb-features-grid">
-      <div className="sb-grid-item">
-        <Image 
-          width={0}
-          height={0}
-          style={{ width: '100%', height: 'auto' }} 
-          src={Docs} 
-          alt="A screenshot showing the autodocs tag being set, pointing a docs page being generated" 
-        />
-        <h4 className="sb-section-item-heading">Autodocs</h4>
-        <p className="sb-section-item-paragraph">Auto-generate living,
-          interactive reference documentation from your components and stories.</p>
-        <a
-          href="https://storybook.js.org/docs/writing-docs/autodocs/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <Image 
-          width={0}
-          height={0}
-          style={{ width: '100%', height: 'auto' }} 
-          src={Share} 
-          alt="A browser window showing a Storybook being published to a chromatic.com URL" 
-        />
-        <h4 className="sb-section-item-heading">Publish to Chromatic</h4>
-        <p className="sb-section-item-paragraph">Publish your Storybook to review and collaborate with your entire team.</p>
-        <a
-          href="https://storybook.js.org/docs/sharing/publish-storybook/?renderer=react#publish-storybook-with-chromatic"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <Image 
-          width={0}
-          height={0}
-          style={{ width: '100%', height: 'auto' }} 
-          src={FigmaPlugin} 
-          alt="Windows showing the Storybook plugin in Figma" 
-        />
-        <h4 className="sb-section-item-heading">Figma Plugin</h4>
-        <p className="sb-section-item-paragraph">Embed your stories into Figma to cross-reference the design and live
-          implementation in one place.</p>
-        <a
-          href="https://storybook.js.org/docs/sharing/design-integrations/?renderer=react#embed-storybook-in-figma-with-the-plugin"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <Image 
-          width={0}
-          height={0}
-          style={{ width: '100%', height: 'auto' }} 
-          src={Testing} 
-          alt="Screenshot of tests passing and failing" 
-        />
-        <h4 className="sb-section-item-heading">Testing</h4>
-        <p className="sb-section-item-paragraph">Use stories to test a component in all its variations, no matter how
-          complex.</p>
-        <a
-          href="https://storybook.js.org/docs/writing-tests/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <Image 
-          width={0}
-          height={0}
-          style={{ width: '100%', height: 'auto' }} 
-          src={Accessibility} 
-          alt="Screenshot of accessibility tests passing and failing" 
-        />
-        <h4 className="sb-section-item-heading">Accessibility</h4>
-        <p className="sb-section-item-paragraph">Automatically test your components for a11y issues as you develop.</p>
-        <a
-          href="https://storybook.js.org/docs/writing-tests/accessibility-testing/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <Image 
-          width={0}
-          height={0}
-          style={{ width: '100%', height: 'auto' }} 
-          src={Theming} 
-          alt="Screenshot of Storybook in light and dark mode" 
-        />
-        <h4 className="sb-section-item-heading">Theming</h4>
-        <p className="sb-section-item-paragraph">Theme Storybook's UI to personalize it to your project.</p>
-        <a
-          href="https://storybook.js.org/docs/configure/theming/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-    </div>
-  </div>
-</div>
-<div className='sb-addon'>
-  <div className='sb-addon-text'>
-    <h4>Addons</h4>
-    <p className="sb-section-item-paragraph">Integrate your tools with Storybook to connect workflows.</p>
-    <a
-        href="https://storybook.js.org/addons/"
-        target="_blank"
-      >Discover all addons<RightArrow /></a>
-  </div>
-  <div className='sb-addon-img'>
-    <Image 
-      width={650}
-      height={347}
-      src={AddonLibrary} 
-      alt="Integrate your tools with Storybook to connect workflows." 
-    />
-  </div>
-</div>
+    <br />
+    <img src="public/dashboard.webp" alt="What2Eat Screenshot" width="800" />
+    <br />
+    
+    <h2>🚀 Características principales</h2>
+    <ul>
+        <li>✅ <strong>Generación de menús inteligentes</strong> con IA generativa del modelo de Gemini 2 Flash.</li>
+        <li>✅ <strong>Compatibilidad con Google Fit</strong> para ajustar tus menús según tu actividad física.</li>
+        <li>✅ <strong>Personalización</strong> para dietas especiales: vegetariana, sin gluten, alta en proteínas, etc.</li>
+        <li>✅ <strong>Gestión eficiente de inventarios</strong>: usa lo que tienes en tu despensa antes de que caduque.</li>
+        <li>✅ <strong>Interfaz fácil de usar</strong>, rápida y optimizada.</li>
+        <li>✅ <strong>Multilingüe</strong>, con soporte para varios idiomas (Español/Inglés).</li>
+    </ul>
+    
+    <h2>📂 Estructura de la Base de Datos</h2>
+    <p><a href="https://dbdiagram.io/d/What2Eat-679c125f263d6cf9a0952c89">🔗 Ver diagrama completo</a></p>
+    <pre>
+    /
+    ├── prisma/
+    │   ├── schema.prisma  (Modelos de BD)
+    </pre>
+    <img src="public/uml.webp" alt="Diagrama UML de la BD" width="800" />
+    
+    <h2>📂 Estructura de Archivos</h2>
+    <pre>
+    /
+    ├── app/
+    │   ├── (dashboard)/
+    │   ├── [locale]/
+    │   ├── AI/
+    │   ├── api/
+    │   ├── components/
+    │   ├── login/
+    │   ├── store/
+    │   ├── layout.tsx
+    │   ├── globals.css
+    │   ├── request.ts
+    │   ├── favicon.ico
+    ├── components/
+    │   ├── dashboard/
+    │   ├── ui/
+    │   ├── icons.tsx
+    │   ├── theme-provider.tsx
+    ├── i18n/
+    │   ├── request.ts
+    ├── lib/
+    │   ├── auth.ts
+    │   ├── db.ts
+    │   ├── prisma.ts
+    │   ├── utils.ts
+    ├── messages/
+    │   ├── en.json
+    │   ├── es.json
+    ├── prisma/
+    │   ├── dbml/
+    │   ├── migrations/
+    │   ├── schema.prisma
+    │   ├── seed.ts
+    ├── public/
+    │   ├── apple-touch-icon.png
+    │   ├── ...
+    ├── .env
+    ├── package.json
+    ├── README.md
+    └── ...
+    </pre>
+    
+    <h2>🛠 Tecnologías usadas</h2>
+    <ul>
+        <li>Framework - <a href="https://nextjs.org">Next.js (App Router)</a></li>
+        <li>Lenguaje - <a href="https://www.typescriptlang.org">TypeScript</a></li>
+        <li>Auth - <a href="https://authjs.dev">Auth.js</a></li>
+        <li>Base de datos - <a href="https://vercel.com/postgres">Postgres</a></li>
+        <li>Deployment - <a href="https://vercel.com/docs/concepts/next.js/overview">Vercel</a></li>
+        <li>Styling - <a href="https://tailwindcss.com">Tailwind CSS</a></li>
+        <li>Componentes - <a href="https://ui.shadcn.com/">Shadcn UI</a></li>
+        <li>Analytics - <a href="https://vercel.com/analytics">Vercel Analytics</a></li>
+        <li>ORM - <a href="https://www.prisma.io/">Prisma</a></li>
+        <li>Manejador de estado - <a href="https://zustand-demo.pmnd.rs/">Zustand</a></li>
+    </ul>
+    
+    <h2>⚡ Getting Started</h2>
+    <br />
+    <h4>Config BD con Prisma</h4>
+    <p>Una vez configurada la URL de la base de datos para conectar Prisma, realiza los siguientes pasos:</p>
+    <pre>
+    <br />
+    <h4> Crea tablas en BD</h4>
+    ```bash
+    pnpm prisma migrate dev --name init
+    ``` 
+    <h4> Actualiza tablas en BD</h4>
+    ```bash
+    pnpm prisma migrate dev --name update
+    ```
 
-<div className="sb-section sb-socials">
-    <div className="sb-section-item">
-      <Image 
-        width={32}
-        height={32}
-        layout="fixed"
-        src={Github} 
-        alt="Github logo" 
-        className="sb-explore-image"
-      />
-      Join our contributors building the future of UI development.
+    <h4> Generate tables cada que se hacen cambios al esquema</h4> 
+    ```bash
+    pnpm prisma generate
+    ```
 
-      <a
-        href="https://github.com/storybookjs/storybook"
-        target="_blank"
-      >Star on GitHub<RightArrow /></a>
-    </div>
-    <div className="sb-section-item">
-      <Image 
-        width={33}
-        height={32}
-        layout="fixed"
-        src={Discord} 
-        alt="Discord logo" 
-        className="sb-explore-image"
-      />
-      <div>
-        Get support and chat with frontend developers.
+    <h4> Reset prisma si requieres borrar toda la BD de cero</h4> 
+    ```bash
+    pnpm prisma db push --force-reset
+    ```
 
-        <a
-          href="https://discord.gg/storybook"
-          target="_blank"
-        >Join Discord server<RightArrow /></a>
-      </div>
-    </div>
-    <div className="sb-section-item">
-      <Image 
-        width={32}
-        height={32}
-        layout="fixed"
-        src={Youtube} 
-        alt="Youtube logo" 
-        className="sb-explore-image"
-      />
-      <div>
-        Watch tutorials, feature previews and interviews.
-
-        <a
-          href="https://www.youtube.com/@chromaticui"
-          target="_blank"
-        >Watch on YouTube<RightArrow /></a>
-      </div>
-    </div>
-    <div className="sb-section-item">
-      <Image 
-        width={33}
-        height={32}
-        layout="fixed"
-        src={Tutorials} 
-        alt="A book" 
-        className="sb-explore-image"
-      />
-      <p>Follow guided walkthroughs on for key workflows.</p>
-
-      <a
-          href="https://storybook.js.org/tutorials/"
-          target="_blank"
-        >Discover tutorials<RightArrow /></a>
-    </div>
+    <h4> Run seed</h4> 
+    ```bash
+    pnpm run seed
+    ```
+    </pre>
+    <p>Convierte el archivo <code>.env.example</code> en <code>.env</code> y actualiza los valores de las variables de ambiente.</p>
+    <p>Finalmente, corre los siguientes comandos para iniciar el servidor de desarrollo:</p>
+    <pre>
+    ```bash
+    pnpm install
+    pnpm run dev
+    ```
+    </pre>
+    <p>Ahora podrás ver la aplicación lanzada en <a href="https://what2eat-dashboard.vercel.app/login">https://what2eat-dashboard.vercel.app</a>.</p>
+    
+    <p><strong>Creado por <a href="#">Francisco Nakú Acosta Zárate</a></strong></p>
 </div>
 
 <style>

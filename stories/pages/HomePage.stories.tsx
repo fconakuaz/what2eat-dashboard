@@ -12,7 +12,7 @@ export const metadata = objMetada;
 const mockProfile = stateProfile;
 
 const meta: Meta<typeof HomePage> = {
-  title: 'What2Eat/HomePage',
+  title: 'What2Eat/H1: Generar menús diarios personalizados',
   component: HomePage,
   parameters: {
     layout: 'fullscreen',
@@ -35,7 +35,7 @@ const meta: Meta<typeof HomePage> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CrearMenúDiario: Story = {
+export const TestCrearMenúDiario: Story = {
   play: async ({ canvasElement, step }) => {
     await step('1. Se carga perfil de usuario de testing', async () => {
       mockState(useProfileStore, { profile: mockProfile });
@@ -66,13 +66,13 @@ export const CrearMenúDiario: Story = {
     });
 
     await step('3. Se valida que se haya generado el menú', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 500)); // Espera inicial
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       await step(
         '3.1. Se espera a que la IA Generativa Gemini complete su tarea.',
         async () => {
           await new Promise((resolve, reject) => {
-            const maxRetries = 100; // Máximo de intentos
+            const maxRetries = 100;
             let retries = 0;
 
             const interval = setInterval(() => {
