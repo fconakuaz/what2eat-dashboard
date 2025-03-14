@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { responseSchema } from './modelRecipe';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {

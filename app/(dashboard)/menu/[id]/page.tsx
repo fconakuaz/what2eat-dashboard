@@ -8,7 +8,7 @@ import { SpinLoading } from 'app/components/layout/SpinLoading';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { GenerateHTMLFromJson } from 'app/AI/getRecipe';
+import { GenerateHTMLFromJson } from '@/components/AI/getRecipe';
 import { FileWarning, Info } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
