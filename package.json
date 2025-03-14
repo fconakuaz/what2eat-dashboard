@@ -5,8 +5,9 @@
     "build": "prisma generate && next build",
     "seed": "bun prisma migrate dev --name init && bun tsx prisma/seed.ts",
     "start": "next start",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook": "storybook dev -p 6006 -s public",
+    "build-storybook": "storybook build -s public",
+    "serve-storybook": "serve storybook-static"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
