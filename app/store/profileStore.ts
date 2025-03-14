@@ -32,7 +32,9 @@ export type Unit = 'metric' | 'imperial';
 
 type Profile = {
   id?: string;
+  name?: string;
   email?: string;
+  image?: string;
   birthDate?: Date;
   age?: number;
   gender?: UserGender | null;

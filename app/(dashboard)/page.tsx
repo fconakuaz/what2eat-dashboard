@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { AccordionFilter } from '@/components/dashboard/AccordionFilter';
 import { Button } from '@/components/ui/button';
-import { runGemini, GenerateHTMLFromJson } from '../AI/getRecipe';
+import { runGemini, GenerateHTMLFromJson } from '@/components/AI/getRecipe';
 import {
   Card,
   CardContent,
@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { Info, Sparkles, Save, Bookmark } from 'lucide-react';
+import { Info, Sparkles } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
 import { useCommonStore } from 'app/store/commonStore';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
@@ -99,6 +99,7 @@ const HomePage = () => {
             {/* Generar menú */}
             <Button
               size="sm"
+              data-testid="generate-menu-button"
               className={`h-8 gap-1 ${loading && 'bg-transparent text-white'}`}
               onClick={runIA}
               disabled={loading}

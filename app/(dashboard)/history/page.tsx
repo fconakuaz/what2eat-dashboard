@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { GenerateHTMLFromJson } from '../../AI/getRecipe';
+import { GenerateHTMLFromJson } from '../../../components/AI/getRecipe';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Info, BookmarkIcon, Calendar, BookmarkX } from 'lucide-react';
 import { SkeletonMenu } from '@/components/ui/skeletonMenu';
