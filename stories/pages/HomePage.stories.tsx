@@ -5,68 +5,11 @@ import { NextIntlClientProvider } from 'next-intl';
 import HomePage from 'app/(dashboard)/page';
 import messages from './../../messages/es.json';
 import { useProfileStore } from 'app/store/profileStore';
+import { mockState, objMetada, stateProfile } from '../../.storybook/utils';
+import { useMenuStore } from 'app/store/menuStore';
 
-export const metadata = {
-  title: 'What2Eat - Eat Smart',
-  description:
-    'Crea menús personalizados con IA generativa con los alimentos que más te gusten y necesitas.',
-  facebook: {
-    appId: '1260364538842027'
-  },
-  openGraph: {
-    title: 'What2Eat - Eat Smart',
-    description:
-      'Crea menús personalizados con IA generativa con los alimentos que más te gusten y necesitas',
-    url: 'https://what2eat-dashboard.vercel.app',
-    siteName: 'What2Eat',
-    images: [
-      {
-        url: 'https://what2eat-dashboard.vercel.app/dashboard.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Imagen promocional de What2Eat'
-      }
-    ],
-    type: 'website'
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@tuusuario',
-    title: 'What2Eat - Eat Smart',
-    description:
-      'Crea menús personalizados con IA generativa con los alimentos que más te gusten y necesitas',
-    images: ['https://what2eat-dashboard.vercel.app/dashboard.webp']
-  }
-};
-
-const mockState = (store: any, newState: Partial<any>) => {
-  store.setState((prev: any) => ({ ...prev, ...newState }));
-};
-
-// 🟢 Estado de perfil que queremos usar en el Story
-const mockProfile = {
-  id: '2bebd70e-49da-4470-af62-78c92ff55c2c',
-  name: 'Francisco Nakú Acosta Zárate',
-  image:
-    'https://lh3.googleusercontent.com/a/ACg8ocI4Uu9B5fj2Rb4kI1eCxYRi1p2HbaNVTa0oQoGEwSW8tBC7yxsxQg=s96-c',
-  email: 'fconakuaz@gmail.com',
-  birthDate: new Date('1983-09-25T06:00:00.000Z'),
-  gender: 'MALE',
-  dietaryPreference: 'NONE',
-  country: 'México',
-  state: 'Veracruz',
-  metricUnit: 'metric',
-  height: 1.8,
-  weight: 107,
-  goal: 'lose_weight',
-  physicalActivity: 'LIGHT',
-  status: 'ACTIVE',
-  role: 'USER',
-  createdAt: new Date('2025-03-10T00:16:46.651Z'),
-  updatedAt: new Date('2025-03-10T00:18:15.511Z'),
-  userActive: true,
-  age: 41
-};
+export const metadata = objMetada;
+const mockProfile = stateProfile;
 
 const meta: Meta<typeof HomePage> = {
   title: 'What2Eat/HomePage',
@@ -92,33 +35,80 @@ const meta: Meta<typeof HomePage> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Historia con `loading: false` y se genera un menú
-export const GenerateMenu: Story = {
-  play: async ({ canvasElement }) => {
-    mockState(useProfileStore, { profile: mockProfile });
-    const canvas = within(canvasElement);
-    const button = await canvas.findByTestId(
-      'generate-menu-button',
-      {},
-      { timeout: 3000 }
-    );
+export const CrearMenúDiario: Story = {
+  play: async ({ canvasElement, step }) => {
+    await step('1. Se carga perfil de usuario de testing', async () => {
+      mockState(useProfileStore, { profile: mockProfile });
+    });
 
-    console.log('✅ Botón encontrado en Storybook:', button);
+    await step('2. Se valida generación de menú', async () => {
+      const canvas = within(canvasElement);
+      const button = await canvas.findByTestId(
+        'generate-menu-button',
+        {},
+        { timeout: 3000 }
+      );
+      await step(
+        '2.1 Se valida que sea visible el botón de generación de menú',
+        async () => {
+          await expect(button).toBeVisible();
+        }
+      );
+      await step('2.2. Se valida que esté activo el botón', async () => {
+        await expect(button).toBeEnabled();
+      });
+      await step(
+        '2.3. Se da click para iniciar generación de menú',
+        async () => {
+          await userEvent.click(button);
+        }
+      );
+    });
 
-    await expect(button).toBeVisible();
-    await expect(button).toBeEnabled();
+    await step('3. Se valida que se haya generado el menú', async () => {
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Espera inicial
 
-    await userEvent.click(button);
-    console.log('🟢 Botón clickeado');
-    // const canvas = within(canvasElement);
-    // const button = canvas.getByRole('button', { name: /create daily menu/i });
-    // await userEvent.click(button);
-    // // Esperar que el estado loading pase a `true` y luego a `false`
-    // await new Promise((resolve) => setTimeout(resolve, 500));
-    // // Verificar que el menú se haya generado
-    // const menuStore = useCommonStore.getState();
-    // await expect(menuStore.breakfast).toBeDefined();
-    // await expect(menuStore.lunch).toBeDefined();
-    // await expect(menuStore.dinner).toBeDefined();
+      await step(
+        '3.1. Se espera a que la IA Generativa Gemini complete su tarea.',
+        async () => {
+          await new Promise((resolve, reject) => {
+            const maxRetries = 100; // Máximo de intentos
+            let retries = 0;
+
+            const interval = setInterval(() => {
+              const menuStore = useMenuStore.getState();
+
+              if (
+                menuStore.breakfast !== null &&
+                menuStore.breakfast !== undefined
+              ) {
+                clearInterval(interval);
+                resolve(true);
+              }
+
+              if (retries >= maxRetries) {
+                clearInterval(interval);
+                reject(
+                  new Error(
+                    'Timeout: `menuStore.breakfast` sigue siendo null después de varios intentos.'
+                  )
+                );
+              }
+              retries++;
+            }, 500);
+          });
+        }
+      );
+
+      await step(
+        '3.2. Se verifica que el menú fue generado correctamente',
+        async () => {
+          const menuStore = useMenuStore.getState();
+          await expect(menuStore.breakfast).toBeDefined();
+          await expect(menuStore.lunch).toBeDefined();
+          await expect(menuStore.dinner).toBeDefined();
+        }
+      );
+    });
   }
 };
