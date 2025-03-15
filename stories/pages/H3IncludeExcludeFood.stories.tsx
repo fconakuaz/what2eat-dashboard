@@ -70,8 +70,11 @@ export const TestExcluirOIncluirAlimentos: Story = {
     });
 
     await step('4. Se seleccionan alimentos a incluir', async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const cherryButton = await screen.findByText('Cereza');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const higoButton = await screen.findByText('Higo');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const albaricoqueButton = await screen.findByText('Albaricoque');
       await userEvent.click(cherryButton);
       await userEvent.click(higoButton);
@@ -103,8 +106,11 @@ export const TestExcluirOIncluirAlimentos: Story = {
     });
 
     await step('8. Se seleccionan alimentos a incluir', async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const pineappleButton = await screen.findByText('Piña');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const pearButton = await screen.findByText('Pera');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const nectarineButton = await screen.findByText('Nectarina');
       await userEvent.click(pineappleButton);
       await userEvent.click(pearButton);

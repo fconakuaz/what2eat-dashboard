@@ -11,10 +11,6 @@ import { useMenuStore } from 'app/store/menuStore';
 export const metadata = objMetada;
 const mockProfile = stateProfile;
 
-const menuStore = useMenuStore.getState();
-console.log('🟢🟢🟢 menuStore 🟢🟢🟢');
-console.log(menuStore);
-
 const meta: Meta<typeof HomePage> = {
   title: 'Tests/H2: Guardar menús favoritos',
   component: HomePage,
