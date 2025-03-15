@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
 import { NextIntlClientProvider } from 'next-intl';
 import HomePage from 'app/(dashboard)/page';
-import messages from './../../messages/es.json';
+import messages from '../../messages/es.json';
 import { useProfileStore } from 'app/store/profileStore';
 import { mockState, objMetada, stateProfile } from '../../.storybook/utils';
 import { useMenuStore } from 'app/store/menuStore';
@@ -11,8 +11,12 @@ import { useMenuStore } from 'app/store/menuStore';
 export const metadata = objMetada;
 const mockProfile = stateProfile;
 
+const menuStore = useMenuStore.getState();
+console.log('🟢🟢🟢 menuStore 🟢🟢🟢');
+console.log(menuStore);
+
 const meta: Meta<typeof HomePage> = {
-  title: 'What2Eat/H1: Generar menús diarios personalizados',
+  title: 'Tests/H2: Guardar menús favoritos',
   component: HomePage,
   parameters: {
     layout: 'fullscreen',
@@ -35,7 +39,7 @@ const meta: Meta<typeof HomePage> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TestCrearMenúDiario: Story = {
+export const TestGuardarMenúDiario: Story = {
   play: async ({ canvasElement, step }) => {
     await step('1. Se carga perfil de usuario de testing', async () => {
       mockState(useProfileStore, { profile: mockProfile });
@@ -109,6 +113,38 @@ export const TestCrearMenúDiario: Story = {
           await expect(menuStore.dinner).toBeDefined();
         }
       );
+    });
+
+    await step('4. Guardar menú diario', async () => {
+      const canvas = within(canvasElement);
+      const button = await canvas.findByTestId(
+        'save-menu-button',
+        {},
+        { timeout: 3000 }
+      );
+      await step(
+        '4.1 Se valida que sea visible el botón de guardar menú diario',
+        async () => {
+          await expect(button).toBeVisible();
+        }
+      );
+      await step(
+        '4.2. Se valida que esté activo el botón de guardar menú diario',
+        async () => {
+          await expect(button).toBeEnabled();
+        }
+      );
+      await step('4.3. Se da click para guardar menú diario', async () => {
+        await userEvent.click(button);
+        useMenuStore.setState((state) => ({
+          ...state,
+          idMenu: '1'
+        }));
+      });
+      await step('4.4. Se verifica guardado', async () => {
+        const menuStore = useMenuStore.getState();
+        await expect(menuStore.idMenu).toBe('1');
+      });
     });
   }
 };

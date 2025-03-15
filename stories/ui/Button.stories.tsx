@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof Button> = {
-  title: 'shadcn/Button',
+  title: 'UI Components/Button',
   component: Button,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

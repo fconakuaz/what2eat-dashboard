@@ -12,6 +12,7 @@ export default function SaveButton() {
   return (
     <Button
       size="sm"
+      data-testid="save-menu-button"
       variant={idMenu === null ? 'secondary' : 'ghost'}
       className="h-8 gap-1 ml-4"
       onClick={() => saveDailyMenu()}
