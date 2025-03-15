@@ -1,6 +1,6 @@
 'use client';
 import type { Meta, StoryObj } from '@storybook/react';
-import { within } from '@storybook/test';
+import { expect, screen, userEvent, within } from '@storybook/test';
 import { NextIntlClientProvider } from 'next-intl';
 import HomePage from 'app/(dashboard)/page';
 import messages from '../../messages/es.json';
@@ -9,7 +9,6 @@ import {
   mockState,
   objMetada,
   stateExcludeFood,
-  stateFood,
   stateIncludeFood,
   stateProfile
 } from '../../.storybook/utils';
@@ -18,11 +17,6 @@ import { useExcludeFoodStore } from '@/app/store/excludeFoodStore';
 import { useFoodStore } from '@/app/store/foodStore';
 
 export const metadata = objMetada;
-
-const foodsStore = useFoodStore.getState();
-
-console.log('🟢🟢🟢 foodsStore 🟢🟢🟢');
-console.log(foodsStore);
 
 const meta: Meta<typeof HomePage> = {
   title: 'Tests/H3: Incluir y excluir alimentos.',
@@ -56,17 +50,84 @@ export const TestExcluirOIncluirAlimentos: Story = {
     mockState(useFoodStore, { foods: stateExcludeFood });
     await step('1. Se carga perfil de usuario de testing', async () => {});
     const canvas = within(canvasElement);
-    // const button = await canvas.findByTestId(
-    //   'save-menu-button',
-    //   {},
-    //   { timeout: 3000 }
-    // );
 
-    // await page.locator('iframe[title="storybook-preview-iframe"]').contentFrame().getByRole('button', { name: 'Incluir alimentos' }).click();
-    // await page.locator('iframe[title="storybook-preview-iframe"]').contentFrame().getByRole('button', { name: 'Agregar' }).click();
-    // await page.locator('iframe[title="storybook-preview-iframe"]').contentFrame().getByRole('button', { name: 'Guardar Selección' }).click();
-    // await page.locator('iframe[title="storybook-preview-iframe"]').contentFrame().getByRole('button', { name: 'Excluir alimentos' }).click();
-    // await page.locator('iframe[title="storybook-preview-iframe"]').contentFrame().getByRole('button', { name: 'Agregar' }).click();
-    // await page.locator('iframe[title="storybook-preview-iframe"]').contentFrame().getByRole('button', { name: 'Guardar Selección' }).click();
+    await step('2. Se abre el modal para incluir alimentos', async () => {
+      const includeButton = await canvas.findByRole('button', {
+        name: 'Incluir alimentos'
+      });
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await userEvent.click(includeButton);
+    });
+
+    await step('3. Se agrega un alimento a la lista de inclusión', async () => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const addButton = await canvas.findByRole(
+        'button',
+        { name: 'Agregar' },
+        { timeout: 3000 }
+      );
+      await userEvent.click(addButton);
+    });
+
+    await step('4. Se seleccionan alimentos a incluir', async () => {
+      const cherryButton = await screen.findByText('Cereza');
+      const higoButton = await screen.findByText('Higo');
+      const albaricoqueButton = await screen.findByText('Albaricoque');
+      await userEvent.click(cherryButton);
+      await userEvent.click(higoButton);
+      await userEvent.click(albaricoqueButton);
+    });
+
+    await step('5. Se guarda la selección de alimentos incluidos', async () => {
+      const saveIncludeButton = await screen.findByTestId(
+        'button-save-list-food',
+        {},
+        { timeout: 2000 }
+      );
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await userEvent.click(saveIncludeButton);
+    });
+
+    await step('6. Se abre el modal para excluir alimentos', async () => {
+      const excludeButton = await canvas.findByRole('button', {
+        name: 'Excluir alimentos'
+      });
+      await userEvent.click(excludeButton);
+    });
+
+    await step('7. Se agrega un alimento a la lista de exclusión', async () => {
+      const addExcludeButton = await canvas.findByRole('button', {
+        name: 'Agregar'
+      });
+      await userEvent.click(addExcludeButton);
+    });
+
+    await step('8. Se seleccionan alimentos a incluir', async () => {
+      const pineappleButton = await screen.findByText('Piña');
+      const pearButton = await screen.findByText('Pera');
+      const nectarineButton = await screen.findByText('Nectarina');
+      await userEvent.click(pineappleButton);
+      await userEvent.click(pearButton);
+      await userEvent.click(nectarineButton);
+    });
+
+    await step('9. Se guarda la selección de alimentos excluidos', async () => {
+      const saveExcludeButton = await screen.findByTestId(
+        'button-save-list-food',
+        {},
+        { timeout: 3000 }
+      );
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await userEvent.click(saveExcludeButton);
+    });
+
+    await step(
+      '10. Se verifica que los alimentos se han guardado correctamente',
+      async () => {
+        const { ingredientsToInclude } = await useIncludeFoodStore.getState();
+        const lenghtIngredientsToInclude = await ingredientsToInclude.length;
+        await expect(lenghtIngredientsToInclude).toBeGreaterThan(0);
+      }
+    );
   }
 };

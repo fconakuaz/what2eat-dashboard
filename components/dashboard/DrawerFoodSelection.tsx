@@ -34,10 +34,6 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   const { toggleIncludeFoodSelection } = useIncludeFoodStore();
   const { toggleExcludeFoodSelection } = useExcludeFoodStore();
   const t = useTranslations('Food');
-
-  console.log('🟡🟡🟡 foods 🟡🟡🟡');
-  console.log(foods);
-
   const [open, setOpen] = useState(false); // Estado para abrir/cerrar el modal o drawer
 
   useEffect(() => {
@@ -104,7 +100,11 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
             <DialogTitle>Seleccionar Alimentos</DialogTitle>
           </DialogHeader>
           {content}
-          <Button onClick={handleSave} className="mt-4">
+          <Button
+            onClick={handleSave}
+            data-testid="button-save-list-food"
+            className="mt-4"
+          >
             Guardar Selección
           </Button>
         </DialogContent>
@@ -124,7 +124,11 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
           <DrawerTitle>Seleccionar Alimentos</DrawerTitle>
         </DrawerHeader>
         {content}
-        <Button onClick={handleSave} className="mt-4">
+        <Button
+          onClick={handleSave}
+          data-testid="button-save-list-food"
+          className="mt-4"
+        >
           Guardar Selección
         </Button>
       </DrawerContent>
