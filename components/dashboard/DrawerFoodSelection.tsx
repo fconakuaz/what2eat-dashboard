@@ -21,6 +21,7 @@ import { useFoodStore } from 'app/store/foodUserStore';
 import { Ingredient, useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useTranslations } from 'next-intl';
 import { useExcludeFoodStore } from 'app/store/excludeFoodStore';
+import { stateFood } from './utils';
 
 interface Props {
   data: any;
@@ -33,6 +34,9 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   const { toggleIncludeFoodSelection } = useIncludeFoodStore();
   const { toggleExcludeFoodSelection } = useExcludeFoodStore();
   const t = useTranslations('Food');
+
+  console.log('🟡🟡🟡 foods 🟡🟡🟡');
+  console.log(foods);
 
   const [open, setOpen] = useState(false); // Estado para abrir/cerrar el modal o drawer
 
@@ -56,7 +60,7 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
 
   const content = (
     <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
-      {Object.entries(foods).map(([category, items]) => (
+      {Object.entries(stateFood).map(([category, items]) => (
         <div key={category}>
           <h3 className="font-semibold text-xl mb-3"> {t(category)}</h3>
           <div className="flex flex-wrap gap-2 mb-12 pt-1">
