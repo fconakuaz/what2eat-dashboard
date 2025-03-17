@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+
     const {
       email,
       gender,
@@ -35,8 +36,8 @@ export async function POST(req: Request) {
           dietaryPreference,
           physicalActivity,
           metricUnit,
-          height,
-          weight,
+          height: String(height),
+          weight: String(weight),
           goal,
           updatedAt: new Date()
         }

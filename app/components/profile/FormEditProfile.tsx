@@ -18,6 +18,7 @@ import {
 } from 'app/store/profileStore';
 import { PhysicalActivityLevel } from '@prisma/client';
 import { Save } from 'lucide-react';
+import DatePickerDropdown from '@/components/datePickerWithYearsSelector';
 
 export const FormEditProfile = ({
   className
@@ -26,7 +27,6 @@ export const FormEditProfile = ({
   const [formData, setFormData] = useState({
     height: profile?.height || '',
     weight: profile?.weight || '',
-    age: profile?.age || '',
     gender: profile?.gender || 'OTHER',
     dietaryPreference: profile?.dietaryPreference || 'NONE',
     goal: profile?.goal || 'lose_weight',
@@ -38,7 +38,6 @@ export const FormEditProfile = ({
 
     updateProfile({
       ...formData,
-      age: Number(formData.age),
       height: Number(formData.height),
       weight: Number(formData.weight),
       gender: formData.gender as UserGender,
@@ -78,19 +77,6 @@ export const FormEditProfile = ({
           type="number"
           value={formData.weight}
           onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-          required
-        />
-      </div>
-
-      {/* Edad */}
-      <div className="grid gap-2 mb-5">
-        <label className="block text-sm font-medium">
-          Edad <Asterisk />
-        </label>
-        <Input
-          type="number"
-          value={formData.age}
-          onChange={(e) => setFormData({ ...formData, age: e.target.value })}
           required
         />
       </div>

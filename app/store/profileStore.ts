@@ -129,6 +129,9 @@ export const useProfileStore = create(
           // Fusiona el estado actual con los nuevos datos
           const newProfile = { ...profile, ...updatedProfile };
 
+          console.log('🚩🚩🚩 newProfile 🚩🚩🚩');
+          console.log(newProfile);
+
           // Enviar actualización a la base de datos
           const response = await axios.post('/api/profile/update', newProfile);
 

@@ -275,9 +275,12 @@
 
     "NONE": "No Restrictions",
     "VEGETARIAN": "Vegetarian",
+    "GLUTEN_FREE": "Gluten free",
     "VEGAN": "Vegan",
     "KETO": "Keto Diet",
     "PALEO": "Paleo Diet",
+    "HALAL": "Halal",
+    "KOSHER": "Kosher",
     "PESCETARIAN": "Pescetarian",
 
     "SEDENTARY": "Sedentary",
@@ -287,6 +290,7 @@
     "ATHLETE": "Athlete",
 
     "ACTIVE": "Active",
+    "VERY_ACTIVE": "Athlete",
     "INACTIVE": "Inactive",
     "BANNED": "Banned",
 
