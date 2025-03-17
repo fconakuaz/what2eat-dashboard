@@ -8,9 +8,9 @@ export async function POST(req: Request) {
   try {
     const { userId, foodIds } = await req.json();
 
-    if (!userId || !foodIds.length) {
+    if (!userId) {
       return NextResponse.json(
-        { error: 'userId y foodIds son requeridos' },
+        { error: 'userId es requerido' },
         { status: 400 }
       );
     }

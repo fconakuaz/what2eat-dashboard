@@ -16,7 +16,7 @@ import {
 import { useIsMobile } from '@/components/hooks/use-mobile';
 import { FC, useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Check, Plus } from 'lucide-react';
+import { Check, Pencil, Plus } from 'lucide-react';
 import { useFoodStore } from 'app/store/foodUserStore';
 import { Ingredient, useIncludeFoodStore } from 'app/store/includeFoodStore';
 import { useTranslations } from 'next-intl';
@@ -92,7 +92,15 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline" onClick={() => setOpen(true)}>
-            <Plus className="w-3 h-3 mr-0" /> Agregar
+            {data.length > 0 ? (
+              <>
+                <Pencil className="w-3 h-3 mr-0" /> {t('add_or_remove_food')}
+              </>
+            ) : (
+              <>
+                <Plus className="w-3 h-3 mr-0" /> {t('add_food')}
+              </>
+            )}
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[500px]">
@@ -116,7 +124,7 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="outline" onClick={() => setOpen(true)}>
-          <Plus className="w-3 h-3 mr-0" /> Agregar
+          <Plus className="w-3 h-3 mr-0" /> Agregar alimentos
         </Button>
       </DrawerTrigger>
       <DrawerContent className="p-3">

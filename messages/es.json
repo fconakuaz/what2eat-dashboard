@@ -18,6 +18,7 @@
     "legendActivateBadge": "Haz clic para activar",
     "legendDesactivateBadge": "Haz clic para desactivar",
     "info": "Haz clic en 'Crear menú del día' para mostrar el menú de hoy...",
+    "infoAdd": "Agrega alimentos de tu elección dando clic en el botón 'Agregar alimentos' si deseas crear un menú más personalizado.",
     "infoSavedMenu": "Da click en una fecha y después en Ver algún menú guardado para cargar el menú del día",
     "infoSharedMenu": "No existe información del menú que accediste",
     "preparation_time": "Tiempo de preparación",
@@ -31,6 +32,8 @@
     "Edit": "Editar"
   },
   "Food": {
+    "add_food": "Agregar alimentos",
+    "add_or_remove_food": "Agregar o quitar alimentos", 
     "FRUITS": "🍌 Frutas",
     "VEGETABLES": "🥦 Verduras",
     "GRAINS": "🍞 Granos",

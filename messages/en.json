@@ -18,6 +18,7 @@
     "legendActivateBadge": "Click to activate",
     "legendDesactivateBadge": "Click to deactivate",
     "info": "Click on 'Create Daily Menu' to display today's menu...",
+    "infoAdd": "Add foods of your choice by clicking the 'Add Foods' button if you wish to create a more personalized menu.",
     "infoSavedMenu": "Da click en una fecha y después en Ver algún menú guardado para cargar el menú del día",
     "infoSharedMenu": "No existe información del menú que accediste",
     "preparation_time": "Preparation time",
@@ -26,6 +27,8 @@
     "protein": "Protein"
   },
   "Food": { 
+    "add_food": "Add foods",
+    "add_or_remove_food": "Add or remove foods", 
     "FRUITS": "🍌 Fruits",
     "VEGETABLES": "🥦 Vegetables",
     "GRAINS": "🍞 Grains",

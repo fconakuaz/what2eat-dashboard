@@ -13,6 +13,7 @@ import { Card } from '../ui/card';
 import { DrawerFoodSelection } from './DrawerFoodSelection';
 import { useEffect } from 'react';
 import { useProfileStore } from 'app/store/profileStore';
+import { Info } from 'lucide-react';
 
 export const AccordionFilter = () => {
   const t = useTranslations('HomePage');
@@ -49,14 +50,20 @@ export const AccordionFilter = () => {
               />
             </div>
             <div className="  ">
-              {ingredientsToInclude.map(({ name, state }, index) => (
-                <BadgeIngredient
-                  key={index}
-                  name={name}
-                  state={state}
-                  type="include"
-                />
-              ))}
+              {ingredientsToInclude.length > 0 ? (
+                ingredientsToInclude.map(({ name, state }, index) => (
+                  <BadgeIngredient
+                    key={index}
+                    name={name}
+                    state={state}
+                    type="include"
+                  />
+                ))
+              ) : (
+                <p className="text-muted-foreground pl-1 pb-4 pr-1">
+                  {t('infoAdd')}
+                </p>
+              )}
             </div>
           </Card>
         </AccordionContent>
@@ -74,14 +81,20 @@ export const AccordionFilter = () => {
               />
             </div>
             <div className="  ">
-              {ingredientsToExclude.map(({ name, state }, index) => (
-                <BadgeIngredient
-                  key={index}
-                  name={name}
-                  state={state}
-                  type="include"
-                />
-              ))}
+              {ingredientsToExclude.length > 0 ? (
+                ingredientsToExclude.map(({ name, state }, index) => (
+                  <BadgeIngredient
+                    key={index}
+                    name={name}
+                    state={state}
+                    type="include"
+                  />
+                ))
+              ) : (
+                <p className="text-muted-foreground pl-1 pb-4 pr-1">
+                  {t('infoAdd')}
+                </p>
+              )}
             </div>
           </Card>
         </AccordionContent>
