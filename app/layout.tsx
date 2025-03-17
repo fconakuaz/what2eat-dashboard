@@ -1,3 +1,5 @@
+import './calendar.css';
+import '@mantine/dates/styles.css';
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
