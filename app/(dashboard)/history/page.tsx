@@ -62,7 +62,7 @@ const HomePage = () => {
           <div
             className={`${selectedSavedMenu?.id == null ? 'hidden' : ''} mt-0 w-full flex flex-row items-center justify-end pr-6 pb-2 gap-3`}
           >
-            <Button
+            {/* <Button
               size="sm"
               variant={'outline'}
               className="h-8 gap-1"
@@ -73,7 +73,7 @@ const HomePage = () => {
               <span className="sm:not-sr-only sm:whitespace-nowrap">
                 {saving ? 'Quitando...' : 'Eliminar '}
               </span>
-            </Button>
+            </Button> */}
             <ShareButton />
           </div>
         </CardTitle>
