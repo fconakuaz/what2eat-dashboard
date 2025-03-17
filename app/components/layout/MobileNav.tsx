@@ -55,13 +55,13 @@ export const MobileNav: FC = (): any => {
             <CalendarCheck2 className="h-5 w-5" />
             Historial
           </Link>
-          <Link
+          {/* <Link
             href="/stats"
             className="flex items-center gap-4 px-2.5  text-muted-foreground hover:text-foreground"
           >
             <LineChart className="h-5 w-5" />
             Estadísticas
-          </Link>
+          </Link> */}
           <Link
             href="/activity"
             className="flex items-center gap-4 px-2.5  text-muted-foreground hover:text-foreground"

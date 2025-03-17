@@ -20,6 +20,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           where: { email: user.email }
         });
 
+        if (existingUser?.status === 'BANNED') {
+          throw new Error('User banned');
+          return false;
+        }
+
         if (!existingUser && user.name) {
           existingUser = await prisma.user.create({
             data: {
@@ -69,6 +74,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }
   },
   pages: {
-    signIn: '/login'
+    signIn: '/login',
+    error: '/auth/error'
   }
 });

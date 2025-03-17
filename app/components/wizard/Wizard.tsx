@@ -171,11 +171,11 @@ export default function Wizard() {
           text: 'Moderado (3-4 días a la semana)'
         },
         {
-          value: 'HIGH',
+          value: 'ACTIVE',
           text: 'Alto (5-6 días a la semana)'
         },
         {
-          value: 'ATHLETE',
+          value: 'VERY_ACTIVE',
           text: 'Atleta (Alto rendimiento)'
         }
       ]
@@ -197,12 +197,16 @@ export default function Wizard() {
           text: 'Vegetariana'
         },
         {
-          value: 'PESCETARIAN',
-          text: 'Pescetariana'
-        },
-        {
           value: 'VEGAN',
           text: 'Vegana'
+        },
+        {
+          value: 'GLUTEN_FREE',
+          text: 'Sin gluten'
+        },
+        {
+          value: 'PESCETARIAN',
+          text: 'Pescetariana'
         },
         {
           value: 'KETO',
@@ -211,6 +215,14 @@ export default function Wizard() {
         {
           value: 'PALEO',
           text: 'Paleo'
+        },
+        {
+          value: 'HALAL',
+          text: 'Halal'
+        },
+        {
+          value: 'KOSHER',
+          text: 'Kosher'
         }
       ]
     },

@@ -1,24 +1,25 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage, devtools } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { Affliction } from './afflictionStore';
 import { HealthIndicatorUser } from './healthIndicatorStore';
 import axios from 'axios';
-import { useAuthStore } from './authStore';
 
-type UserGender = 'MALE' | 'FEMALE' | 'OTHER';
-type DietaryPreference =
+export type UserGender = 'MALE' | 'FEMALE' | 'OTHER';
+export type DietaryPreference =
   | 'NONE'
   | 'VEGETARIAN'
   | 'VEGAN'
+  | 'GLUTEN_FREE'
   | 'KETO'
   | 'PALEO'
-  | 'PESCETARIAN';
-type PhysicalActivityLevel =
+  | 'HALAL'
+  | 'KOSHER';
+export type PhysicalActivityLevel =
   | 'SEDENTARY'
   | 'LIGHT'
   | 'MODERATE'
-  | 'HIGH'
-  | 'ATHLETE';
+  | 'ACTIVE'
+  | 'VERY_ACTIVE';
 type UserStatus = 'ACTIVE' | 'INACTIVE' | 'BANNED';
 type UserRole = 'USER' | 'ADMIN';
 export type UserGoal =
@@ -58,6 +59,7 @@ type Profile = {
 type ProfileStore = {
   profile: Profile;
   setProfile: (updatedProfile: Partial<Profile>) => void;
+  updateProfile: (updatedProfile: Partial<Profile>) => void;
   getUserProfile: (router: any) => Promise<void>;
   saveProfileToDB: () => Promise<void>;
 };
@@ -120,6 +122,26 @@ export const useProfileStore = create(
           console.error('❌ Error al guardar el perfil:', error);
         }
       },
+
+      updateProfile: async (updatedProfile) => {
+        const { profile } = get();
+        try {
+          // Fusiona el estado actual con los nuevos datos
+          const newProfile = { ...profile, ...updatedProfile };
+
+          // Enviar actualización a la base de datos
+          const response = await axios.post('/api/profile/update', newProfile);
+
+          if (response.status === 200) {
+            set({ profile: newProfile });
+          } else {
+            console.error('Error al actualizar perfil:', response.data);
+          }
+        } catch (error) {
+          console.error('❌ Error al actualizar el perfil:', error);
+        }
+      },
+
       getUserProfile: async (router) => {
         try {
           const { data } = await axios.get('/api/profile');

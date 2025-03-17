@@ -44,9 +44,9 @@ export const DesktopNav: FC = (): any => {
           <CalendarCheck2 className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/stats" label="Estadísticas">
+        {/* <NavItem href="/stats" label="Estadísticas">
           <LineChart className="h-5 w-5" />
-        </NavItem>
+        </NavItem> */}
 
         <NavItem href="/activity" label="Actividad física">
           <Dumbbell className="h-5 w-5" />

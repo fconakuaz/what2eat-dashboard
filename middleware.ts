@@ -8,6 +8,7 @@ export async function middleware(req: NextRequest) {
   // Rutas públicas que no necesitan autenticación
   const publicRoutes = [
     '/login',
+    '/auth/error',
     '/api',
     '/_next',
     '/favicon.ico',

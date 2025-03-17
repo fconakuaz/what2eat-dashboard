@@ -18,12 +18,12 @@ import { useProfileStore } from 'app/store/profileStore';
 import { useTranslations } from 'next-intl';
 import { useAuthStore } from 'app/store/authStore';
 import { LoadingBlock, LoadingLabels } from './LoadingLabels';
+import { DrawerEditProfile } from '../../app/components/profile/DrawerEditProfile';
 
 type CardProps = React.ComponentProps<typeof Card>;
 
 export function MyPreferences({ className, ...props }: CardProps) {
   const tp = useTranslations('Profile');
-  const tc = useTranslations('Common');
 
   const { profile } = useProfileStore();
   const { user } = useAuthStore();
@@ -45,9 +45,7 @@ export function MyPreferences({ className, ...props }: CardProps) {
           </div>
         </div>
         <div className="flex items-center  ">
-          <Button variant="outline">
-            <Edit2Icon className="w-3 h-3 mr-2" /> {tc('Edit')}
-          </Button>
+          <DrawerEditProfile />
         </div>
       </CardHeader>
       <CardContent className="gap-1">
