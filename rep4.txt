@@ -1,0 +1,610 @@
+commit c75bbd5aa0041ea7a4438627cb69bcbf610a74f2
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 5 20:55:54 2025 -0600
+
+    Corrección de error en build
+
+M	app/api/user/[id]/route.ts
+
+commit bf5d3edf3b6ec747983e418bfbcf28227da176bf
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 5 20:56:44 2025 -0600
+
+    Corrección de error en build
+
+M	app/api/user/[id]/route.ts
+
+commit a0f643db8bda4db58bcda8af86ece180109392a7
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 5 21:00:33 2025 -0600
+
+    Corrección de error en build
+
+M	app/(dashboard)/history/page.tsx
+
+commit 0aa0d2e398e1e4be8dc532ef21c0d17d1f411ba9
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 5 21:12:46 2025 -0600
+
+    Se valida que sólo los admins puedan entrar al módulo de usuarios
+
+M	app/(dashboard)/history/page.tsx
+M	app/components/layout/DesktopNav.tsx
+M	app/components/layout/MobileNav.tsx
+
+commit ab925750c1ecca0ddfa62495a73b299ebf03bfe5
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 5 21:21:22 2025 -0600
+
+    Se inicia página de estadísticas
+
+M	app/(dashboard)/stats/page.tsx
+A	app/store/healthStore.ts
+M	bun.lock
+M	components/ui/card.tsx
+A	components/ui/chart.tsx
+M	package.json
+
+commit dd95a5a6d2c7f5c5271ca9be4428829a20d1c0cf
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 5 21:41:20 2025 -0600
+
+    Se agregan todos los registros a incluir
+
+M	app/(dashboard)/stats/page.tsx
+M	app/store/healthStore.ts
+
+commit bdf4f30233093b86079affdaaa5919aa83ed6fd6
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 5 21:51:09 2025 -0600
+
+    Inicio de página de registro de actividad
+
+A	app/(dashboard)/activity/page.tsx
+M	app/components/layout/DesktopNav.tsx
+M	app/components/layout/MobileNav.tsx
+A	app/store/activityStore.ts
+
+commit 1b334ab1258d343a4bbe830e78124ed6feedd221
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Sun Mar 9 18:54:17 2025 -0600
+
+    Se agrega modelo de tabla de actividad y función de agregar y cargar de la BD
+
+M	app/(dashboard)/activity/page.tsx
+A	app/api/activities-user/route.ts
+A	app/api/activities/route.ts
+M	app/api/menu/route.ts
+M	app/store/activityStore.ts
+M	bun.lock
+M	package.json
+M	prisma/dbml/schema.dbml
+R073	prisma/migrations/20250220041712_init/migration.sql	prisma/migrations/20250310000923_init/migration.sql
+M	prisma/schema.prisma
+M	prisma/seed.ts
+
+commit aea899da864519478c9a76eec6da440e0ffdd7c0
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Sun Mar 9 18:58:27 2025 -0600
+
+    Se agregan gráficas de barras
+
+M	app/(dashboard)/activity/page.tsx
+
+commit b125d1514ddc17f16112fe5cf707760c4ba02f35
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Sun Mar 9 21:55:17 2025 -0600
+
+    Se agrega Dialog para modo desktop y Sheet para modo Mobile
+
+M	app/(dashboard)/activity/page.tsx
+A	app/components/activities/DrawerActivity.tsx
+A	app/components/activities/ProfileForm.tsx
+A	app/components/common/Asterisk.tsx
+M	app/components/layout/DesktopNav.tsx
+M	app/components/layout/MobileNav.tsx
+M	bun.lock
+A	components/ui/dialog.tsx
+A	components/ui/drawer.tsx
+M	package.json
+
+commit 32d27761b45e9401bfd30d386e0073acff32d2eb
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Sun Mar 9 22:51:44 2025 -0600
+
+    Se da estilo y formato a gráficas
+
+M	app/(dashboard)/activity/page.tsx
+M	app/api/activities-user/route.ts
+A	app/components/charts/BarChart.tsx
+
+commit f3f0e26e0c6601f1ffeb89c0347139fbbaea770b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Sun Mar 9 22:52:37 2025 -0600
+
+    Se da estilo y formato a gráficas
+
+M	app/components/charts/BarChart.tsx
+
+commit 71990194aa4df324da9c25604730165909b8556b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 10 23:08:49 2025 -0600
+
+    Actualización de prisma y reorden de modelo DBML
+
+M	bun.lock
+M	package.json
+M	prisma/dbml/schema.dbml
+M	prisma/schema.prisma
+
+commit 7bfa551e736af66855ff7817c9e48aced2154b9b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 10 23:11:52 2025 -0600
+
+    Mejoramiento de UI responsivo en activity
+
+M	app/(dashboard)/activity/page.tsx
+
+commit 35e1b9c6fe0414784f2e8c9db747beca640de057
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Mar 11 22:04:25 2025 -0600
+
+    Se agrega paginación y sumatoria por día
+
+M	app/(dashboard)/activity/page.tsx
+M	app/api/activities-user/route.ts
+M	app/components/activities/ProfileForm.tsx
+M	app/components/charts/BarChart.tsx
+M	app/store/activityStore.ts
+
+commit 35411a7316d8699c5cc4d357d787abcd4a97c2bf
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Mar 11 22:56:49 2025 -0600
+
+    Se termina módulo, incluye agrupación por día para gráficas, y lista por actividad con exportación a Excel.
+
+M	app/(dashboard)/activity/page.tsx
+A	app/(dashboard)/activity/util.tsx
+M	app/(dashboard)/page.tsx
+M	app/AI/getRecipe.js
+M	app/api/activities-user/route.ts
+M	app/components/charts/BarChart.tsx
+M	app/store/activityStore.ts
+M	bun.lock
+M	package.json
+
+commit b013a35b897ec6809d6a1c27f83d8ae9f89c9123
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Mar 11 23:01:05 2025 -0600
+
+    Se corrige bug en build
+
+M	app/store/activityStore.ts
+
+commit c24c42e023c5b972373a618bd0b397346bbf1ac5
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Mar 11 23:09:05 2025 -0600
+
+    Se corrige bug en build
+
+M	app/(dashboard)/activity/page.tsx
+M	app/components/activities/ProfileForm.tsx
+M	app/store/activityStore.ts
+
+commit e5efbd06e5a3c9ddf9bb11b60cfcd283317a424e
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Mar 11 23:18:21 2025 -0600
+
+    Se corrige bug en build
+
+M	app/api/activities-user/route.ts
+R093	app/components/activities/ProfileForm.tsx	app/components/activities/ActivityForm.tsx
+M	app/components/activities/DrawerActivity.tsx
+
+commit 5eb3d50fbc160b9c6274e66aaae2c488dbe2f748
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Mar 11 23:19:06 2025 -0600
+
+    Limpieza de logs
+
+M	app/AI/getRecipe.js
+M	app/components/activities/ActivityForm.tsx
+
+commit 8442c59874ce23a3d768a3738ac8dac5d80f54df
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Tue Mar 11 23:29:22 2025 -0600
+
+    Se agrega función de cierre al agregar nueva actividad
+
+M	app/components/activities/DrawerActivity.tsx
+M	app/store/activityStore.ts
+
+commit c611adb797b36ce778ef17685a26173490e88da7
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 12 19:06:03 2025 -0600
+
+    Se agrega Drawer para selección de alimentos disponibles para incluir o excluir.
+
+A	app/api/foods/route.ts
+A	app/api/include-food/route.ts
+M	app/components/activities/ActivityForm.tsx
+A	app/store/foodUserStore.ts
+M	components/dashboard/AccordionFilter.tsx
+A	components/dashboard/DrawerFoodSelection.tsx
+M	messages/en.json
+M	messages/es.json
+
+commit cc11ddf5e1550393ff341ab82472fcef770b950e
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 12 22:16:37 2025 -0600
+
+    Se agrega lista de alimentos incluída la traducción
+
+M	app/api/foods/route.ts
+R051	app/api/include-food/route.ts	app/api/include-foods/route.ts
+M	app/store/foodUserStore.ts
+M	app/store/includeFoodStore.ts
+M	components/dashboard/AccordionFilter.tsx
+M	components/dashboard/DrawerFoodSelection.tsx
+M	messages/en.json
+M	messages/es.json
+M	prisma/dbml/schema.dbml
+A	prisma/migrations/20250313030437_add_state_to_included_food_user/migration.sql
+M	prisma/schema.prisma
+
+commit 0cb8f1b4d1c59dd3f2fda367cafd794f3c6fb710
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 12 22:32:56 2025 -0600
+
+    Se completa Dialog/Drawer para Agregar/Quitar ingredientes a incluir
+
+M	app/store/foodUserStore.ts
+M	components/dashboard/BadgeIngredient.tsx
+M	components/dashboard/DrawerFoodSelection.tsx
+
+commit 31521ce363346079df6965d6aa06cc085b5f1439
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Wed Mar 12 22:55:14 2025 -0600
+
+    Se completa Dialog/Drawer para Agregar/Quitar ingredientes a excluir
+
+M	app/AI/getRecipe.js
+A	app/api/exclude-foods/route.ts
+M	app/store/excludeFoodStore.ts
+M	app/store/foodUserStore.ts
+M	components/dashboard/AccordionFilter.tsx
+M	components/dashboard/DrawerFoodSelection.tsx
+
+commit 5ef598f9ade2ba2a817b2388d2da6e00914e6872
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Mar 13 22:08:18 2025 -0600
+
+    update to react 19
+
+M	bun.lock
+D	package-lock.json
+M	package.json
+
+commit c2615d5b6cf1b0394d82c95ec39fb5bdd5ba95cd
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Mar 13 22:11:41 2025 -0600
+
+    Se agrega storybook
+
+M	.gitignore
+A	.storybook/main.ts
+A	.storybook/preview.ts
+A	.storybook/vitest.setup.ts
+M	bun.lock
+M	package.json
+A	stories/Button.stories.ts
+A	stories/Button.tsx
+A	stories/Configure.mdx
+A	stories/Header.stories.ts
+A	stories/Header.tsx
+A	stories/Page.stories.ts
+A	stories/Page.tsx
+A	stories/assets/accessibility.png
+A	stories/assets/accessibility.svg
+A	stories/assets/addon-library.png
+A	stories/assets/assets.png
+A	stories/assets/avif-test-image.avif
+A	stories/assets/context.png
+A	stories/assets/discord.svg
+A	stories/assets/docs.png
+A	stories/assets/figma-plugin.png
+A	stories/assets/github.svg
+A	stories/assets/share.png
+A	stories/assets/styling.png
+A	stories/assets/testing.png
+A	stories/assets/theming.png
+A	stories/assets/tutorials.svg
+A	stories/assets/youtube.svg
+A	stories/button.css
+A	stories/header.css
+A	stories/page.css
+A	vitest.config.ts
+
+commit 214a54acd3d0edf66fc3c9223aa5c46d0bc47a8b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Thu Mar 13 23:37:50 2025 -0600
+
+    vercel
+
+M	.storybook/preview.ts
+M	bun.lock
+M	package.json
+M	stories/Button.stories.ts
+A	vercel.json
+M	vitest.config.ts
+A	vitest.shims.d.ts
+
+commit 31b3e9af9b70b7ae8f8e03c074f3e675a1ff95c9
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 00:17:34 2025 -0600
+
+    corrección de dependecias
+
+D	.storybook/main.ts
+D	.storybook/preview.ts
+D	.storybook/vitest.setup.ts
+D	bun.lock
+M	package.json
+D	stories/Button.stories.ts
+D	stories/Button.tsx
+D	stories/Configure.mdx
+D	stories/Header.stories.ts
+D	stories/Header.tsx
+D	stories/Page.stories.ts
+D	stories/Page.tsx
+D	stories/assets/accessibility.png
+D	stories/assets/accessibility.svg
+D	stories/assets/addon-library.png
+D	stories/assets/assets.png
+D	stories/assets/avif-test-image.avif
+D	stories/assets/context.png
+D	stories/assets/discord.svg
+D	stories/assets/docs.png
+D	stories/assets/figma-plugin.png
+D	stories/assets/github.svg
+D	stories/assets/share.png
+D	stories/assets/styling.png
+D	stories/assets/testing.png
+D	stories/assets/theming.png
+D	stories/assets/tutorials.svg
+D	stories/assets/youtube.svg
+D	stories/button.css
+D	stories/header.css
+D	stories/page.css
+D	vercel.json
+D	vitest.config.ts
+D	vitest.shims.d.ts
+
+commit 4204b46f9b8c879455a4cffb88b4a12e130004f1
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 11:08:44 2025 -0600
+
+    Se quita CalendarHistory por incompatibilidad con librerías de react19
+
+A	bun.lock
+M	components/calendarHistory.tsx
+M	components/ui/calendar.tsx
+M	package.json
+
+commit bd82677649845376128cb0c11381b878ec5b59e0
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 11:17:27 2025 -0600
+
+    Se agrega Storybook para testing y documentación con React19
+
+A	.storybook/main.ts
+A	.storybook/preview.ts
+A	.storybook/vitest.setup.ts
+M	bun.lock
+M	package.json
+A	stories/Button.stories.ts
+A	stories/Button.tsx
+A	stories/Configure.mdx
+A	stories/Header.stories.ts
+A	stories/Header.tsx
+A	stories/Page.stories.ts
+A	stories/Page.tsx
+A	stories/assets/accessibility.png
+A	stories/assets/accessibility.svg
+A	stories/assets/addon-library.png
+A	stories/assets/assets.png
+A	stories/assets/avif-test-image.avif
+A	stories/assets/context.png
+A	stories/assets/discord.svg
+A	stories/assets/docs.png
+A	stories/assets/figma-plugin.png
+A	stories/assets/github.svg
+A	stories/assets/share.png
+A	stories/assets/styling.png
+A	stories/assets/testing.png
+A	stories/assets/theming.png
+A	stories/assets/tutorials.svg
+A	stories/assets/youtube.svg
+A	stories/button.css
+A	stories/header.css
+A	stories/page.css
+A	vitest.config.ts
+
+commit d8b4ddb9df7d4899ee053e51bdb46c4017480746
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 11:59:36 2025 -0600
+
+    Se agrega Story de UI
+
+M	.storybook/main.ts
+M	bun.lock
+M	package.json
+A	playwright.config.ts
+D	stories/Button.stories.ts
+D	stories/Button.tsx
+D	stories/Header.stories.ts
+D	stories/Header.tsx
+D	stories/Page.stories.ts
+D	stories/Page.tsx
+D	stories/button.css
+D	stories/header.css
+D	stories/page.css
+A	stories/ui/Button.stories.tsx
+A	tests/button.spec.ts
+M	vitest.config.ts
+
+commit d8985c0baeb4244cee76161459d269d38dd33af4
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 15:41:47 2025 -0600
+
+    Se logra configurar prueba de generación de Menú con Storybook
+
+M	app/(dashboard)/history/page.tsx
+M	app/(dashboard)/menu/[id]/page.tsx
+M	app/(dashboard)/page.tsx
+M	app/store/profileStore.ts
+M	bun.lock
+M	components.json
+R099	app/AI/getRecipe.js	components/AI/getRecipe.js
+R100	app/AI/modelRecipe.js	components/AI/modelRecipe.js
+M	package.json
+A	stories/pages/HomePage.stories.tsx
+M	tsconfig.json
+
+commit 45f09dcd7edd6365baee319c031f9234796aa232
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 16:35:02 2025 -0600
+
+    Se crean steps para la validaciòn del inicio de sesiòn
+
+A	.storybook/utils.ts
+M	stories/pages/HomePage.stories.tsx
+
+commit c46c6f66aea1887107494fe9ef2bbdbfb5cf776b
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 17:32:27 2025 -0600
+
+    Se completa readme de Storybook
+
+M	stories/Configure.mdx
+M	stories/pages/HomePage.stories.tsx
+
+commit 1a8e3afd6678c26752b955f5ce3c846d39466ed4
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 18:21:53 2025 -0600
+
+    Se completa test de H2 Guardar menú diario
+
+M	app/components/layout/SaveButton.tsx
+M	stories/Configure.mdx
+R098	stories/pages/HomePage.stories.tsx	stories/pages/H1CreateMenu.stories.tsx
+A	stories/pages/H2SaveMenu.stories.tsx
+M	stories/ui/Button.stories.tsx
+
+commit 8133c8ad0035f96e0e43386cc3fb490b0275a227
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 18:30:38 2025 -0600
+
+    Se configura plantilla de Storybook
+
+A	.storybook/manager.js
+M	app/globals.css
+
+commit cdfc99da9f0d22844f186fb0b76887cc2263cf66
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 19:50:05 2025 -0600
+
+    Se carga la lista completa de alimentos estáticamente
+
+M	.storybook/utils.ts
+M	components/dashboard/DrawerFoodSelection.tsx
+A	components/dashboard/utils.js
+A	stories/pages/H3IncludeExcludeFood.stories.tsx
+
+commit 40c9d602d0eb5a7a830ade13faa9fcac58f6b1fa
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 20:38:32 2025 -0600
+
+    Se concluye Story para test de Incluir y excluir alimentos
+
+M	components/dashboard/DrawerFoodSelection.tsx
+M	stories/pages/H3IncludeExcludeFood.stories.tsx
+
+commit 56c7d7872ffa115aace3d108ba85fe683e01c25e
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Fri Mar 14 21:22:12 2025 -0600
+
+    Se concluye Story para test de Incluir y excluir alimentos
+
+M	stories/pages/H2SaveMenu.stories.tsx
+M	stories/pages/H3IncludeExcludeFood.stories.tsx
+
+commit d84982777b8f0ef901de56162bfada1470d9b41d
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 17 14:04:37 2025 -0600
+
+    Se crea formulario de edición de perfil
+
+A	app/api/profile/update/route.ts
+A	app/auth/error/page.tsx
+M	app/components/layout/DesktopNav.tsx
+M	app/components/layout/MobileNav.tsx
+A	app/components/profile/DrawerEditProfile.tsx
+A	app/components/profile/FormEditProfile.tsx
+M	app/components/wizard/Wizard.tsx
+M	app/store/profileStore.ts
+M	components/dashboard/MyPreferences.tsx
+M	lib/auth.ts
+M	middleware.ts
+
+commit d505b2f9dc3a2d1f6f14d8fd4c57d339c4734958
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 17 14:32:39 2025 -0600
+
+    Guardado de edición de perfil
+
+M	app/api/profile/update/route.ts
+M	app/components/profile/FormEditProfile.tsx
+M	app/store/profileStore.ts
+M	messages/en.json
+M	messages/es.json
+
+commit fe034b20a01935ef999c67378d1f6a16fc35632a
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 17 14:40:37 2025 -0600
+
+    Librería calendar
+
+M	bun.lock
+M	package.json
+
+commit c89bb3b89e1d9b241ef18c54183154d3776cdab9
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 17 16:37:19 2025 -0600
+
+    Se selecciona librería de calendario
+
+A	app/calendar.css
+M	app/layout.tsx
+M	components/calendarHistory.tsx
+
+commit 5bed72a3f31d1599d4af868dea3ecd744315efda
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 17 17:11:09 2025 -0600
+
+    Se agrega funcionalidad de menú
+
+M	app/(dashboard)/history/page.tsx
+M	components/calendarHistory.tsx
+
+commit 1b0a7dc66e28d0324ece16285be38001a9758fd9
+Author: Francisco Nakú Acosta Zárate <fconakuaz@gmail.com>
+Date:   Mon Mar 17 17:54:26 2025 -0600
+
+    Se crean avisos de seguimiento en listas de alimentos a incluir y excluir
+
+M	app/api/include-foods/route.ts
+M	components/dashboard/AccordionFilter.tsx
+M	components/dashboard/DrawerFoodSelection.tsx
+M	messages/en.json
+M	messages/es.json

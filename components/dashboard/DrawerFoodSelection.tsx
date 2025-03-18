@@ -91,7 +91,11 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline" onClick={() => setOpen(true)}>
+          <Button
+            data-testid="button-add-list-food"
+            variant="outline"
+            onClick={() => setOpen(true)}
+          >
             {data.length > 0 ? (
               <>
                 <Pencil className="w-3 h-3 mr-0" /> {t('add_or_remove_food')}
@@ -123,7 +127,11 @@ export const DrawerFoodSelection: FC<Props> = ({ data, typeDrawer }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" onClick={() => setOpen(true)}>
+        <Button
+          variant="outline"
+          data-testid="button-add-list-food"
+          onClick={() => setOpen(true)}
+        >
           <Plus className="w-3 h-3 mr-0" /> Agregar alimentos
         </Button>
       </DrawerTrigger>

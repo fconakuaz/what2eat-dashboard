@@ -61,9 +61,9 @@ export const TestExcluirOIncluirAlimentos: Story = {
 
     await step('3. Se agrega un alimento a la lista de inclusión', async () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      const addButton = await canvas.findByRole(
-        'button',
-        { name: 'Agregar' },
+      const addButton = await canvas.findByTestId(
+        'button-add-list-food',
+        {},
         { timeout: 3000 }
       );
       await userEvent.click(addButton);
@@ -99,9 +99,11 @@ export const TestExcluirOIncluirAlimentos: Story = {
     });
 
     await step('7. Se agrega un alimento a la lista de exclusión', async () => {
-      const addExcludeButton = await canvas.findByRole('button', {
-        name: 'Agregar'
-      });
+      const addExcludeButton = await canvas.findByTestId(
+        'button-add-list-food',
+        {},
+        { timeout: 3000 }
+      );
       await userEvent.click(addExcludeButton);
     });
 
