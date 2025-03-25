@@ -56,7 +56,10 @@ export const useActivityStore = create<ActivityState>((set) => ({
 
   fetchActivityRecords: async (page = 1) => {
     try {
-      const res = await fetch(`/api/activities-user?page=${page}`);
+      const { profile } = useProfileStore.getState();
+      const res = await fetch(
+        `/api/activities-user?page=${page}&user=${profile?.id}`
+      );
       const data = await res.json();
       set({
         activities: data.activities,

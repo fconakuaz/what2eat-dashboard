@@ -9,6 +9,15 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get('page') || '1', 10);
+    const userId = searchParams.get('user')?.toString();
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'El user de la solicitud está vacío' },
+        { status: 400 }
+      );
+    }
+
     const limit = 7;
     const offset = (page - 1) * limit;
 
@@ -17,8 +26,8 @@ export async function GET(req: Request) {
 
     // Obtener todos los registros de los últimos 7 días
     const activities = await prisma.activityUser.findMany({
-      where: { startDateTime: { gte: sevenDaysAgo } },
-      include: { activity: true },
+      where: { startDateTime: { gte: sevenDaysAgo }, userId },
+      include: { activity: true, user: true },
       orderBy: { startDateTime: 'desc' }
     });
 
