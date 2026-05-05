@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { auth } from '@/lib/auth';
+import NextAuth from 'next-auth';
+import { authConfig } from '@/lib/auth.config';
 
-export async function middleware(req: NextRequest) {
-  const session = await auth(); // Obtiene la sesión del usuario
+const { auth } = NextAuth(authConfig);
+
+export default auth(async (req) => {
+  const session = req.auth; // Obtiene la sesión del usuario
 
   // Rutas públicas que no necesitan autenticación
   const publicRoutes = [
@@ -39,7 +42,7 @@ export async function middleware(req: NextRequest) {
   }
 
   return NextResponse.next(); // Permitir acceso si está autenticado
-}
+});
 
 // Configuración del middleware: Se ejecuta en todas las rutas excepto las excluidas
 export const config = {

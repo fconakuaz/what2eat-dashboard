@@ -1,17 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+import { authConfig } from './auth.config';
 
 const prisma = new PrismaClient();
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [
-    GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID as string,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET as string
-    })
-  ],
+  ...authConfig,
   callbacks: {
+    ...authConfig.callbacks,
     async signIn({ user }) {
       try {
         if (!user.email) throw new Error('Google no proporcionó un email');
@@ -55,26 +51,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.error('Error al registrar usuario:', error);
         return false;
       }
-    },
-    async session({ session, token }) {
-      if (session?.user && token.email) {
-        session.user.email = token.email;
-        session.user.name = token.name;
-        session.user.image = token.picture;
-      }
-      return session;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.email = user.email;
-        token.name = user.name;
-        token.picture = user.image;
-      }
-      return token;
     }
-  },
-  pages: {
-    signIn: '/login',
-    error: '/auth/error'
   }
 });
