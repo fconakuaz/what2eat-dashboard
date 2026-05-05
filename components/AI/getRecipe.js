@@ -14,7 +14,7 @@ const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
-  model: 'gemini-2.0-flash-exp'
+  model: 'gemini-3.1-flash-lite-preview'
 });
 
 const generationConfig = {
@@ -41,26 +41,26 @@ export async function runGemini(
   const arrIngredientsToInclude =
     ingredientsToInclude.length > 0
       ? //' Se puede incluir sólo los siguientes ingredientes pero ninguno más que ' +
-        ' Se puede incluir los siguientes ingredientes: ' +
-        ingredientsToInclude
-          .filter(({ state }) => state)
-          .map(({ name }) => name)
-          .join(', ') +
-        '.\n'
+      ' Se puede incluir los siguientes ingredientes: ' +
+      ingredientsToInclude
+        .filter(({ state }) => state)
+        .map(({ name }) => name)
+        .join(', ') +
+      '.\n'
       : ' incluir cualquier ingrediente';
 
   const arrIngredientsToExclude =
     ingredientsToExclude.length > 0
       ? ' excluir ingredientes como ' +
-        ingredientsToExclude
-          .filter(({ state }) => state)
-          .map(({ name }) => name)
-          .join(', ') +
-        ingredientsToInclude
-          .filter(({ state }) => state == false)
-          .map(({ name }) => name)
-          .join(', ') +
-        '.\n'
+      ingredientsToExclude
+        .filter(({ state }) => state)
+        .map(({ name }) => name)
+        .join(', ') +
+      ingredientsToInclude
+        .filter(({ state }) => state == false)
+        .map(({ name }) => name)
+        .join(', ') +
+      '.\n'
       : ' no excluir ningún ingrediente';
 
   const messageToSend = `Genera una lista de recetas para un menú del día. 
